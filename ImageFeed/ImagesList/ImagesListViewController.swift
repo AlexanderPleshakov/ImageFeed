@@ -64,7 +64,7 @@ extension ImagesListViewController {
               let mainImage = UIImage(named: "\(photosName[indexPath.row])")
         else { return }
                 
-        
+        cell.doGradient(for: cell.cellGradientView)
         cell.cellImage.image = mainImage
         cell.cellDataLabel.text = dateFormatter.string(from: Date())
         cell.cellLikeButton.setImage(likeImage, for: .normal)

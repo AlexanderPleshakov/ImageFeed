@@ -37,6 +37,10 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZRT-iB-qNo" userLabel="GradientView">
+                                                    <rect key="frame" x="16" y="181.33333333333334" width="361" height="27.666666666666657"/>
+                                                    <color key="backgroundColor" name="YP Black"/>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 август 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxp-aT-8F1" userLabel="Data Label">
                                                     <rect key="frame" x="23.999999999999993" y="185.33333333333334" width="94.333333333333314" height="15.666666666666657"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -51,19 +55,24 @@
                                             </subviews>
                                             <color key="backgroundColor" name="YP Black"/>
                                             <constraints>
+                                                <constraint firstItem="gtr-pf-RQa" firstAttribute="trailing" secondItem="ZRT-iB-qNo" secondAttribute="trailing" id="1gP-y2-ao8"/>
                                                 <constraint firstAttribute="trailing" secondItem="gtr-pf-RQa" secondAttribute="trailing" constant="16" id="2mL-oD-IZr"/>
                                                 <constraint firstItem="gtr-pf-RQa" firstAttribute="bottom" secondItem="xxp-aT-8F1" secondAttribute="bottom" constant="8" id="KPY-BC-kqB"/>
                                                 <constraint firstItem="gtr-pf-RQa" firstAttribute="top" secondItem="8QV-I6-Bhr" secondAttribute="top" constant="4" id="Mf9-cC-OT5"/>
                                                 <constraint firstItem="gtr-pf-RQa" firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="xxp-aT-8F1" secondAttribute="trailing" constant="8" id="Teo-cC-Emb"/>
+                                                <constraint firstItem="ZRT-iB-qNo" firstAttribute="leading" secondItem="gtr-pf-RQa" secondAttribute="leading" id="WZu-n1-fTl"/>
+                                                <constraint firstItem="gtr-pf-RQa" firstAttribute="bottom" secondItem="ZRT-iB-qNo" secondAttribute="bottom" id="gU1-bd-SSW"/>
                                                 <constraint firstItem="gtr-pf-RQa" firstAttribute="leading" secondItem="8QV-I6-Bhr" secondAttribute="leading" constant="16" id="k7R-xC-lDZ"/>
                                                 <constraint firstItem="gtr-pf-RQa" firstAttribute="trailing" secondItem="62e-ks-jFV" secondAttribute="trailing" id="kfm-MH-d8D"/>
                                                 <constraint firstItem="xxp-aT-8F1" firstAttribute="leading" secondItem="gtr-pf-RQa" secondAttribute="leading" constant="8" id="qUG-HK-elv"/>
                                                 <constraint firstItem="62e-ks-jFV" firstAttribute="top" secondItem="gtr-pf-RQa" secondAttribute="top" id="v5x-OM-Z2N"/>
                                                 <constraint firstAttribute="bottom" secondItem="gtr-pf-RQa" secondAttribute="bottom" constant="4" id="xK1-yr-Sws"/>
+                                                <constraint firstItem="ZRT-iB-qNo" firstAttribute="top" secondItem="xxp-aT-8F1" secondAttribute="top" constant="-4" id="xcg-75-aHk"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cellDataLabel" destination="xxp-aT-8F1" id="e3q-sl-pYU"/>
+                                            <outlet property="cellGradientView" destination="ZRT-iB-qNo" id="kK1-tn-qKL"/>
                                             <outlet property="cellImage" destination="gtr-pf-RQa" id="9mt-cU-ehE"/>
                                             <outlet property="cellLikeButton" destination="62e-ks-jFV" id="6Jb-lP-MtJ"/>
                                         </connections>
