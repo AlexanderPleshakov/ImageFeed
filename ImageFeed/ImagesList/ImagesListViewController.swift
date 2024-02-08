@@ -15,7 +15,7 @@ class ImagesListViewController: UIViewController {
     
     // MARK: Outlets
     
-    @IBOutlet weak var ImagesTableView: UITableView!
+    @IBOutlet private var ImagesTableView: UITableView!
     
     // MARK: Life Cycle
     
@@ -26,7 +26,7 @@ class ImagesListViewController: UIViewController {
     
     // MARK: Functions
     
-    
+    private func configCell(for cell: ImagesListCell) { }
     
     // MARK: Actions
 
@@ -39,12 +39,21 @@ extension ImagesListViewController: UITableViewDelegate {
 }
 
 extension ImagesListViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
+        
+        guard let imageListCell = cell as? ImagesListCell else {
+            return UITableViewCell()
+        }
+        
+        configCell(for: imageListCell)
+        
+        return imageListCell
     }
     
     
