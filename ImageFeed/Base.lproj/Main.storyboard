@@ -62,6 +62,11 @@
                                                 <constraint firstAttribute="bottom" secondItem="gtr-pf-RQa" secondAttribute="bottom" constant="4" id="xK1-yr-Sws"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellDataLabel" destination="xxp-aT-8F1" id="e3q-sl-pYU"/>
+                                            <outlet property="cellImage" destination="gtr-pf-RQa" id="9mt-cU-ehE"/>
+                                            <outlet property="cellLikeButton" destination="62e-ks-jFV" id="6Jb-lP-MtJ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -80,7 +85,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="ImagesTableView" destination="BVG-DE-DCF" id="40U-RG-5Jx"/>
+                        <outlet property="imagesTableView" destination="BVG-DE-DCF" id="40U-RG-5Jx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
