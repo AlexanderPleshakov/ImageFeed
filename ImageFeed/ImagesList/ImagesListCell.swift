@@ -12,9 +12,7 @@ final class ImagesListCell: UITableViewCell {
     //MARK: Properties
     
     static let reuseIdentifier = "ImageListCell"
-    
     static let photosName = Array(0..<20).map { "\($0)" }
-    
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -60,6 +58,4 @@ final class ImagesListCell: UITableViewCell {
         cell.cellDataLabel.text = dateFormatter.string(from: Date())
         cell.cellLikeButton.setImage(likeImage, for: .normal)
     }
-    
-
 }

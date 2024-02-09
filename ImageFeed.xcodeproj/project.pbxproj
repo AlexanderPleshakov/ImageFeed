@@ -39,6 +39,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		163EA6152B76D62B002B65F6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				169E80AF2B7276C900E4C3E8 /* Assets.xcassets */,
+				169E80B12B7276C900E4C3E8 /* LaunchScreen.storyboard */,
+				169E80B42B7276C900E4C3E8 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		163FC55E2B74ED35002DA4D6 /* ImagesList */ = {
 			isa = PBXGroup;
 			children = (
@@ -70,10 +80,8 @@
 				169E80A62B7276C700E4C3E8 /* AppDelegate.swift */,
 				169E80A82B7276C700E4C3E8 /* SceneDelegate.swift */,
 				163FC55E2B74ED35002DA4D6 /* ImagesList */,
+				163EA6152B76D62B002B65F6 /* Resources */,
 				169E80AC2B7276C700E4C3E8 /* Main.storyboard */,
-				169E80AF2B7276C900E4C3E8 /* Assets.xcassets */,
-				169E80B12B7276C900E4C3E8 /* LaunchScreen.storyboard */,
-				169E80B42B7276C900E4C3E8 /* Info.plist */,
 			);
 			path = ImageFeed;
 			sourceTree = "<group>";
@@ -306,7 +314,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KD22N7R738;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ImageFeed/Info.plist;
+				INFOPLIST_FILE = ImageFeed/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -336,7 +344,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KD22N7R738;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ImageFeed/Info.plist;
+				INFOPLIST_FILE = ImageFeed/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
