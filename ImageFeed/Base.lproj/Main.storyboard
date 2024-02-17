@@ -97,6 +97,7 @@
                                             <outlet property="cellGradientView" destination="ZRT-iB-qNo" id="kK1-tn-qKL"/>
                                             <outlet property="cellImage" destination="gtr-pf-RQa" id="9mt-cU-ehE"/>
                                             <outlet property="cellLikeButton" destination="62e-ks-jFV" id="6Jb-lP-MtJ"/>
+                                            <segue destination="gK0-SC-BpX" kind="show" id="a2g-GF-SiZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -123,6 +124,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1031.2977099236641" y="-350"/>
+        </scene>
+        <!--Single Image View Controller-->
+        <scene sceneID="o1z-SS-Dik">
+            <objects>
+                <viewController id="gK0-SC-BpX" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SDS-vO-sN0">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="yvZ-Sq-Win">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <color key="backgroundColor" name="YP Black"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="R9m-m9-Aku"/>
+                        <color key="backgroundColor" name="YP Black"/>
+                        <constraints>
+                            <constraint firstItem="yvZ-Sq-Win" firstAttribute="leading" secondItem="R9m-m9-Aku" secondAttribute="leading" id="LdK-MZ-B0A"/>
+                            <constraint firstItem="yvZ-Sq-Win" firstAttribute="bottom" secondItem="R9m-m9-Aku" secondAttribute="bottom" id="Pwm-pi-Hg0"/>
+                            <constraint firstItem="yvZ-Sq-Win" firstAttribute="top" secondItem="R9m-m9-Aku" secondAttribute="top" id="Y0v-5J-ez0"/>
+                            <constraint firstItem="yvZ-Sq-Win" firstAttribute="trailing" secondItem="R9m-m9-Aku" secondAttribute="trailing" id="cd8-b1-iiF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="VFO-vM-3BK"/>
+                    <connections>
+                        <outlet property="imageView" destination="yvZ-Sq-Win" id="Y3p-Z8-qkG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L3k-n5-OH6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2002" y="-350"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="n7W-Zf-xMo">
