@@ -97,7 +97,6 @@
                                             <outlet property="cellGradientView" destination="ZRT-iB-qNo" id="kK1-tn-qKL"/>
                                             <outlet property="cellImage" destination="gtr-pf-RQa" id="9mt-cU-ehE"/>
                                             <outlet property="cellLikeButton" destination="62e-ks-jFV" id="6Jb-lP-MtJ"/>
-                                            <segue destination="gK0-SC-BpX" kind="show" id="a2g-GF-SiZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -119,6 +118,7 @@
                     <navigationItem key="navigationItem" id="Nt8-bV-YRp"/>
                     <connections>
                         <outlet property="imagesTableView" destination="BVG-DE-DCF" id="40U-RG-5Jx"/>
+                        <segue destination="gK0-SC-BpX" kind="show" identifier="ShowSingleImage" id="xKD-Nc-1Si"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
