@@ -19,6 +19,7 @@ final class SingleImageViewController: UIViewController {
     
     // MARK: Outlets
     
+    @IBOutlet private weak var backwardButton: UIButton!
     @IBOutlet private weak var imageView: UIImageView!
     
     // MARK: Life Cycle
@@ -28,4 +29,9 @@ final class SingleImageViewController: UIViewController {
         
         imageView.image = image
     }
+    
+    @IBAction func buttonBackwardTapped() {
+        dismiss(animated: true)
+    }
+    
 }
