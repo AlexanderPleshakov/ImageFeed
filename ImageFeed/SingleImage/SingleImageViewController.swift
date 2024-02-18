@@ -19,6 +19,7 @@ final class SingleImageViewController: UIViewController {
     
     // MARK: Outlets
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet private weak var backwardButton: UIButton!
     @IBOutlet private weak var imageView: UIImageView!
     
@@ -28,10 +29,23 @@ final class SingleImageViewController: UIViewController {
          super.viewDidLoad()
         
         imageView.image = image
+        imageView.frame.size = image?.size ?? CGSize(width: 0, height: 0)
+        
+        scrollView.minimumZoomScale = 0.1
+        scrollView.maximumZoomScale = 1.25
     }
+    
+    // MARK: Actions
     
     @IBAction func buttonBackwardTapped() {
         dismiss(animated: true)
     }
-    
+}
+
+// MARK: UIScrollViewDelegate
+
+extension SingleImageViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        imageView
+    }
 }
