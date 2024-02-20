@@ -9,7 +9,7 @@ import UIKit
 
 final class SingleImageViewController: UIViewController {
     // MARK: Properties
-    
+
     var image: UIImage! {
         didSet {
             guard isViewLoaded else { return }
@@ -17,11 +17,11 @@ final class SingleImageViewController: UIViewController {
         }
     }
     
-//    lazy var zoomingTap: UITapGestureRecognizer = {
-//        let zoomingTap = UITapGestureRecognizer(target: scrollView, action: #selector(handleZoomingTap))
-//        zoomingTap.numberOfTapsRequired = 2
-//        return zoomingTap
-//    }()
+    lazy var zoomingTap: UITapGestureRecognizer = {
+        let zoomingTap = UITapGestureRecognizer(target: self, action: #selector(handleZoomingTap))
+        zoomingTap.numberOfTapsRequired = 2
+        return zoomingTap
+    }()
     
     // MARK: Outlets
     
@@ -55,8 +55,8 @@ final class SingleImageViewController: UIViewController {
         setCurrentMaxAndMinZoomScale()
         scrollView.zoomScale = scrollView.minimumZoomScale
         
-//        imageView.addGestureRecognizer(zoomingTap)
-//        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(zoomingTap)
+        imageView.isUserInteractionEnabled = true
     }
     
     private func setCurrentMaxAndMinZoomScale() {
@@ -103,6 +103,43 @@ final class SingleImageViewController: UIViewController {
         imageView.frame = frameToCenter
     }
     
+    // MARK: Gesture
+        
+    func zoom(point: CGPoint, animated: Bool) {
+        let currentScale = scrollView.zoomScale
+        let minScale = scrollView.minimumZoomScale
+        let maxScale = scrollView.maximumZoomScale
+        
+        if (minScale == maxScale && minScale > 5) {
+            return
+        }
+        
+        let toScale = maxScale
+        let finalScale = (currentScale == minScale) ? toScale : minScale
+        let zoomRect = zoomRect(scale: finalScale, center: point)
+        scrollView.zoom(to: zoomRect, animated: animated)
+        
+    }
+    
+    func zoomRect(scale: CGFloat, center: CGPoint) -> CGRect {
+        var zoomRect = CGRect.zero
+        let bounds = scrollView.bounds
+        
+        zoomRect.size.width = bounds.size.width / scale
+        zoomRect.size.height = bounds.size.height / scale
+        
+        zoomRect.origin.x = center.x - (zoomRect.size.width / 2)
+        zoomRect.origin.y = center.y - (zoomRect.size.height / 2)
+        
+        return zoomRect
+    }
+    
+    @objc func handleZoomingTap(sender: UITapGestureRecognizer) {
+        let location = sender.location(in: sender.view)
+        zoom(point: location, animated: true)
+    }
+    
+    
     // MARK: Actions
     
     @IBAction private func buttonBackwardTapped() {
@@ -121,4 +158,3 @@ extension SingleImageViewController: UIScrollViewDelegate {
         centerImage()
     }
 }
-
