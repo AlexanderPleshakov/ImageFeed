@@ -10,7 +10,7 @@ import UIKit
 final class SingleImageViewController: UIViewController {
     // MARK: Properties
     
-    var image: UIImage? {
+    var image: UIImage! {
         didSet {
             guard isViewLoaded else { return }
             imageView.image = image
@@ -29,10 +29,37 @@ final class SingleImageViewController: UIViewController {
          super.viewDidLoad()
         
         imageView.image = image
-        imageView.frame.size = image?.size ?? CGSize(width: 0, height: 0)
+        imageView.frame.size = image.size
         
-        scrollView.minimumZoomScale = 0.1
-        scrollView.maximumZoomScale = 1.25
+        configurateFor(imageSize: image.size)
+    }
+    
+    func configurateFor(imageSize: CGSize) {
+        scrollView.contentSize = imageSize
+        
+        setCurrentMaxAndMinZoomScale()
+    }
+    
+    func setCurrentMaxAndMinZoomScale() {
+        let boundsSize = scrollView.bounds.size
+        let imageSize = imageView.bounds.size
+        let xScale = boundsSize.width / imageSize.width
+        let yScale = boundsSize.height / imageSize.height
+        let minScale = min(xScale, yScale)
+        
+        var maxScale: CGFloat = 1.0
+        if minScale < 0.1 {
+            maxScale = 0.3
+        }
+        if minScale >= 0.1 && minScale < 0.5 {
+            maxScale = 0.7
+        }
+        if minScale >= 0.5 {
+            maxScale = max (1.0, minScale)
+        }
+        
+        scrollView.minimumZoomScale = minScale
+        scrollView.maximumZoomScale = maxScale
     }
     
     // MARK: Actions
