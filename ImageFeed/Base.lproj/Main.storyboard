@@ -134,8 +134,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Mw-Ng-zDt">
-                                <rect key="frame" x="-20" y="-20" width="433" height="892"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Mw-Ng-zDt">
+                                <rect key="frame" x="0.0" y="0.0" width="433" height="892"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="yvZ-Sq-Win">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
@@ -166,11 +166,11 @@
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstItem="G4E-6t-Cot" firstAttribute="leading" secondItem="R9m-m9-Aku" secondAttribute="leading" constant="9" id="9u6-wE-xdT"/>
-                            <constraint firstItem="2Mw-Ng-zDt" firstAttribute="leading" secondItem="R9m-m9-Aku" secondAttribute="leading" id="JmM-we-eGh"/>
-                            <constraint firstItem="2Mw-Ng-zDt" firstAttribute="top" secondItem="SDS-vO-sN0" secondAttribute="top" constant="-20" id="WJp-1q-MOJ"/>
+                            <constraint firstItem="2Mw-Ng-zDt" firstAttribute="leading" secondItem="SDS-vO-sN0" secondAttribute="leading" id="JmM-we-eGh"/>
+                            <constraint firstItem="2Mw-Ng-zDt" firstAttribute="top" secondItem="SDS-vO-sN0" secondAttribute="top" id="WJp-1q-MOJ"/>
                             <constraint firstItem="G4E-6t-Cot" firstAttribute="top" secondItem="R9m-m9-Aku" secondAttribute="top" constant="11" id="fk3-Eu-cHk"/>
-                            <constraint firstAttribute="bottom" secondItem="2Mw-Ng-zDt" secondAttribute="bottom" constant="-20" id="pwh-NU-UWb"/>
-                            <constraint firstItem="R9m-m9-Aku" firstAttribute="trailing" secondItem="2Mw-Ng-zDt" secondAttribute="trailing" id="sgA-ey-MMM"/>
+                            <constraint firstAttribute="bottom" secondItem="2Mw-Ng-zDt" secondAttribute="bottom" id="pwh-NU-UWb"/>
+                            <constraint firstAttribute="trailing" secondItem="2Mw-Ng-zDt" secondAttribute="trailing" id="sgA-ey-MMM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VFO-vM-3BK"/>

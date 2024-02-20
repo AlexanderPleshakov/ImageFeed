@@ -35,9 +35,11 @@ final class SingleImageViewController: UIViewController {
     }
     
     func configurateFor(imageSize: CGSize) {
+        scrollView.bounds.size = view.bounds.size
         scrollView.contentSize = imageSize
         
         setCurrentMaxAndMinZoomScale()
+        scrollView.zoomScale = scrollView.minimumZoomScale
     }
     
     func setCurrentMaxAndMinZoomScale() {
@@ -47,7 +49,7 @@ final class SingleImageViewController: UIViewController {
         let yScale = boundsSize.height / imageSize.height
         let minScale = min(xScale, yScale)
         
-        var maxScale: CGFloat = 1.0
+        var maxScale: CGFloat = 2.0
         if minScale < 0.1 {
             maxScale = 0.3
         }
@@ -55,7 +57,10 @@ final class SingleImageViewController: UIViewController {
             maxScale = 0.7
         }
         if minScale >= 0.5 {
-            maxScale = max (1.0, minScale)
+            maxScale = max(4, minScale)
+        }
+        if minScale >= 2 {
+            maxScale = max(5, minScale)
         }
         
         scrollView.minimumZoomScale = minScale
