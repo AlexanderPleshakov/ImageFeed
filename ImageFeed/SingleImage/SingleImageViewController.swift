@@ -26,7 +26,6 @@ final class SingleImageViewController: UIViewController {
     // MARK: Outlets
     
     @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var backwardButton: UIButton!
     @IBOutlet private weak var imageView: UIImageView!
     
     // MARK: Life Cycle
@@ -118,7 +117,6 @@ final class SingleImageViewController: UIViewController {
         let finalScale = (currentScale == minScale) ? toScale : minScale
         let zoomRect = zoomRect(scale: finalScale, center: point)
         scrollView.zoom(to: zoomRect, animated: animated)
-        
     }
     
     func zoomRect(scale: CGFloat, center: CGPoint) -> CGRect {
@@ -144,6 +142,12 @@ final class SingleImageViewController: UIViewController {
     
     @IBAction private func buttonBackwardTapped() {
         dismiss(animated: true)
+    }
+    
+    @IBAction func buttonShareTapped() {
+        guard let image = image else { return }
+        let activityView = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        present(activityView, animated: true)
     }
 }
 
