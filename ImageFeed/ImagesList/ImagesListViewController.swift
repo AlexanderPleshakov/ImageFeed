@@ -10,6 +10,7 @@ import UIKit
 final class ImagesListViewController: UIViewController {
     
     //MARK: Properties
+    private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     var imagesListCell: ImagesListCell!
     
@@ -26,6 +27,25 @@ final class ImagesListViewController: UIViewController {
         imagesTableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
     
+    // MARK: Overrides
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showSingleImageSegueIdentifier {
+            guard
+                let viewController = segue.destination as? SingleImageViewController,
+                let indexPath = sender as? IndexPath
+            else {
+                assertionFailure("Invalid segue destination")
+                return
+            }
+            
+            let image = UIImage(named: ImagesListCell.photosName[indexPath.row])
+            viewController.image = image
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
+    }
+    
     // MARK: Functions
     
     
@@ -36,8 +56,8 @@ final class ImagesListViewController: UIViewController {
 //MARK: UITableViewDelegate
 
 extension ImagesListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -56,8 +76,6 @@ extension ImagesListViewController: UITableViewDelegate {
 //MARK: UITableViewDataSource
 
 extension ImagesListViewController: UITableViewDataSource {
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ImagesListCell.photosName.count
     }
