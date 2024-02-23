@@ -64,6 +64,7 @@ final class ProfileViewController: UIViewController {
         userDescriptionLabel.font = UIFont.systemFont(ofSize: 13)
         userDescriptionLabel.text = userDescription
         userDescriptionLabel.textColor = .white
+        userDescriptionLabel.numberOfLines = 0
         userDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(userDescriptionLabel)
         self.userDescriptionLabel = userDescriptionLabel
@@ -86,14 +87,17 @@ final class ProfileViewController: UIViewController {
             // User Name
             userNameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8),
             userNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
+            userNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
             
             // User login
             userLoginLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 8),
             userLoginLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
+            userLoginLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
             
             // User description
             userDescriptionLabel.topAnchor.constraint(equalTo: userLoginLabel.bottomAnchor, constant: 8),
             userDescriptionLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
+            userDescriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
             
             // Logout button
             logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
