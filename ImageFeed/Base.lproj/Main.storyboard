@@ -32,13 +32,47 @@
                     <view key="view" contentMode="scaleToFill" id="TL5-ur-9g9">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="authImage" translatesAutoresizingMaskIntoConstraints="NO" id="j9s-5a-tXO">
+                                <rect key="frame" x="166.66666666666666" y="430.66666666666669" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="SZ0-fb-7Ns"/>
+                                    <constraint firstAttribute="width" constant="60" id="YZs-LJ-Id8"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5t-8Q-kLp">
+                                <rect key="frame" x="16" y="680" width="361" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="oGZ-Yz-bpx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Войти">
+                                    <color key="titleColor" name="YP Black"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="P7z-Fd-qP1" kind="show" id="juf-q9-q3P"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vFx-h4-Uld"/>
                         <color key="backgroundColor" name="YP Black"/>
+                        <constraints>
+                            <constraint firstItem="j9s-5a-tXO" firstAttribute="centerX" secondItem="vFx-h4-Uld" secondAttribute="centerX" id="4MU-VQ-4oX"/>
+                            <constraint firstItem="vFx-h4-Uld" firstAttribute="trailing" secondItem="b5t-8Q-kLp" secondAttribute="trailing" constant="16" id="8mk-u0-pAg"/>
+                            <constraint firstItem="j9s-5a-tXO" firstAttribute="centerY" secondItem="vFx-h4-Uld" secondAttribute="centerY" id="Ask-hb-Yv3"/>
+                            <constraint firstItem="b5t-8Q-kLp" firstAttribute="leading" secondItem="vFx-h4-Uld" secondAttribute="leading" constant="16" id="GWG-2D-kDd"/>
+                            <constraint firstItem="vFx-h4-Uld" firstAttribute="bottom" secondItem="b5t-8Q-kLp" secondAttribute="bottom" constant="90" id="sXk-BW-pAZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8of-9Y-6Qe"/>
-                    <connections>
-                        <segue destination="P7z-Fd-qP1" kind="show" identifier="ShowWebView" id="jOC-wM-Ldm"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XET-B3-r4n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -272,6 +306,7 @@
         <image name="ShareButton" width="51" height="51"/>
         <image name="TabEditorialActive" width="30.333333969116211" height="30"/>
         <image name="TabProfileActive" width="30.333333969116211" height="30"/>
+        <image name="authImage" width="60" height="60"/>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
