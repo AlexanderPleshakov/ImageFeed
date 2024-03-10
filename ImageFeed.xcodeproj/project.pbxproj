@@ -11,6 +11,8 @@
 		1628CA222B80DF4F001F175C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628CA212B80DF4F001F175C /* ProfileViewController.swift */; };
 		163FC55D2B74ECFF002DA4D6 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163FC55C2B74ECFF002DA4D6 /* ImagesListCell.swift */; };
 		1674D1832B9E10870063CBEA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674D1822B9E10870063CBEA /* Constants.swift */; };
+		1674D1852B9E248A0063CBEA /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674D1842B9E248A0063CBEA /* AuthViewController.swift */; };
+		1674D1882B9E2C100063CBEA /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674D1872B9E2C100063CBEA /* WebViewController.swift */; };
 		169E80A72B7276C700E4C3E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169E80A62B7276C700E4C3E8 /* AppDelegate.swift */; };
 		169E80A92B7276C700E4C3E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169E80A82B7276C700E4C3E8 /* SceneDelegate.swift */; };
 		169E80AB2B7276C700E4C3E8 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169E80AA2B7276C700E4C3E8 /* ImagesListViewController.swift */; };
@@ -24,6 +26,8 @@
 		1628CA212B80DF4F001F175C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		163FC55C2B74ECFF002DA4D6 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		1674D1822B9E10870063CBEA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1674D1842B9E248A0063CBEA /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		1674D1872B9E2C100063CBEA /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		169E80A32B7276C700E4C3E8 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		169E80A62B7276C700E4C3E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		169E80A82B7276C700E4C3E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +84,15 @@
 			path = ImagesList;
 			sourceTree = "<group>";
 		};
+		1674D1862B9E2B890063CBEA /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				1674D1842B9E248A0063CBEA /* AuthViewController.swift */,
+				1674D1872B9E2C100063CBEA /* WebViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		169E809A2B7276C700E4C3E8 = {
 			isa = PBXGroup;
 			children = (
@@ -101,12 +114,13 @@
 			children = (
 				169E80A62B7276C700E4C3E8 /* AppDelegate.swift */,
 				169E80A82B7276C700E4C3E8 /* SceneDelegate.swift */,
+				1674D1822B9E10870063CBEA /* Constants.swift */,
+				1674D1862B9E2B890063CBEA /* Auth */,
 				16000FA92B810F9700A8458D /* SingleImage */,
 				1628CA232B80DF95001F175C /* Profile */,
 				163FC55E2B74ED35002DA4D6 /* ImagesList */,
 				163EA6152B76D62B002B65F6 /* Resources */,
 				169E80AC2B7276C700E4C3E8 /* Main.storyboard */,
-				1674D1822B9E10870063CBEA /* Constants.swift */,
 			);
 			path = ImageFeed;
 			sourceTree = "<group>";
@@ -183,9 +197,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				169E80AB2B7276C700E4C3E8 /* ImagesListViewController.swift in Sources */,
+				1674D1882B9E2C100063CBEA /* WebViewController.swift in Sources */,
 				163FC55D2B74ECFF002DA4D6 /* ImagesListCell.swift in Sources */,
 				1628CA222B80DF4F001F175C /* ProfileViewController.swift in Sources */,
 				169E80A72B7276C700E4C3E8 /* AppDelegate.swift in Sources */,
+				1674D1852B9E248A0063CBEA /* AuthViewController.swift in Sources */,
 				1674D1832B9E10870063CBEA /* Constants.swift in Sources */,
 				16000FA82B810C3200A8458D /* SingleImageViewController.swift in Sources */,
 				169E80A92B7276C700E4C3E8 /* SceneDelegate.swift in Sources */,
