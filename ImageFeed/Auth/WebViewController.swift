@@ -9,7 +9,9 @@ import UIKit
 import WebKit
 
 final class WebViewController: UIViewController {
-    @IBOutlet weak var webView: WKWebView!
+    weak var delegate: WebViewControllerDelegate!
+    
+    @IBOutlet private weak var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +22,7 @@ final class WebViewController: UIViewController {
     
     private func loadAuthView() {
         guard var urlComponents = URLComponents(string: Constants.unsplashAuthorizeURLString) else {
-            print("urlComponents is faild")
+            print("urlComponents is failed")
             return
         }
         
@@ -38,8 +40,37 @@ final class WebViewController: UIViewController {
         let request = URLRequest(url: url)
         webView.load(request)
     }
+    
+    @IBAction private func buttonBackTapped() {
+        delegate.webViewControllerDidCancel(self)
+    }
 }
 
 extension WebViewController: WKNavigationDelegate {
+    func webView(
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
+        if let code = code(from: navigationAction) {
+            delegate.webViewController(self, didAuthenticateWithCode: code)
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
+        }
+    }
     
+    private func code(from navigationAction: WKNavigationAction) -> String? {
+        if
+            let url = navigationAction.request.url,
+            let urlComponents = URLComponents(string: url.absoluteString),
+            urlComponents.path == "/oauth/authorize/native",
+            let items = urlComponents.queryItems,
+            let codeItem = items.first(where: { $0.name == "code" })
+        {
+            return codeItem.value
+        } else {
+            return nil
+        }
+    }
 }
