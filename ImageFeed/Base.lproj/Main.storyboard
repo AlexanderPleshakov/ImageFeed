@@ -58,7 +58,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="P7z-Fd-qP1" kind="show" id="juf-q9-q3P"/>
+                                    <segue destination="P7z-Fd-qP1" kind="show" identifier="ShowWebView" id="juf-q9-q3P"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -85,14 +85,33 @@
                     <view key="view" contentMode="scaleToFill" id="Ynk-Nf-VsG">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ujf-7R-goo">
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="auE-GZ-lLM"/>
-                        <color key="backgroundColor" name="YP Black"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ujf-7R-goo" firstAttribute="trailing" secondItem="auE-GZ-lLM" secondAttribute="trailing" id="cxe-RE-HTH"/>
+                            <constraint firstItem="Ujf-7R-goo" firstAttribute="leading" secondItem="auE-GZ-lLM" secondAttribute="leading" id="lB3-se-bEH"/>
+                            <constraint firstAttribute="bottom" secondItem="Ujf-7R-goo" secondAttribute="bottom" id="moz-d8-9qb"/>
+                            <constraint firstItem="Ujf-7R-goo" firstAttribute="top" secondItem="auE-GZ-lLM" secondAttribute="top" id="yBn-QF-ciI"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OVU-5K-BRS"/>
+                    <connections>
+                        <outlet property="webView" destination="Ujf-7R-goo" id="pSc-CZ-oba"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Qc-Uy-kW6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1941" y="-2"/>
+            <point key="canvasLocation" x="-1941.2213740458014" y="-2.1126760563380285"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Lb9-pq-GCQ">
