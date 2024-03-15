@@ -9,15 +9,58 @@ import UIKit
 import WebKit
 
 final class WebViewController: UIViewController {
+    // MARK: Properties
     weak var delegate: WebViewControllerDelegate!
     
+    // MARK: Outlets
+    
+    @IBOutlet private weak var progressView: UIProgressView!
     @IBOutlet private weak var webView: WKWebView!
+    
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         webView.navigationDelegate = self
         loadAuthView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        webView.addObserver(
+            self,
+            forKeyPath: #keyPath(WKWebView.estimatedProgress),
+            options: .new,
+            context: nil
+        )
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
+    }
+    
+    // MARK: Overrides
+    
+    override func observeValue(
+        forKeyPath keyPath: String?,
+        of object: Any?,
+        change: [NSKeyValueChangeKey : Any]?,
+        context: UnsafeMutableRawPointer?
+    ) {
+        if keyPath == #keyPath(WKWebView.estimatedProgress) {
+            updateProgress()
+        } else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+    }
+    
+    // MARK: Methods
+
+    private func updateProgress() {
+        progressView.progress = Float(webView.estimatedProgress)
+        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
     }
     
     private func loadAuthView() {
@@ -41,10 +84,16 @@ final class WebViewController: UIViewController {
         webView.load(request)
     }
     
+    // MARK: Actions
+    
     @IBAction private func buttonBackTapped() {
         delegate.webViewControllerDidCancel(self)
     }
+    
+    
 }
+
+// MARK: WKNavigationDelegate
 
 extension WebViewController: WKNavigationDelegate {
     func webView(

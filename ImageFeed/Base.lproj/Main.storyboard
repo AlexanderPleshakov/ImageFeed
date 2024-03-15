@@ -94,10 +94,17 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XhJ-eG-qmD">
+                                <rect key="frame" x="0.0" y="103" width="393" height="4"/>
+                                <color key="progressTintColor" name="YP Black"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="auE-GZ-lLM"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="XhJ-eG-qmD" firstAttribute="top" secondItem="auE-GZ-lLM" secondAttribute="top" id="3ye-wA-Zh9"/>
+                            <constraint firstItem="XhJ-eG-qmD" firstAttribute="leading" secondItem="auE-GZ-lLM" secondAttribute="leading" id="LjI-b3-G8f"/>
+                            <constraint firstItem="auE-GZ-lLM" firstAttribute="trailing" secondItem="XhJ-eG-qmD" secondAttribute="trailing" id="VFq-7a-6up"/>
                             <constraint firstItem="Ujf-7R-goo" firstAttribute="trailing" secondItem="auE-GZ-lLM" secondAttribute="trailing" id="cxe-RE-HTH"/>
                             <constraint firstItem="Ujf-7R-goo" firstAttribute="leading" secondItem="auE-GZ-lLM" secondAttribute="leading" id="lB3-se-bEH"/>
                             <constraint firstAttribute="bottom" secondItem="Ujf-7R-goo" secondAttribute="bottom" id="moz-d8-9qb"/>
@@ -106,6 +113,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="OVU-5K-BRS"/>
                     <connections>
+                        <outlet property="progressView" destination="XhJ-eG-qmD" id="pNx-hc-6xC"/>
                         <outlet property="webView" destination="Ujf-7R-goo" id="pSc-CZ-oba"/>
                     </connections>
                 </viewController>
