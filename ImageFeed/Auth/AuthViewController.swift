@@ -39,10 +39,20 @@ final class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewControllerDelegate {
     func webViewController(_ vc: WebViewController, didAuthenticateWithCode code: String) {
-        
+        print("didAuthenticateWithCode")
+        OAuth2Service.shared.fetchOAuthToken(code: code) { result in
+
+            switch result {
+            case .success(let bearerToken):
+                print("success - \(bearerToken)")
+            case .failure(let error):
+                print("failure with error - \(error)")
+            }
+        }
     }
     
     func webViewControllerDidCancel(_ vc: WebViewController) {
+        
         dismiss(animated: true)
     }
     
