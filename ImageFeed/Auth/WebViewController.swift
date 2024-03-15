@@ -89,8 +89,6 @@ final class WebViewController: UIViewController {
     @IBAction private func buttonBackTapped() {
         delegate.webViewControllerDidCancel(self)
     }
-    
-    
 }
 
 // MARK: WKNavigationDelegate

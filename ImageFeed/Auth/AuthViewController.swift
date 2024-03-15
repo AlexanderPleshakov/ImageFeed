@@ -26,7 +26,6 @@ final class AuthViewController: UIViewController {
         } else {
             super.prepare(for: segue, sender: sender)
         }
-        
     }
     
     private func configureNavigationBar() {
@@ -39,12 +38,12 @@ final class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewControllerDelegate {
     func webViewController(_ vc: WebViewController, didAuthenticateWithCode code: String) {
-        print("didAuthenticateWithCode")
-        OAuth2Service.shared.fetchOAuthToken(code: code) { result in
-
+        OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
+            self?.navigationController?.popViewController(animated: true)
+            
             switch result {
             case .success(let bearerToken):
-                print("success - \(bearerToken)")
+                print(bearerToken)
             case .failure(let error):
                 print("failure with error - \(error)")
             }
@@ -52,9 +51,6 @@ extension AuthViewController: WebViewControllerDelegate {
     }
     
     func webViewControllerDidCancel(_ vc: WebViewController) {
-        
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
-    
-    
 }
