@@ -113,7 +113,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="OVU-5K-BRS"/>
                     <connections>
-                        <outlet property="progressView" destination="XhJ-eG-qmD" id="pNx-hc-6xC"/>
+                        <outlet property="progressView" destination="XhJ-eG-qmD" id="Xub-3b-ecj"/>
                         <outlet property="webView" destination="Ujf-7R-goo" id="pSc-CZ-oba"/>
                     </connections>
                 </viewController>
