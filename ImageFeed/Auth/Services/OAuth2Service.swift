@@ -39,16 +39,16 @@ final class OAuth2Service {
                 
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                
-                guard let token = try? decoder.decode(OAuthTokenResponseBody.self, from: data),
-                      let accessToken = token.accessToken
-                else {
-                    fatalError("Token is nil")
+                do {
+                    let token = try decoder.decode(OAuthTokenResponseBody.self, from: data)
+                    guard let token = token.accessToken else {
+                        fatalError("token is nil")
+                    }
+                    handler(.success(token))
+                } catch {
+                    handler(.failure(error))
                 }
-                handler(.success(accessToken))
-                
             case .failure(let error):
-                print("failure in fetching, error - \(error)")
                 handler(.failure(error))
             }
         }
