@@ -16,27 +16,26 @@ final class OAuth2Service {
         case codeError
     }
     
+    
+    
     func makeOAuthTokenRequest(code: String) -> URLRequest {
-        guard var urlComponents = URLComponents(string: "https://unsplash.com/oauth/token") else {
-            fatalError("Ошибка создания urlComponents")
-        }
-        
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: Constants.accessKey),
-            URLQueryItem(name: "client_secret", value: Constants.secretKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
-            URLQueryItem(name: "code", value: code),
-            URLQueryItem(name: "client_id", value: "authorization_code")
-        ]
-        
-        guard let url = urlComponents.url else {
-            fatalError("Ошибка создания url")
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        return request
+        let baseURL = URL(string: "https://unsplash.com")!
+         let url = URL(string: "/oauth/token"
+             + "?client_id=\(Constants.accessKey)"         //
+             + "&&client_secret=\(Constants.secretKey)"
+             + "&&redirect_uri=\(Constants.redirectURI)"
+             + "&&code=\(code)"
+             + "&&grant_type=authorization_code",
+             relativeTo: baseURL)!
+        print("https://unsplash.com/oauth/token"
+              + "?client_id=\(Constants.accessKey)"         //
+              + "&&client_secret=\(Constants.secretKey)"
+              + "&&redirect_uri=\(Constants.redirectURI)"
+              + "&&code=\(code)"
+              + "&&grant_type=authorization_code")
+         var request = URLRequest(url: url)
+         request.httpMethod = "POST"
+         return request
     }
     
     func fetchOAuthToken(code: String, handler: @escaping (Result<String, Error>) -> Void) {
@@ -57,8 +56,10 @@ final class OAuth2Service {
                 handler(.success(accessToken))
                 
             case .failure(let error):
+                print("failure in fetching, error - \(error)")
                 handler(.failure(error))
             }
         }
+        task.resume()
     }
 }
