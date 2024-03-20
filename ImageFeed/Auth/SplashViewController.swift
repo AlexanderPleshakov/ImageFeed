@@ -19,11 +19,24 @@ final class SplashViewController: UIViewController {
     }
     
     private func showNextScreen() {
-        if let token = UserDefaults.standard.string(forKey: Constants.UserDefaults.bearerTokenKey) {
+        if let _ = UserDefaults.standard.string(forKey: Constants.UserDefaults.bearerTokenKey) {
+            print("gallery showed")
             performSegue(withIdentifier: showGallerySegueId, sender: self)
         } else {
             performSegue(withIdentifier: showAuthSegueId, sender: self)
         }
+    }
+    
+    private func switchToTabBarController() {
+        guard let window = UIApplication.shared.windows.first else {
+            assertionFailure("Invalid window configuration")
+            return
+        }
+        
+        let tabBarController = UIStoryboard(name: "Main", bundle: .main)
+            .instantiateViewController(withIdentifier: "TabBarViewController")
+           
+        window.rootViewController = tabBarController
     }
 }
 
@@ -46,5 +59,6 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
+        switchToTabBarController()
     }
 }
