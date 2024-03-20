@@ -30,6 +30,7 @@ extension URLSession {
                     fulfillCompletionOnTheMainThread(.success(data))
                 } else {
                     print("Unexpected status code")
+                    print(String(data: data, encoding: .utf8) ?? "")
                     fulfillCompletionOnTheMainThread(.failure(NetworkError.httpStatusCode(statusCode)))
                 }
             } else if let error = error {
