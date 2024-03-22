@@ -9,8 +9,8 @@ import UIKit
 
 
 final class AuthViewController: UIViewController {
-    let ShowWebViewSegueIdentifier = "ShowWebView"
-    var oauth2TokenStorage = OAuth2TokenStorage()
+    private let showWebViewSegueIdentifier = "ShowWebView"
+    private let oauth2TokenStorage = OAuth2TokenStorage()
     weak var delegate: AuthViewControllerDelegate!
     
     override func viewDidLoad() {
@@ -20,9 +20,9 @@ final class AuthViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ShowWebViewSegueIdentifier {
+        if segue.identifier == showWebViewSegueIdentifier {
             guard let webViewController = segue.destination as? WebViewController else {
-                fatalError("Failed to prepare for \(ShowWebViewSegueIdentifier)")
+                fatalError("Failed to prepare for \(showWebViewSegueIdentifier)")
             }
             webViewController.delegate = self
         } else {
