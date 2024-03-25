@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 
 final class AuthViewController: UIViewController {
@@ -40,6 +41,7 @@ final class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewControllerDelegate {
     func webViewController(_ vc: WebViewController, didAuthenticateWithCode code: String) {
+        ProgressHUD.animate()
         OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
             guard let self = self else { return }
             self.navigationController?.popViewController(animated: true)
@@ -51,6 +53,7 @@ extension AuthViewController: WebViewControllerDelegate {
             case .failure(let error):
                 print("failure with error - \(error)")
             }
+            ProgressHUD.dismiss()
         }
     }
     
