@@ -10,11 +10,14 @@ import UIKit
 final class OAuth2Service {
     static let shared = OAuth2Service()
     
+    private var task: URLSessionTask?
+    private var lastCode: String?
+    
     private init () {}
     
     private enum NetworkError: Error {
         case codeError
-        case createRequestError
+        case invalidRequest, equalAuthCodes, differentAuthCodes
     }
     
     func makeOAuthTokenRequest(code: String) -> URLRequest? {
@@ -37,13 +40,28 @@ final class OAuth2Service {
     }
     
     func fetchOAuthToken(code: String, handler: @escaping (Result<String, Error>) -> Void) {
-        let request = makeOAuthTokenRequest(code: code)
-        guard let request = request else {
-            handler(.failure(NetworkError.createRequestError))
+        assert(Thread.isMainThread)
+        print("-- start fetching --")
+        
+        print(lastCode)
+        guard lastCode != code else {
+//            print("lastCode - \(lastCode)")
+//            print("code - \(code)")
+            handler(.failure(NetworkError.differentAuthCodes))
             return
         }
         
-        let task = URLSession.shared.data(for: request) { result in
+        task?.cancel()
+        lastCode = code
+        
+        
+        guard let request = makeOAuthTokenRequest(code: code) else {
+            handler(.failure(NetworkError.invalidRequest))
+            return
+        }
+        
+        let task = URLSession.shared.data(for: request) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let data):
                 
@@ -61,7 +79,12 @@ final class OAuth2Service {
             case .failure(let error):
                 handler(.failure(error))
             }
+            self.task = nil
+            self.lastCode = nil
+            print("task was resumed")
         }
+        self.task = task
         task.resume()
+        
     }
 }
