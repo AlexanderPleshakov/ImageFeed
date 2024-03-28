@@ -18,13 +18,20 @@ final class ProfileService {
         repeatedRequest
     }
     
+    private func makeRequest() -> URLRequest? {
+        guard let url = URL(string: "https://api.unsplash.com/me") else {
+            assertionFailure("Cannot construct url")
+            return nil
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(tokenStorage.token)", forHTTPHeaderField: "Authorization")
+        
+        return request
+    }
+    
     func fetchProfile(bearerToken: String, completion: @escaping (Result<ProfileResult, Error>) -> Void) {
         assert(Thread.isMainThread)
-        
-        guard let url = URL(string: "https://api.unsplash.com/me") else {
-            completion(.failure(ProfileFetchingError.incorrectURL))
-            return
-        }
         
         guard lastToken != bearerToken else {
             completion(.failure(ProfileFetchingError.repeatedRequest))
@@ -34,8 +41,10 @@ final class ProfileService {
         task?.cancel()
         lastToken = bearerToken
         
-        var request = URLRequest(url: url)
-        request.setValue("Bearer \(tokenStorage.token)", forHTTPHeaderField: "Authorization")
+        guard let request = makeRequest() else {
+            completion(.failure(ProfileFetchingError.requestCreateFailure))
+            return
+        }
         
         let task = URLSession.shared.data(for: request) { [weak self] result in
             guard let self = self else { return }
