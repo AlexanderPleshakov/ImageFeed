@@ -30,7 +30,7 @@ final class ProfileService {
         return request
     }
     
-    func fetchProfile(bearerToken: String, completion: @escaping (Result<ProfileResult, Error>) -> Void) {
+    func fetchProfile(bearerToken: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
         
         guard lastToken != bearerToken else {
@@ -55,7 +55,8 @@ final class ProfileService {
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
                     let profileResult = try decoder.decode(ProfileResult.self, from: data)
-                    completion(.success(profileResult))
+                    let profile = Profile(profileResult: profileResult)
+                    completion(.success(profile))
                 } catch {
                     completion(.failure(ProfileFetchingError.decodeFailure))
                 }
