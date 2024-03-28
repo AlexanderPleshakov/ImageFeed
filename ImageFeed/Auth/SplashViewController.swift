@@ -13,7 +13,6 @@ final class SplashViewController: UIViewController {
     private let showAuthSegueId = "showAuthorization"
     
     private let tokenStorage = OAuth2TokenStorage()
-    private let profileService = ProfileService.shared
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -42,6 +41,8 @@ final class SplashViewController: UIViewController {
     }
     
     private func fetchProfile(token: String) {
+        let profileService = ProfileService.shared
+        
         profileService.fetchProfile(bearerToken: token) { [weak self] result in
             guard let self = self else { return }
             
@@ -74,6 +75,6 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        fetchProfile(token: tokenStorage.token)
+        //fetchProfile(token: tokenStorage.token)
     }
 }
