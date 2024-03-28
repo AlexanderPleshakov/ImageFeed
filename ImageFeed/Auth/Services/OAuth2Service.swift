@@ -43,10 +43,7 @@ final class OAuth2Service {
         assert(Thread.isMainThread)
         print("-- start fetching --")
         
-        print(lastCode)
         guard lastCode != code else {
-//            print("lastCode - \(lastCode)")
-//            print("code - \(code)")
             handler(.failure(NetworkError.differentAuthCodes))
             return
         }
