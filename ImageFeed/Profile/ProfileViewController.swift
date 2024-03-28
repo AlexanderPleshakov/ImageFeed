@@ -10,26 +10,33 @@ import UIKit
 final class ProfileViewController: UIViewController {
     // MARK: Properties
     
+    // For UI
     var avatarImage: UIImage?
-    var userName: String?
-    var userLogin: String?
-    var userDescription: String?
     
     var userNameLabel: UILabel?
     var userLoginLabel: UILabel?
-    var userDescriptionLabel: UILabel?
+    var userBioLabel: UILabel?
+    
+    // Services
+    let bearerToken = OAuth2TokenStorage().token
+    let profileService = ProfileService.shared
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
+        configure(profile: profileService.profile)
     }
     
     // MARK: Methods
     
-    private func configure() {
+    private func configure(profile: Profile?) {
+        guard let profile = profile else { return }
+        construct(userName: profile.name, loginName: profile.loginName, bio: profile.bio)
+    }
+    
+    private func construct(userName: String?, loginName: String?, bio: String?) {
         // Avatar
         avatarImage = UIImage(systemName: "person.crop.circle.fill")
         let avatarImageView = UIImageView(image: avatarImage)
@@ -39,7 +46,6 @@ final class ProfileViewController: UIViewController {
         view.addSubview(avatarImageView)
         
         // User name
-        userName = "Екатерина Новикова"
         let userNameLabel = UILabel()
         userNameLabel.font = UIFont.boldSystemFont(ofSize: 23)
         userNameLabel.text = userName
@@ -49,25 +55,23 @@ final class ProfileViewController: UIViewController {
         self.userNameLabel = userNameLabel
         
         // User login
-        userLogin = "@ecaterina_nov"
         let userLoginLabel = UILabel()
         userLoginLabel.font = UIFont.systemFont(ofSize: 13)
-        userLoginLabel.text = userLogin
+        userLoginLabel.text = loginName
         userLoginLabel.textColor = UIColor(named: "YP Gray")
         userLoginLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(userLoginLabel)
         self.userLoginLabel = userLoginLabel
         
         // User description
-        userDescription = "Hello, world!"
-        let userDescriptionLabel = UILabel()
-        userDescriptionLabel.font = UIFont.systemFont(ofSize: 13)
-        userDescriptionLabel.text = userDescription
-        userDescriptionLabel.textColor = .white
-        userDescriptionLabel.numberOfLines = 0
-        userDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(userDescriptionLabel)
-        self.userDescriptionLabel = userDescriptionLabel
+        let userBioLabel = UILabel()
+        userBioLabel.font = UIFont.systemFont(ofSize: 13)
+        userBioLabel.text = bio
+        userBioLabel.textColor = .white
+        userBioLabel.numberOfLines = 0
+        userBioLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(userBioLabel)
+        self.userBioLabel = userBioLabel
         
         // Logout button
         let logoutImage = UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage()
@@ -95,9 +99,9 @@ final class ProfileViewController: UIViewController {
             userLoginLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
             
             // User description
-            userDescriptionLabel.topAnchor.constraint(equalTo: userLoginLabel.bottomAnchor, constant: 8),
-            userDescriptionLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
-            userDescriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
+            userBioLabel.topAnchor.constraint(equalTo: userLoginLabel.bottomAnchor, constant: 8),
+            userBioLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
+            userBioLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
             
             // Logout button
             logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
