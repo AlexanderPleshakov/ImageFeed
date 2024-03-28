@@ -12,7 +12,7 @@ final class SplashViewController: UIViewController {
     private let showGallerySegueId = "showGallery"
     private let showAuthSegueId = "showAuthorization"
     
-    private let token = OAuth2TokenStorage().token
+    private let tokenStorage = OAuth2TokenStorage()
     private let profileService = ProfileService.shared
     
     override func viewDidAppear(_ animated: Bool) {
@@ -23,7 +23,7 @@ final class SplashViewController: UIViewController {
     
     private func showNextScreen() {
         if let _ = UserDefaults.standard.string(forKey: Constants.UserDefaults.bearerTokenKey) {
-            fetchProfile(token: token)
+            fetchProfile(token: tokenStorage.token)
         } else {
             performSegue(withIdentifier: showAuthSegueId, sender: self)
         }
@@ -74,6 +74,6 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        fetchProfile(token: token)
+        fetchProfile(token: tokenStorage.token)
     }
 }
