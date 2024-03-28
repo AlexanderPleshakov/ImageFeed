@@ -8,7 +8,11 @@
 import Foundation
 
 final class ProfileService {
+    static let shared = ProfileService()
     
+    private init() {}
+    
+    var profile: Profile?
     private let tokenStorage = OAuth2TokenStorage()
     private var lastToken: String?
     private var task: URLSessionTask?
@@ -31,6 +35,7 @@ final class ProfileService {
     }
     
     func fetchProfile(bearerToken: String, completion: @escaping (Result<Profile, Error>) -> Void) {
+        print("-- Start fetching profile --")
         assert(Thread.isMainThread)
         
         guard lastToken != bearerToken else {

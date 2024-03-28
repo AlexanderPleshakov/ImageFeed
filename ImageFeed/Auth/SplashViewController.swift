@@ -12,6 +12,9 @@ final class SplashViewController: UIViewController {
     private let showGallerySegueId = "showGallery"
     private let showAuthSegueId = "showAuthorization"
     
+    private let token = OAuth2TokenStorage().token
+    private let profileService = ProfileService.shared
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -20,8 +23,7 @@ final class SplashViewController: UIViewController {
     
     private func showNextScreen() {
         if let _ = UserDefaults.standard.string(forKey: Constants.UserDefaults.bearerTokenKey) {
-            print("gallery showed")
-            performSegue(withIdentifier: showGallerySegueId, sender: self)
+            fetchProfile(token: token)
         } else {
             performSegue(withIdentifier: showAuthSegueId, sender: self)
         }
@@ -38,6 +40,20 @@ final class SplashViewController: UIViewController {
            
         window.rootViewController = tabBarController
     }
+    
+    private func fetchProfile(token: String) {
+        profileService.fetchProfile(bearerToken: token) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let profile):
+                profileService.profile = profile
+                self.switchToTabBarController()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 extension SplashViewController: AuthViewControllerDelegate {
@@ -50,7 +66,6 @@ extension SplashViewController: AuthViewControllerDelegate {
                 assertionFailure("Failed to prepare for \(showAuthSegueId)")
                 return
             }
-            
             authViewController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)
@@ -59,6 +74,6 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        switchToTabBarController()
+        fetchProfile(token: token)
     }
 }
