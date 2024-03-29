@@ -32,6 +32,7 @@
 		16A560362BA5059C00AD37C8 /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A560352BA5059C00AD37C8 /* OAuth2TokenStorage.swift */; };
 		16AC60B92BB6DAA100CD04FA /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC60B82BB6DAA100CD04FA /* ProfileImageService.swift */; };
 		16AC60BB2BB6DAD200CD04FA /* UserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC60BA2BB6DAD100CD04FA /* UserResult.swift */; };
+		16AC60BD2BB754AF00CD04FA /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC60BC2BB754AF00CD04FA /* AlertPresenter.swift */; };
 		16B4CB3D2B9E78C700775EAF /* WebViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B4CB3C2B9E78C700775EAF /* WebViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		16A560352BA5059C00AD37C8 /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
 		16AC60B82BB6DAA100CD04FA /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		16AC60BA2BB6DAD100CD04FA /* UserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResult.swift; sourceTree = "<group>"; };
+		16AC60BC2BB754AF00CD04FA /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		16B4CB3C2B9E78C700775EAF /* WebViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 				160960F42BB390E8004E4973 /* UIBlockingProgressHUD.swift */,
 				1674D1822B9E10870063CBEA /* Constants.swift */,
 				1609F9012BA4EBA70022AA13 /* URLSession+data.swift */,
+				16AC60BC2BB754AF00CD04FA /* AlertPresenter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				168799822BAB5ECC00154C8A /* SplashViewController.swift in Sources */,
 				1674D1852B9E248A0063CBEA /* AuthViewController.swift in Sources */,
 				167162FE2BB575BD00D481FB /* ProfileService.swift in Sources */,
+				16AC60BD2BB754AF00CD04FA /* AlertPresenter.swift in Sources */,
 				1609F9022BA4EBA70022AA13 /* URLSession+data.swift in Sources */,
 				16AC60B92BB6DAA100CD04FA /* ProfileImageService.swift in Sources */,
 				1674D1832B9E10870063CBEA /* Constants.swift in Sources */,

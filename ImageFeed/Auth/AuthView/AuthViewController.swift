@@ -53,8 +53,13 @@ extension AuthViewController: WebViewControllerDelegate {
                 print("Authenticated")
             case .failure(let error):
                 print("failure with error - \(error)")
+                let alertPresenter = AlertPresenter(delegate: self)
+                alertPresenter.presentPresentNetworkErrorAlert(
+                    title: "Что-то пошло не так(",
+                    message: "Не удалось войти в систему",
+                    buttonTitle: "Ok")
             }
-            
+            UIBlockingProgressHUD.dismiss()
         }
     }
     
