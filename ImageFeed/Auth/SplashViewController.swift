@@ -22,6 +22,7 @@ final class SplashViewController: UIViewController {
     
     private func showNextScreen() {
         if let _ = UserDefaults.standard.string(forKey: Constants.UserDefaults.bearerTokenKey) {
+            print("Token - \(tokenStorage.token)")
             fetchProfile(token: tokenStorage.token)
         } else {
             performSegue(withIdentifier: showAuthSegueId, sender: self)

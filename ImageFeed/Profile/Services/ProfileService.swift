@@ -30,7 +30,6 @@ final class ProfileService {
         
         var request = URLRequest(url: url)
         request.setValue("Bearer \(tokenStorage.token)", forHTTPHeaderField: "Authorization")
-        print("Token - \(tokenStorage.token)")
         
         return request
     }
@@ -73,6 +72,7 @@ final class ProfileService {
             
             self.task = nil
             self.lastToken = nil
+            print("-- Finish fetching profile --")
         }
         self.task = task
         task.resume()
