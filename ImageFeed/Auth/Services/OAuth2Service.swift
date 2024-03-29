@@ -57,22 +57,15 @@ final class OAuth2Service {
             return
         }
         
-        let task = URLSession.shared.data(for: request) { [weak self] result in
+        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
             guard let self = self else { return }
             switch result {
-            case .success(let data):
+            case .success(let token):
                 
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    let token = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                    guard let token = token.accessToken else {
-                        fatalError("token is nil")
-                    }
-                    handler(.success(token))
-                } catch {
-                    handler(.failure(error))
+                guard let token = token.accessToken else {
+                    fatalError("token is nil")
                 }
+                handler(.success(token))
             case .failure(let error):
                 handler(.failure(error))
             }
