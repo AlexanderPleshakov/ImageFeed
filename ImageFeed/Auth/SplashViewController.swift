@@ -47,8 +47,7 @@ final class SplashViewController: UIViewController {
             guard let self = self else { return }
             
             switch result {
-            case .success(let profile):
-                profileService.profile = profile
+            case .success(_):
                 self.switchToTabBarController()
             case .failure(let error):
                 print(error)

@@ -12,7 +12,7 @@ final class ProfileService {
     
     private init() {}
     
-    var profile: Profile?
+    private(set) var profile: Profile?
     private let tokenStorage = OAuth2TokenStorage()
     private var lastToken: String?
     private var task: URLSessionTask?
@@ -61,6 +61,7 @@ final class ProfileService {
                 do {
                     let profileResult = try decoder.decode(ProfileResult.self, from: data)
                     let profile = Profile(profileResult: profileResult)
+                    self.profile = profile
                     completion(.success(profile))
                 } catch {
                     completion(.failure(ProfileFetchingError.decodeFailure))
