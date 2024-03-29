@@ -34,7 +34,7 @@ final class ProfileImageService {
         return request
     }
     
-    func fetchUserImage(username: String, completion: @escaping (Result<String, Error>) -> Void) {
+    func fetchProfileImageURL(username: String, completion: @escaping (Result<String, Error>) -> Void) {
         print("-- Start fetching user image --")
         
         if self.username == username {
@@ -68,6 +68,7 @@ final class ProfileImageService {
                     }
                     
                     self.avatarURL = avatarURL
+                    print(avatarURL)
                     completion(.success(avatarURL))
                 } catch {
                     completion(.failure(FetchingImageError.decodeImageFailure))

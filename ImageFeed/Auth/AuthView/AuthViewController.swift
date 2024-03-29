@@ -11,7 +11,7 @@ import ProgressHUD
 
 final class AuthViewController: UIViewController {
     private let showWebViewSegueIdentifier = "ShowWebView"
-    private let oauth2TokenStorage = OAuth2TokenStorage()
+    private let tokenStorage = OAuth2TokenStorage()
     weak var delegate: AuthViewControllerDelegate!
     
     override func viewDidLoad() {
@@ -48,14 +48,13 @@ extension AuthViewController: WebViewControllerDelegate {
             
             switch result {
             case .success(let bearerToken):
-                self.oauth2TokenStorage.token = bearerToken
+                self.tokenStorage.token = bearerToken
                 delegate.didAuthenticate(self)
                 print("Authenticated")
-                print("token - \(self.oauth2TokenStorage.token)")
             case .failure(let error):
                 print("failure with error - \(error)")
             }
-            UIBlockingProgressHUD.dismiss()
+            
         }
     }
     

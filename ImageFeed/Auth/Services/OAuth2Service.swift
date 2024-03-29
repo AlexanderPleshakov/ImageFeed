@@ -41,7 +41,7 @@ final class OAuth2Service {
     
     func fetchOAuthToken(code: String, handler: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
-        print("-- start fetching --")
+        print("-- Start fetching token --")
         
         guard lastCode != code else {
             handler(.failure(NetworkError.differentAuthCodes))
@@ -78,10 +78,8 @@ final class OAuth2Service {
             }
             self.task = nil
             self.lastCode = nil
-            print("task was resumed")
         }
         self.task = task
         task.resume()
-        
     }
 }
