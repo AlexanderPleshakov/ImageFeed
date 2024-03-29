@@ -10,6 +10,8 @@ import UIKit
 final class ProfileImageService {
     static let shared = ProfileImageService()
     
+    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
+    
     private(set) var avatarURL: String?
     private var task: URLSessionTask?
     private var username: String?
@@ -47,6 +49,7 @@ final class ProfileImageService {
         
         guard let request = makeRequest(username: username) else {
             completion(.failure(FetchingImageError.invalidImageRequest))
+            print("Repeated request")
             return
         }
         
@@ -70,6 +73,9 @@ final class ProfileImageService {
                     self.avatarURL = avatarURL
                     print(avatarURL)
                     completion(.success(avatarURL))
+                    NotificationCenter.default.post(name: ProfileImageService.didChangeNotification,
+                                                    object: self,
+                                                    userInfo: ["URL": avatarURL])
                 } catch {
                     completion(.failure(FetchingImageError.decodeImageFailure))
                 }
