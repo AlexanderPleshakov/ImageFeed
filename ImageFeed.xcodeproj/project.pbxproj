@@ -84,6 +84,7 @@
 		1609F9032BA4EBAD0022AA13 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				160960F42BB390E8004E4973 /* UIBlockingProgressHUD.swift */,
 				1674D1822B9E10870063CBEA /* Constants.swift */,
 				1609F9012BA4EBA70022AA13 /* URLSession+data.swift */,
 			);
@@ -93,7 +94,6 @@
 		1609F9062BA4F3B50022AA13 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				160960F42BB390E8004E4973 /* UIBlockingProgressHUD.swift */,
 				16A560352BA5059C00AD37C8 /* OAuth2TokenStorage.swift */,
 				1609F8FF2BA4DC320022AA13 /* OAuth2Service.swift */,
 				1609F9072BA4F3E90022AA13 /* Models */,
