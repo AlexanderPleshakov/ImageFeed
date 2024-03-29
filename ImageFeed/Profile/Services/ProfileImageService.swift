@@ -53,32 +53,24 @@ final class ProfileImageService {
             return
         }
         
-        let task = URLSession.shared.data(for: request) { [weak self] result in
+        let task = URLSession.shared.objectTask(for: request) { [weak self] (result:(Result<UserResult, Error>)) in
             assert(Thread.isMainThread)
             
             guard let self = self else { return }
             
             switch result{
-            case .success(let data):
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    let userResult = try decoder.decode(UserResult.self, from: data)
-                    
-                    guard let avatarURL = userResult.profileImage.small else {
-                        completion(.failure(FetchingImageError.imageIsNil))
-                        return
-                    }
-                    
-                    self.avatarURL = avatarURL
-                    print(avatarURL)
-                    completion(.success(avatarURL))
-                    NotificationCenter.default.post(name: ProfileImageService.didChangeNotification,
-                                                    object: self,
-                                                    userInfo: ["URL": avatarURL])
-                } catch {
-                    completion(.failure(FetchingImageError.decodeImageFailure))
+            case .success(let userResult):
+                guard let avatarURL = userResult.profileImage.small else {
+                    completion(.failure(FetchingImageError.imageIsNil))
+                    return
                 }
+                
+                self.avatarURL = avatarURL
+                print(avatarURL)
+                completion(.success(avatarURL))
+                NotificationCenter.default.post(name: ProfileImageService.didChangeNotification,
+                                                object: self,
+                                                userInfo: ["URL": avatarURL])
             case .failure(let error):
                 completion(.failure(error))
             }
