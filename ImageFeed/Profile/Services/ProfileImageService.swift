@@ -41,6 +41,7 @@ final class ProfileImageService {
         
         if self.username == username {
             completion(.failure(FetchingImageError.repeatedRequest))
+            print("Error: fetchProfileImageURL - FetchingImageError - repeatedRequest")
             return
         }
         
@@ -49,7 +50,7 @@ final class ProfileImageService {
         
         guard let request = makeRequest(username: username) else {
             completion(.failure(FetchingImageError.invalidImageRequest))
-            print("Repeated request")
+            print("Error: fetchProfileImageURL - FetchingImageError - invalidImageRequest")
             return
         }
         
@@ -62,6 +63,7 @@ final class ProfileImageService {
             case .success(let userResult):
                 guard let avatarURL = userResult.profileImage.small else {
                     completion(.failure(FetchingImageError.imageIsNil))
+                    print("Error: fetchProfileImageURL - FetchingImageError - imageIsNil")
                     return
                 }
                 
@@ -73,6 +75,7 @@ final class ProfileImageService {
                                                 userInfo: ["URL": avatarURL])
             case .failure(let error):
                 completion(.failure(error))
+                print("Error: fetchProfileImageURL - NetworkError - \(error)")
             }
             self.task = nil
             self.username = nil

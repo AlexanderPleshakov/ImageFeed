@@ -38,8 +38,9 @@ final class ProfileService {
         print("-- Start fetching profile --")
         assert(Thread.isMainThread)
         
-        guard lastToken != bearerToken else {
+        if lastToken == bearerToken {
             completion(.failure(ProfileFetchingError.repeatedRequest))
+            print("Error: fetchProfile - NetworkError - repeatedRequest")
             return
         }
         
@@ -48,6 +49,7 @@ final class ProfileService {
         
         guard let request = makeRequest() else {
             completion(.failure(ProfileFetchingError.requestCreateFailure))
+            print("Error: fetchProfile - NetworkError - requestCreateFailure")
             return
         }
         
@@ -61,6 +63,7 @@ final class ProfileService {
                 completion(.success(profile))
             case .failure(let error):
                 completion(.failure(error))
+                print("Error: fetchProfile - NetworkError - \(error)")
             }
             
             self.task = nil

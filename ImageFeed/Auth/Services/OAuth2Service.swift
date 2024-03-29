@@ -54,6 +54,7 @@ final class OAuth2Service {
         
         guard let request = makeOAuthTokenRequest(code: code) else {
             handler(.failure(NetworkError.invalidRequest))
+            print("Error: fetchOAuthToken - NetworkError - ivalidRequest")
             return
         }
         
@@ -68,6 +69,7 @@ final class OAuth2Service {
                 handler(.success(token))
             case .failure(let error):
                 handler(.failure(error))
+                print("Error: fetchOAuthToken - NetworkError - \(error.localizedDescription)")
             }
             self.task = nil
             self.lastCode = nil
