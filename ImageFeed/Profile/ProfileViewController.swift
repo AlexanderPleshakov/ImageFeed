@@ -11,15 +11,16 @@ final class ProfileViewController: UIViewController {
     // MARK: Properties
     
     // For UI
-    var avatarImage: UIImage?
+    private var avatarImage: UIImage?
     
-    var userNameLabel: UILabel?
-    var userLoginLabel: UILabel?
-    var userBioLabel: UILabel?
+    private var userNameLabel: UILabel?
+    private var userLoginLabel: UILabel?
+    private var userBioLabel: UILabel?
     
     // Services
-    let bearerToken = OAuth2TokenStorage().token
-    let profileService = ProfileService.shared
+    private let bearerToken = OAuth2TokenStorage().token
+    private let profileService = ProfileService.shared
+    private var profileImageObserver: NSObjectProtocol?
     
     // MARK: Life Cycle
     
@@ -27,9 +28,30 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         configure(profile: profileService.profile)
+        
+        profileImageObserver = NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotification,
+            object: nil,
+            queue: .main,
+            using: { [weak self] _ in
+                guard let self = self else { return }
+                self.updateAvatar()
+            })
     }
     
     // MARK: Methods
+    
+    
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let url = URL(string: profileImageURL)
+        else {
+            return
+        }
+        
+        // TODO: Обновить аватар
+    }
     
     private func configure(profile: Profile?) {
         guard let profile = profile else { return }
