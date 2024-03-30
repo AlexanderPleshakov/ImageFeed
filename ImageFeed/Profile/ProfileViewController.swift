@@ -58,6 +58,8 @@ final class ProfileViewController: UIViewController {
     }
     
     private func configure(profile: Profile?) {
+        view.backgroundColor = UIColor(named: "YP Black")
+        
         guard let profile = profile else { return }
         construct(userName: profile.name, loginName: profile.loginName, bio: profile.bio)
     }
