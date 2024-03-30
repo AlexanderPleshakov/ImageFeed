@@ -61,7 +61,7 @@ final class ProfileImageService {
             
             switch result{
             case .success(let userResult):
-                guard let avatarURL = userResult.profileImage.small else {
+                guard let avatarURL = userResult.profileImage.large else {
                     completion(.failure(FetchingImageError.imageIsNil))
                     print("Error: fetchProfileImageURL - FetchingImageError - imageIsNil")
                     return
