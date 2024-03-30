@@ -14,6 +14,12 @@ final class SplashViewController: UIViewController {
     
     private let tokenStorage = OAuth2TokenStorage()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        configure()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -25,7 +31,16 @@ final class SplashViewController: UIViewController {
             print("Token - \(tokenStorage.token)")
             fetchProfile(token: tokenStorage.token)
         } else {
-            performSegue(withIdentifier: showAuthSegueId, sender: self)
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            
+            guard 
+                let navigationController = storyboard.instantiateViewController(withIdentifier: "AuthNavigationController") as? UINavigationController,
+                let authViewController = navigationController.viewControllers[0] as? AuthViewController
+            else { return }
+            
+            authViewController.delegate = self
+            authViewController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true)
         }
     }
     
@@ -61,22 +76,25 @@ final class SplashViewController: UIViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showAuthSegueId {
-            let navigationController = segue.destination as? UINavigationController
-            guard let authViewController = navigationController?.viewControllers[0] as? AuthViewController 
-            else {
-                assertionFailure("Failed to prepare for \(showAuthSegueId)")
-                return
-            }
-            authViewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
-    
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        //fetchProfile(token: tokenStorage.token)
+    }
+}
+
+extension SplashViewController {
+    private func configure() {
+        view.backgroundColor = UIColor(named: "YP Black")
+        
+        let logoImage = UIImage(named: "LaunchScreenLogo")
+        let imageView = UIImageView(image: logoImage)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: 77),
+            imageView.widthAnchor.constraint(equalToConstant: 75)
+        ])
     }
 }
