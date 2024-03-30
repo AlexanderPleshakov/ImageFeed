@@ -6,17 +6,28 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 final class OAuth2TokenStorage {
     var token: String {
         get {
-            guard let token = UserDefaults.standard.string(forKey: Constants.UserDefaults.bearerTokenKey) else {
-                fatalError("Bearer token isn't string")
+            guard let retrievedString = KeychainWrapper.standard.string(forKey: Constants.UserDefaults.bearerTokenKey) else {
+                fatalError("Bearer token is nil")
             }
-            return token
+            return retrievedString
         }
         set {
-            UserDefaults.standard.setValue(newValue, forKey: Constants.UserDefaults.bearerTokenKey)
+            let saveSuccessful: Bool = KeychainWrapper.standard.set(newValue, forKey: Constants.UserDefaults.bearerTokenKey)
+            
+            guard saveSuccessful else {
+                fatalError("Saving key error")
+            }
+        }
+    }
+    
+    var tokenOrNil: String? {
+        get {
+            return KeychainWrapper.standard.string(forKey: Constants.UserDefaults.bearerTokenKey)
         }
     }
 }
