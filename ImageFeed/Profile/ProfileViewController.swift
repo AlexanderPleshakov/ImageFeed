@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     // MARK: Properties
@@ -16,6 +17,7 @@ final class ProfileViewController: UIViewController {
     private var userNameLabel: UILabel?
     private var userLoginLabel: UILabel?
     private var userBioLabel: UILabel?
+    private var avatarImageView: UIImageView?
     
     // Services
     private let bearerToken = OAuth2TokenStorage().token
@@ -50,8 +52,9 @@ final class ProfileViewController: UIViewController {
         else {
             return
         }
+        avatarImageView?.kf.setImage(with: url,
+                                     placeholder: UIImage(named: "PlaceholderAvatar"))
         
-        // TODO: Обновить аватар
     }
     
     private func configure(profile: Profile?) {
@@ -65,7 +68,10 @@ final class ProfileViewController: UIViewController {
         let avatarImageView = UIImageView(image: avatarImage)
         avatarImageView.layer.cornerRadius = 35
         avatarImageView.tintColor = .white
+        avatarImageView.clipsToBounds = true
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        avatarImageView.backgroundColor = UIColor(named: "YP Black")
+        self.avatarImageView = avatarImageView
         view.addSubview(avatarImageView)
         
         // User name
