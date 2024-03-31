@@ -67,3 +67,9 @@ extension AuthViewController: WebViewControllerDelegate {
         navigationController?.popViewController(animated: true)
     }
 }
+
+extension AuthViewController {
+    private func configure() {
+        
+    }
+}

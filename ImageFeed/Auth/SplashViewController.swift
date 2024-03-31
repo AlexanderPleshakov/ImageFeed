@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 final class SplashViewController: UIViewController {
     
@@ -17,6 +18,7 @@ final class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        KeychainWrapper.standard.removeAllKeys()
         configure()
     }
     
@@ -32,14 +34,11 @@ final class SplashViewController: UIViewController {
             fetchProfile(token: tokenStorage.token)
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            guard let authViewController = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController else { return }
+            let navigationController = UINavigationController(rootViewController: authViewController)
             
-            guard 
-                let navigationController = storyboard.instantiateViewController(withIdentifier: "AuthNavigationController") as? UINavigationController,
-                let authViewController = navigationController.viewControllers[0] as? AuthViewController
-            else { return }
-            
+            navigationController.modalPresentationStyle = .fullScreen
             authViewController.delegate = self
-            authViewController.modalPresentationStyle = .fullScreen
             present(navigationController, animated: true)
         }
     }
