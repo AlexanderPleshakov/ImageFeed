@@ -9,49 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Web View Controller-->
-        <scene sceneID="0bD-u0-bNo">
-            <objects>
-                <viewController storyboardIdentifier="WebViewController" id="P7z-Fd-qP1" customClass="WebViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ynk-Nf-VsG">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ujf-7R-goo">
-                                <rect key="frame" x="0.0" y="59" width="393" height="793"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XhJ-eG-qmD">
-                                <rect key="frame" x="0.0" y="59" width="393" height="4"/>
-                                <color key="progressTintColor" name="YP Black"/>
-                            </progressView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="auE-GZ-lLM"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="XhJ-eG-qmD" firstAttribute="top" secondItem="auE-GZ-lLM" secondAttribute="top" id="3ye-wA-Zh9"/>
-                            <constraint firstItem="XhJ-eG-qmD" firstAttribute="leading" secondItem="auE-GZ-lLM" secondAttribute="leading" id="LjI-b3-G8f"/>
-                            <constraint firstItem="auE-GZ-lLM" firstAttribute="trailing" secondItem="XhJ-eG-qmD" secondAttribute="trailing" id="VFq-7a-6up"/>
-                            <constraint firstItem="Ujf-7R-goo" firstAttribute="trailing" secondItem="auE-GZ-lLM" secondAttribute="trailing" id="cxe-RE-HTH"/>
-                            <constraint firstItem="Ujf-7R-goo" firstAttribute="leading" secondItem="auE-GZ-lLM" secondAttribute="leading" id="lB3-se-bEH"/>
-                            <constraint firstAttribute="bottom" secondItem="Ujf-7R-goo" secondAttribute="bottom" id="moz-d8-9qb"/>
-                            <constraint firstItem="Ujf-7R-goo" firstAttribute="top" secondItem="auE-GZ-lLM" secondAttribute="top" id="yBn-QF-ciI"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="OVU-5K-BRS"/>
-                    <connections>
-                        <outlet property="progressView" destination="XhJ-eG-qmD" id="Xub-3b-ecj"/>
-                        <outlet property="webView" destination="Ujf-7R-goo" id="pSc-CZ-oba"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Qc-Uy-kW6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1094" y="-1085"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Lb9-pq-GCQ">
             <objects>

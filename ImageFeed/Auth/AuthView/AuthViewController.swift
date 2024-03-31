@@ -47,8 +47,7 @@ final class AuthViewController: UIViewController {
     // MARK: Methods
     
     @objc private func goToWebView() {
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        guard let webView = storyboard.instantiateViewController(withIdentifier: "WebViewController") as? WebViewController else { return }
+        let webView = WebViewController()
         webView.delegate = self
         navigationController?.pushViewController(webView, animated: true)
     }
