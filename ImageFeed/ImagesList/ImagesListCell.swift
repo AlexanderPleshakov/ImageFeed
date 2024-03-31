@@ -23,10 +23,36 @@ final class ImagesListCell: UITableViewCell {
     
     //MARK: Outlets
     
-    @IBOutlet weak var cellGradientView: UIView!
-    @IBOutlet weak var cellDataLabel: UILabel!
-    @IBOutlet weak var cellLikeButton: UIButton!
-    @IBOutlet weak var cellImage: UIImageView!
+//    @IBOutlet weak var cellGradientView: UIView!
+//    @IBOutlet weak var cellDataLabel: UILabel!
+//    @IBOutlet weak var cellLikeButton: UIButton!
+//    @IBOutlet weak var cellImage: UIImageView!
+    
+    private let cellGradientView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let cellDataLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let cellLikeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let cellImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     
     //MARK: Functions
     
@@ -49,6 +75,9 @@ final class ImagesListCell: UITableViewCell {
     }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+        setupSubviews(for: cell)
+        setConstraints(for: cell)
+        
         guard let likeImage = indexPath.row % 2 != 0 ? UIImage(named: "FavoritesNoActive") : UIImage(named: "FavoritesActive"),
               let mainImage = UIImage(named: "\(ImagesListCell.photosName[indexPath.row])")
         else { return }
@@ -57,5 +86,33 @@ final class ImagesListCell: UITableViewCell {
         cell.cellImage.image = mainImage
         cell.cellDataLabel.text = dateFormatter.string(from: Date())
         cell.cellLikeButton.setImage(likeImage, for: .normal)
+    }
+    
+    private func setupSubviews(for cell: ImagesListCell) {
+        cell.addSubview(cellImage)
+        cell.addSubview(cellGradientView)
+        cell.addSubview(cellDataLabel)
+        cell.addSubview(cellLikeButton)
+    }
+    
+    private func setConstraints(for cell: ImagesListCell) {
+        NSLayoutConstraint.activate([
+            cellImage.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: 16),
+            cellImage.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 16),
+            cellImage.topAnchor.constraint(equalTo: cell.topAnchor, constant: 4),
+            cellImage.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: 4),
+            
+            cellGradientView.leadingAnchor.constraint(equalTo: cellImage.leadingAnchor),
+            cellGradientView.trailingAnchor.constraint(equalTo: cellImage.trailingAnchor),
+            cellGradientView.bottomAnchor.constraint(equalTo: cellImage.bottomAnchor),
+            cellGradientView.topAnchor.constraint(equalTo: cellDataLabel.topAnchor, constant: -4),
+            
+            cellDataLabel.leadingAnchor.constraint(equalTo: cellImage.leadingAnchor, constant: 8),
+            cellDataLabel.bottomAnchor.constraint(equalTo: cellImage.bottomAnchor, constant: 8),
+            cellDataLabel.trailingAnchor.constraint(greaterThanOrEqualTo: cellImage.trailingAnchor, constant: 8),
+            
+            cellLikeButton.trailingAnchor.constraint(equalTo: cellImage.trailingAnchor),
+            cellLikeButton.topAnchor.constraint(equalTo: cellImage.topAnchor)
+        ])
     }
 }
