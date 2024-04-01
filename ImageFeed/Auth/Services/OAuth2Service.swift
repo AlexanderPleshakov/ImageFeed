@@ -51,7 +51,6 @@ final class OAuth2Service {
         task?.cancel()
         lastCode = code
         
-        
         guard let request = makeOAuthTokenRequest(code: code) else {
             handler(.failure(NetworkError.invalidRequest))
             print("Error: fetchOAuthToken - NetworkError - ivalidRequest")

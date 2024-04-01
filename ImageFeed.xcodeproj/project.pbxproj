@@ -221,13 +221,13 @@
 			children = (
 				169E80A62B7276C700E4C3E8 /* AppDelegate.swift */,
 				169E80A82B7276C700E4C3E8 /* SceneDelegate.swift */,
+				168056BD2BB8776100075D91 /* TabBarController.swift */,
 				1674D1862B9E2B890063CBEA /* Auth */,
 				16000FA92B810F9700A8458D /* SingleImage */,
 				1628CA232B80DF95001F175C /* Profile */,
 				163FC55E2B74ED35002DA4D6 /* ImagesList */,
 				1609F9032BA4EBAD0022AA13 /* Helpers */,
 				163EA6152B76D62B002B65F6 /* Resources */,
-				168056BD2BB8776100075D91 /* TabBarController.swift */,
 			);
 			path = ImageFeed;
 			sourceTree = "<group>";

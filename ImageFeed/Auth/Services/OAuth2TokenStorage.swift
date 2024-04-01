@@ -11,13 +11,13 @@ import SwiftKeychainWrapper
 final class OAuth2TokenStorage {
     var token: String {
         get {
-            guard let retrievedString = KeychainWrapper.standard.string(forKey: Constants.UserDefaults.bearerTokenKey) else {
+            guard let retrievedString = KeychainWrapper.standard.string(forKey: Constants.Keys.bearerTokenKey) else {
                 fatalError("Bearer token is nil")
             }
             return retrievedString
         }
         set {
-            let saveSuccessful: Bool = KeychainWrapper.standard.set(newValue, forKey: Constants.UserDefaults.bearerTokenKey)
+            let saveSuccessful: Bool = KeychainWrapper.standard.set(newValue, forKey: Constants.Keys.bearerTokenKey)
             
             guard saveSuccessful else {
                 fatalError("Saving key error")
@@ -27,7 +27,7 @@ final class OAuth2TokenStorage {
     
     var tokenOrNil: String? {
         get {
-            return KeychainWrapper.standard.string(forKey: Constants.UserDefaults.bearerTokenKey)
+            return KeychainWrapper.standard.string(forKey: Constants.Keys.bearerTokenKey)
         }
     }
 }
