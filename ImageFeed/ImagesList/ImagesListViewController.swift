@@ -52,11 +52,13 @@ final class ImagesListViewController: UIViewController {
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        guard let singleImageViewController = storyboard.instantiateViewController(withIdentifier: "SingleImageViewController") as? SingleImageViewController else { return }
-        
+//        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+//        guard let singleImageViewController = storyboard.instantiateViewController(withIdentifier: "SingleImageViewController") as? SingleImageViewController else { return }
+//        
+        let singleImageViewController = SingleImageViewController()
         let image = UIImage(named: ImagesListCell.photosName[indexPath.row])
         singleImageViewController.image = image
+        singleImageViewController.modalPresentationStyle = .fullScreen
         present(singleImageViewController, animated: true)
     }
     

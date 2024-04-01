@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 final class SplashViewController: UIViewController {
     
@@ -17,6 +18,7 @@ final class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+  //      KeychainWrapper.standard.removeAllKeys()
         configure()
     }
     
