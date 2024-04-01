@@ -17,7 +17,7 @@ enum Constants {
     
     static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     
-    enum UserDefaults {
+    enum Keys {
         static let bearerTokenKey = "bearerToken"
     }
 }

@@ -10,21 +10,34 @@ import WebKit
 
 final class WebViewController: UIViewController {
     // MARK: Properties
-    weak var delegate: WebViewControllerDelegate!
     
+    weak var delegate: WebViewControllerDelegate!
     private var estimatedProgressObservation: NSKeyValueObservation?
     
-    // MARK: Outlets
+    // MARK: Views
     
-    @IBOutlet private weak var progressView: UIProgressView!
-    @IBOutlet private weak var webView: WKWebView!
+    private let progressView: UIProgressView = {
+        let view = UIProgressView()
+        view.progressTintColor = UIColor(named: "YP Black")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private let webView: WKWebView = {
+        let webView = WKWebView()
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.backgroundColor = .white
+        return webView
+    }()
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        webView.navigationDelegate = self
+        view.backgroundColor = .white
+        configure()
         loadAuthView()
         
         estimatedProgressObservation = webView.observe(
@@ -38,6 +51,11 @@ final class WebViewController: UIViewController {
     }
     
     // MARK: Methods
+    
+    private func configure() {
+        setupSubviews()
+        webView.navigationDelegate = self
+    }
 
     private func updateProgress() {
         progressView.progress = Float(webView.estimatedProgress)
@@ -101,5 +119,29 @@ extension WebViewController: WKNavigationDelegate {
         } else {
             return nil
         }
+    }
+}
+
+// MARK: Configure UI
+
+extension WebViewController {
+    private func setupSubviews() {
+        view.addSubview(webView)
+        view.addSubview(progressView)
+        
+        setConstraints()
+    }
+    
+    private func setConstraints() {
+        NSLayoutConstraint.activate([
+            webView.topAnchor.constraint(equalTo: view.topAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        ])
     }
 }

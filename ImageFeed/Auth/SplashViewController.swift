@@ -31,15 +31,11 @@ final class SplashViewController: UIViewController {
             print("Token - \(tokenStorage.token)")
             fetchProfile(token: tokenStorage.token)
         } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let authViewController = AuthViewController()
+            let navigationController = UINavigationController(rootViewController: authViewController)
             
-            guard 
-                let navigationController = storyboard.instantiateViewController(withIdentifier: "AuthNavigationController") as? UINavigationController,
-                let authViewController = navigationController.viewControllers[0] as? AuthViewController
-            else { return }
-            
+            navigationController.modalPresentationStyle = .fullScreen
             authViewController.delegate = self
-            authViewController.modalPresentationStyle = .fullScreen
             present(navigationController, animated: true)
         }
     }
@@ -50,8 +46,7 @@ final class SplashViewController: UIViewController {
             return
         }
         
-        let tabBarController = UIStoryboard(name: "Main", bundle: .main)
-            .instantiateViewController(withIdentifier: "TabBarViewController")
+        let tabBarController = TabBarController()
            
         window.rootViewController = tabBarController
     }
@@ -77,7 +72,7 @@ final class SplashViewController: UIViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     
     func didAuthenticate(_ vc: AuthViewController) {
-        vc.dismiss(animated: true)
+        vc.dismiss(animated: false)
     }
 }
 

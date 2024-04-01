@@ -9,19 +9,27 @@ import UIKit
 
 final class TabBarController: UITabBarController {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        let imagesListViewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController")
+        view.backgroundColor = UIColor(named: "YP Black")
+        tabBar.barTintColor = UIColor(named: "YP Black")
+        tabBar.isTranslucent = false
         
+        let imagesListViewController = ImagesListViewController()
         let profileViewController = ProfileViewController()
+        
         profileViewController.tabBarItem = UITabBarItem(
             title: "",
             image: UIImage(named: "TabProfileActive"),
             selectedImage: nil
         )
         
+        imagesListViewController.tabBarItem = UITabBarItem(
+            title: "",
+            image: UIImage(named: "TabEditorialActive"),
+            selectedImage: nil)
+            
         self.viewControllers  = [imagesListViewController, profileViewController]
     }
 }

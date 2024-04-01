@@ -8,6 +8,7 @@
 import UIKit
 
 final class SingleImageViewController: UIViewController {
+    
     // MARK: Properties
 
     var image: UIImage! {
@@ -23,15 +24,40 @@ final class SingleImageViewController: UIViewController {
         return zoomingTap
     }()
     
-    // MARK: Outlets
+    private var scrollView: UIScrollView!
     
-    @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var imageView: UIImageView!
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = UIColor(named: "YP Black")
+        return imageView
+    }()
+    
+    private let backwardButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "Backward"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let shareButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "ShareButton"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configScrollView()
+        view.backgroundColor = UIColor(named: "YP Black")
+        
+        shareButton.addTarget(self, action: #selector(buttonShareTapped), for: .touchUpInside)
+        backwardButton.addTarget(self, action: #selector(buttonBackwardTapped), for: .touchUpInside)
+        
+        setupViews()
         
         imageView.image = image
         imageView.frame.size = image.size
@@ -44,6 +70,13 @@ final class SingleImageViewController: UIViewController {
     }
     
     // MARK: Methods
+    
+    private func configScrollView() {
+        scrollView = UIScrollView(frame: view.bounds)
+        scrollView.backgroundColor = UIColor(named: "YP Black")
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.delegate = self
+    }
     
     private func configurateFor(imageSize: CGSize) {
         scrollView.bounds.size = view.bounds.size
@@ -98,7 +131,6 @@ final class SingleImageViewController: UIViewController {
         } else {
             frameToCenter.origin.y = 0
         }
-        
         imageView.frame = frameToCenter
     }
     
@@ -137,14 +169,13 @@ final class SingleImageViewController: UIViewController {
         zoom(point: location, animated: true)
     }
     
-    
     // MARK: Actions
     
-    @IBAction private func buttonBackwardTapped() {
+    @objc private func buttonBackwardTapped() {
         dismiss(animated: true)
     }
     
-    @IBAction func buttonShareTapped() {
+    @objc private func buttonShareTapped() {
         guard let image = image else { return }
         let activityView = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         present(activityView, animated: true)
@@ -160,5 +191,35 @@ extension SingleImageViewController: UIScrollViewDelegate {
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         centerImage()
+    }
+}
+
+extension SingleImageViewController {
+    private func setupViews() {
+        scrollView.addSubview(imageView)
+        view.addSubview(scrollView)
+        view.addSubview(shareButton)
+        view.addSubview(backwardButton)
+        
+        setConstraints()
+    }
+    
+    private func setConstraints() {
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            
+            shareButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            shareButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            shareButton.heightAnchor.constraint(equalToConstant: 51),
+            shareButton.widthAnchor.constraint(equalToConstant: 51),
+            
+            backwardButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 11),
+            backwardButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 9),
+            backwardButton.heightAnchor.constraint(equalToConstant: 48),
+            backwardButton.widthAnchor.constraint(equalToConstant: 48)
+        ])
     }
 }
