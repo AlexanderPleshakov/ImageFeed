@@ -9,8 +9,12 @@ import UIKit
 
 final class TabBarController: UITabBarController {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor(named: "YP Black")
+        tabBar.barTintColor = UIColor(named: "YP Black")
+        tabBar.isTranslucent = false
         
         let imagesListViewController = ImagesListViewController()
         let profileViewController = ProfileViewController()
