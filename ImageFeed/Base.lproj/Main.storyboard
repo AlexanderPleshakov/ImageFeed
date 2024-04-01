@@ -27,105 +27,10 @@
             </objects>
             <point key="canvasLocation" x="-1019" y="-2"/>
         </scene>
-        <!--ImageList-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController storyboardIdentifier="ImagesListViewController" title="ImageList" id="BYZ-38-t0r" customClass="ImagesListViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BVG-DE-DCF">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <color key="backgroundColor" name="YP Black"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageListCell" rowHeight="213" id="AwM-Jg-iyY" customClass="ImagesListCell" customModule="ImageFeed" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="213"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AwM-Jg-iyY" id="8QV-I6-Bhr">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="213"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="gtr-pf-RQa" userLabel="Image">
-                                                    <rect key="frame" x="16" y="4" width="361" height="205"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="16"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZRT-iB-qNo" userLabel="GradientView">
-                                                    <rect key="frame" x="16" y="181.33333333333334" width="361" height="27.666666666666657"/>
-                                                    <color key="backgroundColor" name="YP Black"/>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 август 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxp-aT-8F1" userLabel="Data Label">
-                                                    <rect key="frame" x="23.999999999999993" y="185.33333333333334" width="94.333333333333314" height="15.666666666666657"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62e-ks-jFV" userLabel="Like Button">
-                                                    <rect key="frame" x="335" y="4" width="42" height="42"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="FavoritesActive"/>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" name="YP Black"/>
-                                            <constraints>
-                                                <constraint firstItem="gtr-pf-RQa" firstAttribute="trailing" secondItem="ZRT-iB-qNo" secondAttribute="trailing" id="1gP-y2-ao8"/>
-                                                <constraint firstAttribute="trailing" secondItem="gtr-pf-RQa" secondAttribute="trailing" constant="16" id="2mL-oD-IZr"/>
-                                                <constraint firstItem="gtr-pf-RQa" firstAttribute="bottom" secondItem="xxp-aT-8F1" secondAttribute="bottom" constant="8" id="KPY-BC-kqB"/>
-                                                <constraint firstItem="gtr-pf-RQa" firstAttribute="top" secondItem="8QV-I6-Bhr" secondAttribute="top" constant="4" id="Mf9-cC-OT5"/>
-                                                <constraint firstItem="gtr-pf-RQa" firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="xxp-aT-8F1" secondAttribute="trailing" constant="8" id="Teo-cC-Emb"/>
-                                                <constraint firstItem="ZRT-iB-qNo" firstAttribute="leading" secondItem="gtr-pf-RQa" secondAttribute="leading" id="WZu-n1-fTl"/>
-                                                <constraint firstItem="gtr-pf-RQa" firstAttribute="bottom" secondItem="ZRT-iB-qNo" secondAttribute="bottom" id="gU1-bd-SSW"/>
-                                                <constraint firstItem="gtr-pf-RQa" firstAttribute="leading" secondItem="8QV-I6-Bhr" secondAttribute="leading" constant="16" id="k7R-xC-lDZ"/>
-                                                <constraint firstItem="gtr-pf-RQa" firstAttribute="trailing" secondItem="62e-ks-jFV" secondAttribute="trailing" id="kfm-MH-d8D"/>
-                                                <constraint firstItem="xxp-aT-8F1" firstAttribute="leading" secondItem="gtr-pf-RQa" secondAttribute="leading" constant="8" id="qUG-HK-elv"/>
-                                                <constraint firstItem="62e-ks-jFV" firstAttribute="top" secondItem="gtr-pf-RQa" secondAttribute="top" id="v5x-OM-Z2N"/>
-                                                <constraint firstAttribute="bottom" secondItem="gtr-pf-RQa" secondAttribute="bottom" constant="4" id="xK1-yr-Sws"/>
-                                                <constraint firstItem="ZRT-iB-qNo" firstAttribute="top" secondItem="xxp-aT-8F1" secondAttribute="top" constant="-4" id="xcg-75-aHk"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="cellDataLabel" destination="xxp-aT-8F1" id="e3q-sl-pYU"/>
-                                            <outlet property="cellGradientView" destination="ZRT-iB-qNo" id="kK1-tn-qKL"/>
-                                            <outlet property="cellImage" destination="gtr-pf-RQa" id="9mt-cU-ehE"/>
-                                            <outlet property="cellLikeButton" destination="62e-ks-jFV" id="6Jb-lP-MtJ"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="pvx-c6-PL4"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="z8D-Pf-Hg9"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" name="YP Black"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="BVG-DE-DCF" secondAttribute="bottom" id="RtY-7u-Jyo"/>
-                            <constraint firstItem="BVG-DE-DCF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kWh-ag-FDi"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BVG-DE-DCF" secondAttribute="trailing" id="mFt-fK-QaI"/>
-                            <constraint firstItem="BVG-DE-DCF" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="oXu-QW-n1Z"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="TabEditorialActive" id="glG-Hf-JgI"/>
-                    <navigationItem key="navigationItem" id="Nt8-bV-YRp"/>
-                    <connections>
-                        <outlet property="imagesTableView" destination="BVG-DE-DCF" id="40U-RG-5Jx"/>
-                        <segue destination="gK0-SC-BpX" kind="presentation" identifier="ShowSingleImage" id="xKD-Nc-1Si"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="105" y="-350"/>
-        </scene>
         <!--Single Image View Controller-->
         <scene sceneID="o1z-SS-Dik">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="gK0-SC-BpX" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SingleImageViewController" modalPresentationStyle="fullScreen" id="gK0-SC-BpX" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SDS-vO-sN0">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,7 +51,7 @@
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4E-6t-Cot" userLabel="Backward Button">
-                                <rect key="frame" x="9" y="11" width="48" height="48"/>
+                                <rect key="frame" x="9" y="70" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="6gN-nT-I6V"/>
                                     <constraint firstAttribute="height" constant="48" id="Shj-Tq-J8Y"/>
@@ -197,9 +102,7 @@
     <resources>
         <image name="0" width="3840" height="2400"/>
         <image name="Backward" width="24" height="24"/>
-        <image name="FavoritesActive" width="42" height="42"/>
         <image name="ShareButton" width="51" height="51"/>
-        <image name="TabEditorialActive" width="30.333333969116211" height="30"/>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
