@@ -11,7 +11,7 @@ import ProgressHUD
 
 final class AuthViewController: UIViewController {
     // MARK: Properties
-    private let showWebViewSegueIdentifier = "ShowWebView"
+    
     private let tokenStorage = OAuth2TokenStorage()
     weak var delegate: AuthViewControllerDelegate!
     
@@ -53,6 +53,8 @@ final class AuthViewController: UIViewController {
     }
 }
 
+// MARK: WebViewControllerDelegate
+
 extension AuthViewController: WebViewControllerDelegate {
     func webViewController(_ vc: WebViewController, didAuthenticateWithCode code: String) {
         UIBlockingProgressHUD.show()
@@ -81,6 +83,8 @@ extension AuthViewController: WebViewControllerDelegate {
         navigationController?.popViewController(animated: true)
     }
 }
+
+// MARK: UI
 
 extension AuthViewController {
     private func configureNavigationBar() {

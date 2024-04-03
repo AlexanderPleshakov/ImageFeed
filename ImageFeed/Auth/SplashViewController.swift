@@ -8,11 +8,11 @@
 import UIKit
 
 final class SplashViewController: UIViewController {
-    
-    private let showGallerySegueId = "showGallery"
-    private let showAuthSegueId = "showAuthorization"
+    // MARK: Properties
     
     private let tokenStorage = OAuth2TokenStorage()
+    
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,8 @@ final class SplashViewController: UIViewController {
         
         showNextScreen()
     }
+    
+    // MARK: Methods
     
     private func showNextScreen() {
         if let _ = tokenStorage.tokenOrNil {
@@ -68,6 +70,8 @@ final class SplashViewController: UIViewController {
         }
     }
 }
+
+// MARK: AuthViewControllerDelegate
 
 extension SplashViewController: AuthViewControllerDelegate {
     
