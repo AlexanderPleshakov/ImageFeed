@@ -9,18 +9,54 @@ import UIKit
 import Kingfisher
 
 final class ProfileViewController: UIViewController {
+    
     // MARK: Properties
-    
     // For UI
-    private var avatarImage: UIImage?
+    private let avatarImageView = {
+        let avatarImage = UIImage(systemName: "person.crop.circle.fill")
+        let avatarImageView = UIImageView(image: avatarImage)
+        avatarImageView.layer.cornerRadius = 35
+        avatarImageView.tintColor = .white
+        avatarImageView.clipsToBounds = true
+        avatarImageView.backgroundColor = UIColor(named: "YP Black")
+        
+        return avatarImageView
+    }()
     
-    private var userNameLabel: UILabel?
-    private var userLoginLabel: UILabel?
-    private var userBioLabel: UILabel?
-    private var avatarImageView: UIImageView?
+    private let userNameLabel: UILabel = {
+        let userNameLabel = UILabel()
+        userNameLabel.font = UIFont.boldSystemFont(ofSize: 23)
+        userNameLabel.textColor = .white
+        
+        return userNameLabel
+    }()
+    
+    private let userLoginLabel: UILabel = {
+        let userLoginLabel = UILabel()
+        userLoginLabel.font = UIFont.systemFont(ofSize: 13)
+        userLoginLabel.textColor = UIColor(named: "YP Gray")
+        
+        return userLoginLabel
+    }()
+    
+    private let userBioLabel: UILabel = {
+        let userBioLabel = UILabel()
+        userBioLabel.font = UIFont.systemFont(ofSize: 13)
+        userBioLabel.textColor = .white
+        userBioLabel.numberOfLines = 0
+        
+        return userBioLabel
+    }()
+    
+    private let logoutButton: UIButton = {
+        let logoutImage = UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage()
+        let logoutButton = UIButton.systemButton(with: logoutImage, target: ProfileViewController.self, action: nil)
+        logoutButton.tintColor = UIColor(named: "YP Red")
+        
+        return logoutButton
+    }()
     
     // Services
-    private let bearerToken = OAuth2TokenStorage().token
     private let profileService = ProfileService.shared
     private var profileImageObserver: NSObjectProtocol?
     
@@ -44,7 +80,6 @@ final class ProfileViewController: UIViewController {
     
     // MARK: Methods
     
-    
     private func updateAvatar() {
         guard
             let profileImageURL = ProfileImageService.shared.avatarURL,
@@ -52,66 +87,32 @@ final class ProfileViewController: UIViewController {
         else {
             return
         }
-        avatarImageView?.kf.setImage(with: url,
-                                     placeholder: UIImage(named: "PlaceholderAvatar"))
-        
+        avatarImageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "PlaceholderAvatar"))
     }
     
     private func configure(profile: Profile?) {
         view.backgroundColor = UIColor(named: "YP Black")
         
         guard let profile = profile else { return }
-        construct(userName: profile.name, loginName: profile.loginName, bio: profile.bio)
+        setupSubviews(userName: profile.name, loginName: profile.loginName, bio: profile.bio)
     }
     
-    private func construct(userName: String?, loginName: String?, bio: String?) {
-        // Avatar
-        avatarImage = UIImage(systemName: "person.crop.circle.fill")
-        let avatarImageView = UIImageView(image: avatarImage)
-        avatarImageView.layer.cornerRadius = 35
-        avatarImageView.tintColor = .white
-        avatarImageView.clipsToBounds = true
-        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        avatarImageView.backgroundColor = UIColor(named: "YP Black")
-        self.avatarImageView = avatarImageView
-        view.addSubview(avatarImageView)
-        
-        // User name
-        let userNameLabel = UILabel()
-        userNameLabel.font = UIFont.boldSystemFont(ofSize: 23)
+    private func setupSubviews(userName: String?, loginName: String?, bio: String?) {
         userNameLabel.text = userName
-        userNameLabel.textColor = .white
-        userNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(userNameLabel)
-        self.userNameLabel = userNameLabel
-        
-        // User login
-        let userLoginLabel = UILabel()
-        userLoginLabel.font = UIFont.systemFont(ofSize: 13)
         userLoginLabel.text = loginName
-        userLoginLabel.textColor = UIColor(named: "YP Gray")
-        userLoginLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(userLoginLabel)
-        self.userLoginLabel = userLoginLabel
-        
-        // User description
-        let userBioLabel = UILabel()
-        userBioLabel.font = UIFont.systemFont(ofSize: 13)
         userBioLabel.text = bio
-        userBioLabel.textColor = .white
-        userBioLabel.numberOfLines = 0
-        userBioLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(userBioLabel)
-        self.userBioLabel = userBioLabel
         
-        // Logout button
-        let logoutImage = UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage()
-        let logoutButton = UIButton.systemButton(with: logoutImage, target: self, action: nil)
-        logoutButton.translatesAutoresizingMaskIntoConstraints = false
-        logoutButton.tintColor = UIColor(named: "YP Red")
-        view.addSubview(logoutButton)
+        [avatarImageView, userNameLabel, userLoginLabel, userBioLabel, logoutButton].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
         
-        // Constraints
+        setConstrains()
+    }
+    
+    private func setConstrains() {
         NSLayoutConstraint.activate([
             //Avatar
             avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
