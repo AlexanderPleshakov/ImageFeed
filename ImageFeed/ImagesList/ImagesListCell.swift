@@ -14,7 +14,6 @@ final class ImagesListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupSubviews()
-        self.setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +34,6 @@ final class ImagesListCell: UITableViewCell {
     
     private let cellGradientView: GradientView = {
         let view = GradientView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(named: "YP Black")
         view.layer.masksToBounds = true
         return view
@@ -45,19 +43,16 @@ final class ImagesListCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let cellLikeButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private let cellImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 16
         imageView.clipsToBounds = true
         imageView.backgroundColor = UIColor(named: "YP Black")
@@ -68,7 +63,6 @@ final class ImagesListCell: UITableViewCell {
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         setupSubviews()
-        setConstraints()
         
         guard let likeImage = indexPath.row % 2 != 0 ? UIImage(named: "FavoritesNoActive") : UIImage(named: "FavoritesActive"),
               let mainImage = UIImage(named: "\(ImagesListCell.photosName[indexPath.row])")
@@ -80,10 +74,12 @@ final class ImagesListCell: UITableViewCell {
     }
     
     private func setupSubviews() {
-        addSubview(cellImage)
-        addSubview(cellGradientView)
-        addSubview(cellDataLabel)
-        addSubview(cellLikeButton)
+        [cellImage, cellGradientView, cellDataLabel, cellLikeButton].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            addSubview($0)
+        }
+        
+        setConstraints()
     }
     
     private func setConstraints() {
