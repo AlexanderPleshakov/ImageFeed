@@ -66,7 +66,6 @@ extension AuthViewController: WebViewControllerDelegate {
             case .success(let bearerToken):
                 self.tokenStorage.token = bearerToken
                 delegate.didAuthenticate(self)
-                print("Authenticated")
             case .failure(let error):
                 print("failure with error - \(error)")
                 let alertPresenter = AlertPresenter(delegate: self)

@@ -41,7 +41,6 @@ final class OAuth2Service {
     
     func fetchOAuthToken(code: String, handler: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
-        print("-- Start fetching token --")
         
         guard lastCode != code else {
             handler(.failure(NetworkError.differentAuthCodes))

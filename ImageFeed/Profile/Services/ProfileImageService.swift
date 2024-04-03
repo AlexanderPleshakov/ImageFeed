@@ -37,7 +37,6 @@ final class ProfileImageService {
     }
     
     func fetchProfileImageURL(username: String, completion: @escaping (Result<String, Error>) -> Void) {
-        print("-- Start fetching user image --")
         
         if self.username == username {
             completion(.failure(FetchingImageError.repeatedRequest))
@@ -68,7 +67,6 @@ final class ProfileImageService {
                 }
                 
                 self.avatarURL = avatarURL
-                print(avatarURL)
                 completion(.success(avatarURL))
                 NotificationCenter.default.post(name: ProfileImageService.didChangeNotification,
                                                 object: self,
@@ -79,7 +77,6 @@ final class ProfileImageService {
             }
             self.task = nil
             self.username = nil
-            print("-- Finish fetching user image --")
         }
         
         self.task = task

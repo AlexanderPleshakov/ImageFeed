@@ -30,7 +30,6 @@ final class SplashViewController: UIViewController {
     
     private func showNextScreen() {
         if let _ = tokenStorage.tokenOrNil {
-            print("Token - \(tokenStorage.token)")
             fetchProfile(token: tokenStorage.token)
         } else {
             let authViewController = AuthViewController()

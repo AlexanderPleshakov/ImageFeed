@@ -35,7 +35,6 @@ final class ProfileService {
     }
     
     func fetchProfile(bearerToken: String, completion: @escaping (Result<Profile, Error>) -> Void) {
-        print("-- Start fetching profile --")
         assert(Thread.isMainThread)
         
         if lastToken == bearerToken {
@@ -68,7 +67,6 @@ final class ProfileService {
             
             self.task = nil
             self.lastToken = nil
-            print("-- Finish fetching profile --")
         }
         self.task = task
         task.resume()
