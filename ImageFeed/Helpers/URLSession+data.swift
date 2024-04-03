@@ -11,6 +11,7 @@ enum NetworkError: Error {
     case httpStatusCode(Int)
     case urlRequestError(Error)
     case urlSessionError
+    case decodeError
 }
 
 extension URLSession {
@@ -41,6 +42,31 @@ extension URLSession {
                 fulfillCompletionOnTheMainThread(.failure(NetworkError.urlSessionError))
             }
         })
+        
+        return task
+    }
+    
+    func objectTask<T: Decodable>(
+        for request: URLRequest,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) -> URLSessionTask {
+        
+        let task = data(for: request) { result in
+            switch result {
+            case .success(let data):
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                do {
+                    let resultData = try decoder.decode(T.self, from: data)
+                    completion(.success(resultData))
+                } catch {
+                    print("Ошибка декодирования: \(error.localizedDescription), Данные: \(String(data: data, encoding: .utf8) ?? "")")
+                    completion(.failure(NetworkError.decodeError))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
         
         return task
     }

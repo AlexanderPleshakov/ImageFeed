@@ -10,53 +10,52 @@ import WebKit
 
 final class WebViewController: UIViewController {
     // MARK: Properties
+    
     weak var delegate: WebViewControllerDelegate!
+    private var estimatedProgressObservation: NSKeyValueObservation?
     
-    // MARK: Outlets
+    // MARK: Views
     
-    @IBOutlet private weak var progressView: UIProgressView!
-    @IBOutlet private weak var webView: WKWebView!
+    private let progressView: UIProgressView = {
+        let view = UIProgressView()
+        view.progressTintColor = UIColor(named: "YP Black")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private let webView: WKWebView = {
+        let webView = WKWebView()
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.backgroundColor = .white
+        return webView
+    }()
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        webView.navigationDelegate = self
+        view.backgroundColor = .white
+        configure()
         loadAuthView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        webView.addObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            options: .new,
-            context: nil
-        )
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
-    }
-    
-    // MARK: Overrides
-    
-    override func observeValue(
-        forKeyPath keyPath: String?,
-        of object: Any?,
-        change: [NSKeyValueChangeKey : Any]?,
-        context: UnsafeMutableRawPointer?
-    ) {
-        if keyPath == #keyPath(WKWebView.estimatedProgress) {
-            updateProgress()
-        } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
+        estimatedProgressObservation = webView.observe(
+            \.estimatedProgress,
+             options: [.new],
+             changeHandler: { [weak self] _, _ in
+                 guard let self = self else { return }
+                 
+                 self.updateProgress()
+             })
     }
     
     // MARK: Methods
+    
+    private func configure() {
+        setupSubviews()
+        webView.navigationDelegate = self
+    }
 
     private func updateProgress() {
         progressView.progress = Float(webView.estimatedProgress)
@@ -101,6 +100,7 @@ extension WebViewController: WKNavigationDelegate {
     ) {
         if let code = code(from: navigationAction) {
             delegate.webViewController(self, didAuthenticateWithCode: code)
+            
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
@@ -119,5 +119,29 @@ extension WebViewController: WKNavigationDelegate {
         } else {
             return nil
         }
+    }
+}
+
+// MARK: Configure UI
+
+extension WebViewController {
+    private func setupSubviews() {
+        view.addSubview(webView)
+        view.addSubview(progressView)
+        
+        setConstraints()
+    }
+    
+    private func setConstraints() {
+        NSLayoutConstraint.activate([
+            webView.topAnchor.constraint(equalTo: view.topAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        ])
     }
 }
