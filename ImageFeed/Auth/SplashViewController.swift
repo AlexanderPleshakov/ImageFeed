@@ -29,8 +29,8 @@ final class SplashViewController: UIViewController {
     // MARK: Methods
     
     private func showNextScreen() {
-        if let _ = tokenStorage.tokenOrNil {
-            fetchProfile(token: tokenStorage.token)
+        if let token = tokenStorage.tokenOrNil {
+            fetchProfile(token: token)
         } else {
             let authViewController = AuthViewController()
             let navigationController = UINavigationController(rootViewController: authViewController)
@@ -54,14 +54,12 @@ final class SplashViewController: UIViewController {
     
     private func fetchProfile(token: String) {
         let profileService = ProfileService.shared
-        let profileImageService = ProfileImageService.shared
         
         profileService.fetchProfile(bearerToken: token) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let profile):
-                profileImageService.fetchProfileImageURL(username: profile.username) { _ in }
                 self.switchToTabBarController()
             case .failure(let error):
                 print(error)

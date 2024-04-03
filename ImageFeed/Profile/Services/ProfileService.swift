@@ -29,6 +29,7 @@ final class ProfileService {
         }
         
         var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         request.setValue("Bearer \(tokenStorage.token)", forHTTPHeaderField: "Authorization")
         
         return request
@@ -54,11 +55,13 @@ final class ProfileService {
         
         let task = URLSession.shared.objectTask(for: request) { [weak self] (result: (Result<ProfileResult, Error>)) in
             guard let self = self else { return }
+            let profileImageService = ProfileImageService.shared
             
             switch result {
             case .success(let profileResult):
                 let profile = Profile(profileResult: profileResult)
                 self.profile = profile
+                profileImageService.fetchProfileImageURL(username: profile.username) { _ in }
                 completion(.success(profile))
             case .failure(let error):
                 completion(.failure(error))
