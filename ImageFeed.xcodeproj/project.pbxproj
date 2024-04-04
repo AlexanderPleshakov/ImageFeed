@@ -109,7 +109,6 @@
 		1602D44A2BBF4F59001C3B64 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				1602D44D2BBF4F9E001C3B64 /* Models */,
 				1602D44B2BBF4F8E001C3B64 /* ImagesListService.swift */,
 			);
 			path = Services;
@@ -139,7 +138,6 @@
 			children = (
 				16A560352BA5059C00AD37C8 /* OAuth2TokenStorage.swift */,
 				1609F8FF2BA4DC320022AA13 /* OAuth2Service.swift */,
-				1609F9072BA4F3E90022AA13 /* Models */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -156,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				1628CA212B80DF4F001F175C /* ProfileViewController.swift */,
+				167163032BB57BFC00D481FB /* Models */,
 				167163042BB581EB00D481FB /* Services */,
 			);
 			path = Profile;
@@ -176,6 +175,7 @@
 			children = (
 				169E80AA2B7276C700E4C3E8 /* ImagesListViewController.swift */,
 				1602D4492BBF4F40001C3B64 /* Views */,
+				1602D44D2BBF4F9E001C3B64 /* Models */,
 				1602D44A2BBF4F59001C3B64 /* Services */,
 			);
 			path = ImagesList;
@@ -196,7 +196,6 @@
 			children = (
 				16AC60B82BB6DAA100CD04FA /* ProfileImageService.swift */,
 				167162FD2BB575BD00D481FB /* ProfileService.swift */,
-				167163032BB57BFC00D481FB /* Models */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -207,6 +206,7 @@
 				168799812BAB5ECC00154C8A /* SplashViewController.swift */,
 				168799862BAB85C500154C8A /* AuthView */,
 				168799852BAB85B300154C8A /* WebView */,
+				1609F9072BA4F3E90022AA13 /* Models */,
 				1609F9062BA4F3B50022AA13 /* Services */,
 			);
 			path = Auth;
