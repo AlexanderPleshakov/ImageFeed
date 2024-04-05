@@ -27,17 +27,32 @@ final class ImagesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        
+        NotificationCenter.default.addObserver(
+            forName: ImagesListService.didChangeNotification,
+            object: self,
+            queue: .main) { [weak self] _ in
+                
+                guard let self = self else { return }
+                self.addImages()
+        }
+        
         configure()
     }
     
     // MARK: Functions
     
+    private func addImages() {
+        
+    }
+    
     private func configure() {
         view.backgroundColor = UIColor(named: "YP Black")
         view.addSubview(tableView)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),

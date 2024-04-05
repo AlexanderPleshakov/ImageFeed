@@ -8,6 +8,8 @@
 import Foundation
 
 final class ImagesListService {
+    static let didChangeNotification = Notification.Name("ImagesListServiceDidChange")
+    
     private (set) var photos: [Photo] = []
     
     private var lastLoadedPage: Int?
@@ -92,6 +94,7 @@ final class ImagesListService {
                 }
                 self.photos += photos
                 completion(.success(photos))
+                NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: self)
             case .failure(let error):
                 completion(.failure(error))
             }
