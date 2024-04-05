@@ -74,6 +74,7 @@ final class ImagesListCell: UITableViewCell {
         else { return }
         
         guard let url = URL(string: photo.thumbImageURL) else { return }
+        cell.cellImage.kf.indicatorType = .activity
         cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "PlaceholderCellImage")) { _ in
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
