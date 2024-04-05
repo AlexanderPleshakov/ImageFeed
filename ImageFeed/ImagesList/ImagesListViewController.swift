@@ -101,6 +101,12 @@ extension ImagesListViewController: UITableViewDelegate {
         let cellHeight = photos[indexPath.row].size.height * scale + imageInsets.top + imageInsets.bottom
         return cellHeight
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == photos.count - 1 {
+            imagesListService.fetchPhotosNextPage()
+        }
+    }
 }
 
 //MARK: UITableViewDataSource
@@ -121,9 +127,10 @@ extension ImagesListViewController: UITableViewDataSource {
         imageListCell.selectionStyle = .none
         imageListCell.configCell(in: tableView, for: imageListCell, with: indexPath, photo: photos[indexPath.row])
         
-        if indexPath.row == photos.count - 1 {
-            imagesListService.fetchPhotosNextPage()
-        }
+//        if indexPath.row == photos.count - 1 {
+//            imagesListService.fetchPhotosNextPage()
+//        }
+        
         return imageListCell
     }
 }
