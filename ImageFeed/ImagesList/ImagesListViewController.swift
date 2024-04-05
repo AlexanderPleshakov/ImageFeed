@@ -32,8 +32,6 @@ final class ImagesListViewController: UIViewController {
         
         configure()
         
-        
-        
         NotificationCenter.default.addObserver(
             forName: ImagesListService.didChangeNotification,
             object: nil,
@@ -122,6 +120,9 @@ extension ImagesListViewController: UITableViewDataSource {
         imageListCell.selectionStyle = .none
         imageListCell.configCell(in: tableView, for: imageListCell, with: indexPath, photo: photos[indexPath.row])
         
+        if indexPath.row == photos.count - 1 {
+            imagesListService.fetchPhotosNextPage()
+        }
         return imageListCell
     }
 }

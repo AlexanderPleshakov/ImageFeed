@@ -71,8 +71,9 @@ final class ImagesListService {
         }
         
         task?.cancel()
-        
         let page = (lastLoadedPage ?? 0) + 1
+        lastLoadedPage = page
+        print(page)
         guard let request = makeRequest(page: page) else {
             print("Cannot construct request")
             return
