@@ -7,13 +7,14 @@
 
 import Foundation
 
-struct PhotoResult: Decodable {
-    let id, slug: String
-    let createdAt: Date?
+struct PhotoResultElement: Decodable {
+    let id: String
     let width, height: Int
-    let description: String?
-    let altDescription: String?
+    let createdAt: String?
+    let description, altDescription: String?
     let urls: PhotoUrls
     let likes: Int
     let likedByUser: Bool
 }
+
+typealias PhotoResult = [PhotoResultElement]
