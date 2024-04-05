@@ -6,17 +6,15 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class SingleImageViewController: UIViewController {
     
     // MARK: Properties
 
-    var image: UIImage! {
-        didSet {
-            guard isViewLoaded else { return }
-            imageView.image = image
-        }
-    }
+    var imageURL: URL!
+    
+    private var image: KFCrossPlatformImage?
     
     lazy var zoomingTap: UITapGestureRecognizer = {
         let zoomingTap = UITapGestureRecognizer(target: self, action: #selector(handleZoomingTap))
@@ -59,10 +57,25 @@ final class SingleImageViewController: UIViewController {
         
         setupViews()
         
-        imageView.image = image
-        imageView.frame.size = image.size
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: imageURL)
         
-        configurateFor(imageSize: image.size)
+        KingfisherManager.shared.retrieveImage(with: imageURL, options: nil, progressBlock: nil) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let value):
+                self.image = value.image
+                guard let image = image else {
+                    print("image is nil")
+                    return
+                }
+                self.imageView.frame.size = image.size
+                
+                configurateFor(imageSize: image.size)
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
     }
     
     override func viewWillLayoutSubviews() {
