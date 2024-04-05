@@ -17,11 +17,6 @@ final class ImagesListService {
     private var tokenStorage = OAuth2TokenStorage()
     private var task: URLSessionTask?
     
-    private enum FetchingPhotoListError: Error {
-        case invalidPhotoListRequest, decodePhotoFailure,
-        repeatedRequest
-    }
-    
     private func convertToPrettyDate(from date: String?) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -68,10 +63,10 @@ final class ImagesListService {
         return request
     }
     
-    func fetchPhotosNextPage(completion: @escaping (Result<[Photo], Error>) -> Void) {
+    func fetchPhotosNextPage() {
         
         if task != nil {
-            completion(.failure(FetchingPhotoListError.repeatedRequest))
+            print("Repeated fetch photos request ")
             return
         }
         
@@ -79,7 +74,7 @@ final class ImagesListService {
         
         let page = (lastLoadedPage ?? 0) + 1
         guard let request = makeRequest(page: page) else {
-            completion(.failure(FetchingPhotoListError.invalidPhotoListRequest))
+            print("Cannot construct request")
             return
         }
         let task = URLSession.shared.objectTask(for: request) { [weak self] (result: (Result<PhotoResult, Error>)) in
@@ -93,10 +88,9 @@ final class ImagesListService {
                     photos.append(photo)
                 }
                 self.photos += photos
-                completion(.success(photos))
                 NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: self)
             case .failure(let error):
-                completion(.failure(error))
+                print("Error: fetchPhotosNextPage - SomeError - \(error)")
             }
             self.task = nil
         }
