@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ImagesListCell: UITableViewCell {
     
@@ -23,7 +24,6 @@ final class ImagesListCell: UITableViewCell {
     //MARK: Properties
     
     static let reuseIdentifier = "ImageListCell"
-    static let photosName = Array(0..<20).map { "\($0)" }
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -61,15 +61,25 @@ final class ImagesListCell: UITableViewCell {
     
     //MARK: Functions
     
-    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        cellImage.kf.cancelDownloadTask()
+    }
+    
+    func configCell(in tableView: UITableView, for cell: ImagesListCell, with indexPath: IndexPath, photo: Photo) {
         setupSubviews()
         
-        guard let likeImage = indexPath.row % 2 != 0 ? UIImage(named: "FavoritesNoActive") : UIImage(named: "FavoritesActive"),
-              let mainImage = UIImage(named: "\(ImagesListCell.photosName[indexPath.row])")
+        guard let likeImage = indexPath.row % 2 != 0 ? UIImage(named: "FavoritesNoActive") : UIImage(named: "FavoritesActive")
         else { return }
         
-        cell.cellImage.image = mainImage
-        cell.cellDataLabel.text = dateFormatter.string(from: Date())
+        guard let url = URL(string: photo.thumbImageURL) else { return }
+        cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "PlaceholderCellImage")) { _ in
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            print("reloaded")
+        }
+        
+        cell.cellDataLabel.text = photo.createdAt
         cell.cellLikeButton.setImage(likeImage, for: .normal)
     }
     
