@@ -10,7 +10,7 @@ import UIKit
 final class ImagesListViewController: UIViewController {
     
     //MARK: Properties
-    private let showSingleImageSegueIdentifier = "ShowSingleImage"
+    let imagesListService = ImagesListService()
     
     var imagesListCell: ImagesListCell!
     
