@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ImagesListViewController: UIViewController {
     
     //MARK: Properties
-    let imagesListService = ImagesListService()
+    private let imagesListService = ImagesListService()
+    private var photos = [Photo]()
     
-    var imagesListCell: ImagesListCell!
+    private var imagesListCell: ImagesListCell!
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -28,22 +30,40 @@ final class ImagesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configure()
+        
+        
+        
         NotificationCenter.default.addObserver(
             forName: ImagesListService.didChangeNotification,
-            object: self,
+            object: nil,
             queue: .main) { [weak self] _ in
-                
+                print("-- Notification --")
                 guard let self = self else { return }
-                self.addImages()
+                self.updateTableViewAnimated()
+        }
+        if !photos.isEmpty {
+            updateTableViewAnimated()
         }
         
-        configure()
+        imagesListService.fetchPhotosNextPage()
     }
     
     // MARK: Functions
     
-    private func addImages() {
+    private func updateTableViewAnimated() {
+        print("-- update --")
+        let oldCount = photos.count
+        let newCount = imagesListService.photos.count
+        photos = imagesListService.photos
         
+        tableView.performBatchUpdates {
+            let indexPaths = (oldCount..<newCount).map { i in
+                IndexPath(row: i, section: 0)
+            }
+            tableView.insertRows(at: indexPaths, with: .automatic)
+        } completion: { _ in }
+
     }
     
     private func configure() {
@@ -68,21 +88,18 @@ final class ImagesListViewController: UIViewController {
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let singleImageViewController = SingleImageViewController()
-        let image = UIImage(named: ImagesListCell.photosName[indexPath.row])
+        let image = tableView.cellForRow(at: indexPath)?.imageView?.image
         singleImageViewController.image = image
         singleImageViewController.modalPresentationStyle = .fullScreen
         present(singleImageViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let image = UIImage(named: ImagesListCell.photosName[indexPath.row]) else {
-            return 0
-        }
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
-        let imageWidth = image.size.width
+        let imageWidth = photos[indexPath.row].size.width
         let scale = imageViewWidth / imageWidth
-        let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
+        let cellHeight = photos[indexPath.row].size.height * scale + imageInsets.top + imageInsets.bottom
         return cellHeight
     }
 }
@@ -91,7 +108,7 @@ extension ImagesListViewController: UITableViewDelegate {
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ImagesListCell.photosName.count
+        return photos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -103,7 +120,7 @@ extension ImagesListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         imageListCell.selectionStyle = .none
-        imageListCell.configCell(for: imageListCell, with: indexPath)
+        imageListCell.configCell(in: tableView, for: imageListCell, with: indexPath, photo: photos[indexPath.row])
         
         return imageListCell
     }
