@@ -84,7 +84,7 @@ final class ImagesListService {
             switch result {
             case .success(let photoResult):
                 var photos = [Photo]()
-                photoResult.forEach {
+                photoResult[..<(photoResult.count - 2)].forEach {
                     let photo = self.convertToPhoto(from: $0)
                     photos.append(photo)
                 }
