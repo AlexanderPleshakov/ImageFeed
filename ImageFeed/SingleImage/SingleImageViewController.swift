@@ -14,7 +14,7 @@ final class SingleImageViewController: UIViewController {
 
     var imageURL: URL!
     
-    private var image: KFCrossPlatformImage?
+    private var image = UIImage()
     
     lazy var zoomingTap: UITapGestureRecognizer = {
         let zoomingTap = UITapGestureRecognizer(target: self, action: #selector(handleZoomingTap))
@@ -58,22 +58,15 @@ final class SingleImageViewController: UIViewController {
         setupViews()
         
         imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(with: imageURL)
-        
-        KingfisherManager.shared.retrieveImage(with: imageURL, options: nil, progressBlock: nil) { [weak self] result in
+        imageView.kf.setImage(with: imageURL) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let value):
                 self.image = value.image
-                guard let image = image else {
-                    print("image is nil")
-                    return
-                }
                 self.imageView.frame.size = image.size
-                
-                configurateFor(imageSize: image.size)
+                self.configurateFor(imageSize: image.size)
             case .failure(let error):
-                print("Error: \(error)")
+                print("Error \(error)")
             }
         }
     }
@@ -189,7 +182,8 @@ final class SingleImageViewController: UIViewController {
     }
     
     @objc private func buttonShareTapped() {
-        guard let image = image else { return }
+//        guard let image = image else { return }
+        print(image)
         let activityView = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         present(activityView, animated: true)
     }
