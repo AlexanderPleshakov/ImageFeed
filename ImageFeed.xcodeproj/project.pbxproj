@@ -41,6 +41,7 @@
 		16AC60BB2BB6DAD200CD04FA /* UserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC60BA2BB6DAD100CD04FA /* UserResult.swift */; };
 		16AC60BD2BB754AF00CD04FA /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC60BC2BB754AF00CD04FA /* AlertPresenter.swift */; };
 		16B4CB3D2B9E78C700775EAF /* WebViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B4CB3C2B9E78C700775EAF /* WebViewControllerDelegate.swift */; };
+		16E3FA0B2BC44C8400F07E46 /* ImagesListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3FA0A2BC44C8400F07E46 /* ImagesListCellDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		16AC60BA2BB6DAD100CD04FA /* UserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResult.swift; sourceTree = "<group>"; };
 		16AC60BC2BB754AF00CD04FA /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		16B4CB3C2B9E78C700775EAF /* WebViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerDelegate.swift; sourceTree = "<group>"; };
+		16E3FA0A2BC44C8400F07E46 /* ImagesListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCellDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				1602D44E2BBF4FB5001C3B64 /* Photo.swift */,
 				1602D4502BBF580C001C3B64 /* PhotoResult.swift */,
 				1602D4522BBF6496001C3B64 /* PhotoUrls.swift */,
+				16E3FA0A2BC44C8400F07E46 /* ImagesListCellDelegate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				16000FA82B810C3200A8458D /* SingleImageViewController.swift in Sources */,
 				168799842BAB84AB00154C8A /* AuthViewControllerDelegate.swift in Sources */,
 				1688EAB62BBB18A400F7FD92 /* GradientView.swift in Sources */,
+				16E3FA0B2BC44C8400F07E46 /* ImagesListCellDelegate.swift in Sources */,
 				160960F52BB390E8004E4973 /* UIBlockingProgressHUD.swift in Sources */,
 				169E80A92B7276C700E4C3E8 /* SceneDelegate.swift in Sources */,
 				1602D44C2BBF4F8E001C3B64 /* ImagesListService.swift in Sources */,
