@@ -50,7 +50,7 @@ final class ProfileViewController: UIViewController {
     
     private let logoutButton: UIButton = {
         let logoutImage = UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage()
-        let logoutButton = UIButton.systemButton(with: logoutImage, target: ProfileViewController.self, action: nil)
+        let logoutButton = UIButton.systemButton(with: logoutImage, target: nil, action: nil)
         logoutButton.tintColor = UIColor(named: "YP Red")
         
         return logoutButton
@@ -80,6 +80,10 @@ final class ProfileViewController: UIViewController {
     
     // MARK: Methods
     
+    @objc private func buttonLogoutTapped() {
+        ProfileLogoutService.shared.logout()
+    }
+    
     private func updateAvatar() {
         guard
             let profileImageURL = ProfileImageService.shared.avatarURL,
@@ -94,6 +98,7 @@ final class ProfileViewController: UIViewController {
     
     private func configure(profile: Profile?) {
         view.backgroundColor = UIColor(named: "YP Black")
+        logoutButton.addTarget(self, action: #selector(buttonLogoutTapped), for: .touchUpInside)
         
         guard let profile = profile else { return }
         setupSubviews(userName: profile.name, loginName: profile.loginName, bio: profile.bio)
