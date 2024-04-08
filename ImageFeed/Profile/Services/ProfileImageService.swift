@@ -37,6 +37,10 @@ final class ProfileImageService {
         return request
     }
     
+    func clearBeforeLogout() {
+        avatarURL = nil
+    }
+    
     func fetchProfileImageURL(username: String, completion: @escaping (Result<String, Error>) -> Void) {
         
         if self.username == username {

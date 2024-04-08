@@ -35,6 +35,10 @@ final class ProfileService {
         return request
     }
     
+    func clearBeforeLogout() {
+        profile = nil
+    }
+    
     func fetchProfile(bearerToken: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
         

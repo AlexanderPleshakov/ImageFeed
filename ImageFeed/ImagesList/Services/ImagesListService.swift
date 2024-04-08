@@ -82,6 +82,10 @@ final class ImagesListService {
         return request
     }
     
+    func clearBeforeLogout() {
+        photos = []
+    }
+    
     func changeLike(photoId: String, isLiked: Bool, _ completion: @escaping (Result<Photo, Error>) -> Void) {
         let request: URLRequest
         if isLiked {

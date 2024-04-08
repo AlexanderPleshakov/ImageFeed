@@ -42,6 +42,7 @@
 		16AC60BD2BB754AF00CD04FA /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC60BC2BB754AF00CD04FA /* AlertPresenter.swift */; };
 		16B4CB3D2B9E78C700775EAF /* WebViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B4CB3C2B9E78C700775EAF /* WebViewControllerDelegate.swift */; };
 		16E3FA0B2BC44C8400F07E46 /* ImagesListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3FA0A2BC44C8400F07E46 /* ImagesListCellDelegate.swift */; };
+		16E3FA0D2BC47DCE00F07E46 /* ProfileLogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3FA0C2BC47DCE00F07E46 /* ProfileLogoutService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,7 @@
 		16AC60BC2BB754AF00CD04FA /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		16B4CB3C2B9E78C700775EAF /* WebViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerDelegate.swift; sourceTree = "<group>"; };
 		16E3FA0A2BC44C8400F07E46 /* ImagesListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCellDelegate.swift; sourceTree = "<group>"; };
+		16E3FA0C2BC47DCE00F07E46 /* ProfileLogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 			children = (
 				16AC60B82BB6DAA100CD04FA /* ProfileImageService.swift */,
 				167162FD2BB575BD00D481FB /* ProfileService.swift */,
+				16E3FA0C2BC47DCE00F07E46 /* ProfileLogoutService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 			files = (
 				169E80AB2B7276C700E4C3E8 /* ImagesListViewController.swift in Sources */,
 				167163022BB57BF300D481FB /* Profile.swift in Sources */,
+				16E3FA0D2BC47DCE00F07E46 /* ProfileLogoutService.swift in Sources */,
 				1674D1882B9E2C100063CBEA /* WebViewController.swift in Sources */,
 				1602D44F2BBF4FB5001C3B64 /* Photo.swift in Sources */,
 				167163002BB575D000D481FB /* ProfileResult.swift in Sources */,
