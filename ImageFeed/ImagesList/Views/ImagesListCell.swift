@@ -11,6 +11,9 @@ import Kingfisher
 final class ImagesListCell: UITableViewCell {
     
     // MARK: Init
+    private var isLiked = false
+    private var photoId: String?
+    private var imagesListService = ImagesListService.shared
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -54,6 +57,29 @@ final class ImagesListCell: UITableViewCell {
     
     //MARK: Functions
     
+    @objc private func buttonLikeTapped() {
+        print("-- tapped --")
+        guard let photoId = photoId else {
+            print("Photo id is nil")
+            return
+        }
+        imagesListService.changeLike(photoId: photoId, isLiked: isLiked) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.isLiked = !self.isLiked
+                    let newImage = !self.isLiked ? UIImage(named: "FavoritesActive") : UIImage(named: "FavoritesNoActive")
+                    self.cellLikeButton.setImage(newImage, for: .normal)
+                    print("Image was set")
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -61,9 +87,11 @@ final class ImagesListCell: UITableViewCell {
     }
     
     func configCell(in tableView: UITableView, for cell: ImagesListCell, with indexPath: IndexPath, photo: Photo) {
+        isLiked = photo.isLiked
+        photoId = photo.id
         setupSubviews()
         
-        guard let likeImage = indexPath.row % 2 != 0 ? UIImage(named: "FavoritesNoActive") : UIImage(named: "FavoritesActive")
+        guard let likeImage = photo.isLiked ? UIImage(named: "FavoritesActive") : UIImage(named: "FavoritesNoActive")
         else { return }
         
         guard let url = URL(string: photo.thumbImageURL) else { return }
@@ -71,7 +99,7 @@ final class ImagesListCell: UITableViewCell {
         cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "PlaceholderCellImage")) { _ in
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
-        
+        cell.cellLikeButton.addTarget(self, action: #selector(buttonLikeTapped), for: .touchUpInside)
         cell.cellDataLabel.text = photo.createdAt
         cell.cellLikeButton.setImage(likeImage, for: .normal)
     }
