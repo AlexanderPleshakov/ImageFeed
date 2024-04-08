@@ -126,7 +126,6 @@ final class ImagesListService {
         task?.cancel()
         let page = (lastLoadedPage ?? 0) + 1
         lastLoadedPage = page
-        print(page)
         guard let request = makeFetchPhotoRequest(page: page) else {
             print("Cannot construct request")
             return
@@ -143,12 +142,10 @@ final class ImagesListService {
                 }
                 self.photos += photos
                 NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: self)
-                print("-- Notification posted --")
             case .failure(let error):
                 print("Error: fetchPhotosNextPage - SomeError - \(error)")
             }
             self.task = nil
-            print("-- Fetched --")
         }
         self.task = task
         task.resume()

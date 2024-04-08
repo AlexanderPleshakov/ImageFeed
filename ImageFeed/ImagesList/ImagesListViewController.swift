@@ -36,7 +36,6 @@ final class ImagesListViewController: UIViewController {
             forName: ImagesListService.didChangeNotification,
             object: nil,
             queue: .main) { [weak self] _ in
-                print("-- Notification --")
                 guard let self = self else { return }
                 self.updateTableViewAnimated()
         }
@@ -50,7 +49,6 @@ final class ImagesListViewController: UIViewController {
     // MARK: Functions
     
     private func updateTableViewAnimated() {
-        print("-- update --")
         let oldCount = photos.count
         let newCount = imagesListService.photos.count
         photos = imagesListService.photos

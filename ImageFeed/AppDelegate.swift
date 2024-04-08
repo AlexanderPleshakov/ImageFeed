@@ -12,7 +12,7 @@ import ProgressHUD
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        ProgressHUD.colorHUD = UIColor(red: 255, green: 255, blue: 255, alpha: 0.5)
+        ProgressHUD.colorHUD = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
         ProgressHUD.colorAnimation = UIColor(named: "YP Black") ?? .lightGray
         ProgressHUD.animationType = .activityIndicator
         ProgressHUD.mediaSize = 51
