@@ -57,6 +57,16 @@ final class SingleImageViewController: UIViewController {
         
         setupViews()
         
+        setFullImage()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        centerImage()
+    }
+    
+    // MARK: Methods
+    
+    private func setFullImage() {
         UIBlockingProgressHUD.show()
         imageView.kf.setImage(with: imageURL) { [weak self] result in
             guard let self = self else { return }
@@ -67,16 +77,19 @@ final class SingleImageViewController: UIViewController {
                 self.configurateFor(imageSize: image.size)
             case .failure(let error):
                 print("Error \(error)")
+                let alertPresenter = AlertPresenter(delegate: self)
+                let actionOk = UIAlertAction(title: "Повторить", style: .default) { [weak self] _ in
+                    self?.setFullImage()
+                }
+                let actionNo = UIAlertAction(title: "Не надо", style: .default)
+                alertPresenter.presentPhotoLoadingErrorAlert(
+                    title: "Что-то пошло не так(",
+                    message: "Попробовать еще раз?",
+                    actionOk: actionOk, actionNo: actionNo)
             }
             UIBlockingProgressHUD.dismiss()
         }
     }
-    
-    override func viewWillLayoutSubviews() {
-        centerImage()
-    }
-    
-    // MARK: Methods
     
     private func configScrollView() {
         scrollView = UIScrollView(frame: view.bounds)

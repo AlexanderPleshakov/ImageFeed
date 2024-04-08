@@ -15,10 +15,19 @@ final class AlertPresenter {
         self.delegate = delegate
     }
     
-    func presentPresentNetworkErrorAlert(title: String?, message: String?, buttonTitle: String?) {
+    func presentNetworkErrorAlert(title: String?, message: String?, buttonTitle: String?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: buttonTitle, style: .default)
         alert.addAction(action)
+        delegate?.present(alert, animated: true)
+    }
+    
+    func presentPhotoLoadingErrorAlert(title: String?, message: String?,
+                                       actionOk: UIAlertAction,
+                                       actionNo: UIAlertAction) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(actionOk)
+        alert.addAction(actionNo)
         delegate?.present(alert, animated: true)
     }
 }
