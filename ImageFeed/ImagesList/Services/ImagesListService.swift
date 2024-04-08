@@ -9,6 +9,9 @@ import Foundation
 
 final class ImagesListService {
     static let didChangeNotification = Notification.Name("ImagesListServiceDidChange")
+    static let shared = ImagesListService()
+    
+    private init() {}
     
     private (set) var photos: [Photo] = []
     
@@ -16,6 +19,10 @@ final class ImagesListService {
     
     private var tokenStorage = OAuth2TokenStorage()
     private var task: URLSessionTask?
+    
+    private enum NetworkError: Error {
+        case indexSearchError
+    }
     
     private func convertToPrettyDate(from date: String?) -> String? {
         let dateFormatter = DateFormatter()
@@ -53,7 +60,7 @@ final class ImagesListService {
         return photo
     }
     
-    private func makeRequest(page: Int) -> URLRequest? {
+    private func makeFetchPhotoRequest(page: Int) -> URLRequest? {
         guard let url = URL(string: "https://api.unsplash.com/photos?page=\(page)") else {
             fatalError("Cannot construct url")
         }
@@ -63,6 +70,52 @@ final class ImagesListService {
         
         return request
     }
+    
+    private func makeLikeRequest(with url: String, httpMethod: String) -> URLRequest {
+        guard let url = URL(string: url) else {
+            fatalError("Cannot construct url")
+        }
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(tokenStorage.token)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = httpMethod
+        
+        return request
+    }
+    
+    func changeLike(photoId: String, isLiked: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        let request: URLRequest
+        if isLiked {
+            request = makeLikeRequest(with: "https://api.unsplash.com/photos/\(photoId)/like", httpMethod: "DELETE")
+        } else {
+            request = makeLikeRequest(with: "https://api.unsplash.com/photos/\(photoId)/like", httpMethod: "POST")
+        }
+        
+        let task = URLSession.shared.data(for: request) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(_):
+                if let index = self.photos.firstIndex(where: { $0.id == photoId }) {
+                    print("-- changed --")
+                    let oldPhoto = self.photos[index]
+                    let newPhoto = Photo(id: oldPhoto.id, size: oldPhoto.size,
+                                         createdAt: oldPhoto.createdAt,
+                                         welcomeDescription: oldPhoto.welcomeDescription,
+                                         thumbImageURL: oldPhoto.thumbImageURL,
+                                         largeImageURL: oldPhoto.largeImageURL,
+                                         isLiked: !oldPhoto.isLiked)
+                    self.photos[index] = newPhoto
+                    completion(.success(()))
+                } else {
+                    completion(.failure(NetworkError.indexSearchError))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        task.resume()
+    }
+
     
     func fetchPhotosNextPage() {
         
@@ -75,7 +128,7 @@ final class ImagesListService {
         let page = (lastLoadedPage ?? 0) + 1
         lastLoadedPage = page
         print(page)
-        guard let request = makeRequest(page: page) else {
+        guard let request = makeFetchPhotoRequest(page: page) else {
             print("Cannot construct request")
             return
         }
