@@ -82,7 +82,7 @@ final class ImagesListService {
         return request
     }
     
-    func changeLike(photoId: String, isLiked: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+    func changeLike(photoId: String, isLiked: Bool, _ completion: @escaping (Result<Photo, Error>) -> Void) {
         let request: URLRequest
         if isLiked {
             request = makeLikeRequest(with: "https://api.unsplash.com/photos/\(photoId)/like", httpMethod: "DELETE")
@@ -96,7 +96,6 @@ final class ImagesListService {
             switch result {
             case .success(_):
                 if let index = self.photos.firstIndex(where: { $0.id == photoId }) {
-                    print("-- changed --")
                     let oldPhoto = self.photos[index]
                     let newPhoto = Photo(id: oldPhoto.id, size: oldPhoto.size,
                                          createdAt: oldPhoto.createdAt,
@@ -105,7 +104,7 @@ final class ImagesListService {
                                          largeImageURL: oldPhoto.largeImageURL,
                                          isLiked: !oldPhoto.isLiked)
                     self.photos[index] = newPhoto
-                    completion(.success(()))
+                    completion(.success((newPhoto)))
                 } else {
                     completion(.failure(NetworkError.indexSearchError))
                 }

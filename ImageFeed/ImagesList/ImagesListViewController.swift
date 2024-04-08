@@ -120,17 +120,31 @@ extension ImagesListViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
         cell.backgroundColor = UIColor(named: "YP Black")
-        
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
+        imageListCell.delegate = self
         imageListCell.selectionStyle = .none
         imageListCell.configCell(in: tableView, for: imageListCell, with: indexPath, photo: photos[indexPath.row])
         
-//        if indexPath.row == photos.count - 1 {
-//            imagesListService.fetchPhotosNextPage()
-//        }
-        
         return imageListCell
+    }
+}
+
+extension ImagesListViewController: ImagesListCellDelegate {
+    func imageListCellDidTapLike(_ cell: ImagesListCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = photos[indexPath.row]
+        
+        imagesListService.changeLike(photoId: photo.id, isLiked: photo.isLiked) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let newPhoto):
+                self.photos[indexPath.row] = newPhoto
+                cell.setIsLiked(newPhoto.isLiked)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

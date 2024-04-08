@@ -13,6 +13,7 @@ final class ImagesListCell: UITableViewCell {
     // MARK: Init
     private var isLiked = false
     private var photoId: String?
+    weak var delegate: ImagesListCellDelegate?
     private var imagesListService = ImagesListService.shared
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -22,6 +23,11 @@ final class ImagesListCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setIsLiked(_ isLiked: Bool) {
+        let newImage = isLiked ? UIImage(named: "FavoritesActive") : UIImage(named: "FavoritesNoActive")
+        self.cellLikeButton.setImage(newImage, for: .normal)
     }
     
     //MARK: Properties
@@ -58,26 +64,7 @@ final class ImagesListCell: UITableViewCell {
     //MARK: Functions
     
     @objc private func buttonLikeTapped() {
-        print("-- tapped --")
-        guard let photoId = photoId else {
-            print("Photo id is nil")
-            return
-        }
-        imagesListService.changeLike(photoId: photoId, isLiked: isLiked) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(_):
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.isLiked = !self.isLiked
-                    let newImage = !self.isLiked ? UIImage(named: "FavoritesActive") : UIImage(named: "FavoritesNoActive")
-                    self.cellLikeButton.setImage(newImage, for: .normal)
-                    print("Image was set")
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
+        delegate?.imageListCellDidTapLike(self)
     }
     
     override func prepareForReuse() {
