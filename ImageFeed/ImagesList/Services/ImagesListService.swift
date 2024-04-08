@@ -28,6 +28,7 @@ final class ImagesListService {
         
         let outputDateFormatter = DateFormatter()
         outputDateFormatter.dateFormat = "d MMMM yyyy"
+        outputDateFormatter.locale = Locale(identifier: "ru_RU")
         
         let output = outputDateFormatter.string(from: date)
         

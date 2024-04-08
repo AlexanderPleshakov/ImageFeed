@@ -25,13 +25,6 @@ final class ImagesListCell: UITableViewCell {
     
     static let reuseIdentifier = "ImageListCell"
     
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
-    
     private let cellGradientView: GradientView = {
         let view = GradientView()
         view.backgroundColor = UIColor(named: "YP Black")
