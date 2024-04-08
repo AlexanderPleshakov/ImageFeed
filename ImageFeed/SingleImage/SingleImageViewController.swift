@@ -82,7 +82,7 @@ final class SingleImageViewController: UIViewController {
                     self?.setFullImage()
                 }
                 let actionNo = UIAlertAction(title: "Не надо", style: .default)
-                alertPresenter.presentPhotoLoadingErrorAlert(
+                alertPresenter.presentTwoButtonsAlert(
                     title: "Что-то пошло не так(",
                     message: "Попробовать еще раз?",
                     actionOk: actionOk, actionNo: actionNo)

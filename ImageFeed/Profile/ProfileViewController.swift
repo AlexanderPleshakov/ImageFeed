@@ -81,7 +81,16 @@ final class ProfileViewController: UIViewController {
     // MARK: Methods
     
     @objc private func buttonLogoutTapped() {
-        ProfileLogoutService.shared.logout()
+        let alertPresenter = AlertPresenter(delegate: self)
+        let profileLogoutService = ProfileLogoutService.shared
+        let actionOk = UIAlertAction(title: "Да", style: .default) { _ in
+            profileLogoutService.logout()
+        }
+        let actionNo = UIAlertAction(title: "Нет", style: .default)
+        alertPresenter.presentTwoButtonsAlert(title: "Пока, пока!",
+                                              message: "Уверены, что хотите выйти?",
+                                              actionOk: actionOk, actionNo: actionNo)
+        
     }
     
     private func updateAvatar() {

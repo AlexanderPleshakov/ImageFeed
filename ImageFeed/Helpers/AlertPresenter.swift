@@ -22,7 +22,7 @@ final class AlertPresenter {
         delegate?.present(alert, animated: true)
     }
     
-    func presentPhotoLoadingErrorAlert(title: String?, message: String?,
+    func presentTwoButtonsAlert(title: String?, message: String?,
                                        actionOk: UIAlertAction,
                                        actionNo: UIAlertAction) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
