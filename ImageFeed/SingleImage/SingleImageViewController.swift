@@ -57,7 +57,7 @@ final class SingleImageViewController: UIViewController {
         
         setupViews()
         
-        imageView.kf.indicatorType = .activity
+        UIBlockingProgressHUD.show()
         imageView.kf.setImage(with: imageURL) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -68,6 +68,7 @@ final class SingleImageViewController: UIViewController {
             case .failure(let error):
                 print("Error \(error)")
             }
+            UIBlockingProgressHUD.dismiss()
         }
     }
     
