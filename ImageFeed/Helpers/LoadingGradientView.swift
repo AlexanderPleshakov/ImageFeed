@@ -39,7 +39,7 @@ class LoadingGradientView: UIView {
         animateGradient()
     }
     
-    private func animateGradient() {
+    func animateGradient() {
         let gradientChangeAnimation = CABasicAnimation(keyPath: "locations")
         gradientChangeAnimation.duration = 2
         gradientChangeAnimation.repeatCount = .infinity

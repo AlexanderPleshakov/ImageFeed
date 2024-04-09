@@ -11,6 +11,8 @@ import Kingfisher
 final class ProfileViewController: UIViewController {
     
     // MARK: Properties
+    var animationLayers = [CALayer]()
+    
     // For UI
     private let avatarImageView = {
         let avatarImage = UIImage(systemName: "person.crop.circle.fill")
@@ -56,6 +58,7 @@ final class ProfileViewController: UIViewController {
         return logoutButton
     }()
     
+    private let avatarGradient = LoadingGradientView(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
     // Services
     private let profileService = ProfileService.shared
     private var profileImageObserver: NSObjectProtocol?
@@ -67,6 +70,8 @@ final class ProfileViewController: UIViewController {
         
         configure(profile: profileService.profile)
         
+        avatarImageView.addSubview(avatarGradient)
+        
         profileImageObserver = NotificationCenter.default.addObserver(
             forName: ProfileImageService.didChangeNotification,
             object: nil,
@@ -76,6 +81,12 @@ final class ProfileViewController: UIViewController {
                 self.updateAvatar()
             })
         updateAvatar()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        avatarGradient.animateGradient()
     }
     
     // MARK: Methods
@@ -102,7 +113,10 @@ final class ProfileViewController: UIViewController {
         }
         avatarImageView.kf.setImage(
             with: url,
-            placeholder: UIImage(named: "PlaceholderAvatar"))
+            placeholder: UIImage(named: "PlaceholderAvatar")) { [weak self] result in
+                guard let self = self else { return }
+                self.avatarGradient.removeFromSuperview()
+            }
     }
     
     private func configure(profile: Profile?) {

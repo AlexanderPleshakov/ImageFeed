@@ -17,6 +17,7 @@
 		1609F9022BA4EBA70022AA13 /* URLSession+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1609F9012BA4EBA70022AA13 /* URLSession+data.swift */; };
 		1609F9052BA4F00C0022AA13 /* OAuthTokenResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1609F9042BA4F00C0022AA13 /* OAuthTokenResponseBody.swift */; };
 		1624453E2BB220DB00991134 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 1624453D2BB220DB00991134 /* ProgressHUD */; };
+		162664502BC5B9310060F644 /* LoadingGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1626644F2BC5B9310060F644 /* LoadingGradientView.swift */; };
 		1628CA222B80DF4F001F175C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628CA212B80DF4F001F175C /* ProfileViewController.swift */; };
 		163FC55D2B74ECFF002DA4D6 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163FC55C2B74ECFF002DA4D6 /* ImagesListCell.swift */; };
 		167162FE2BB575BD00D481FB /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167162FD2BB575BD00D481FB /* ProfileService.swift */; };
@@ -55,6 +56,7 @@
 		1609F8FF2BA4DC320022AA13 /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		1609F9012BA4EBA70022AA13 /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
 		1609F9042BA4F00C0022AA13 /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
+		1626644F2BC5B9310060F644 /* LoadingGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingGradientView.swift; sourceTree = "<group>"; };
 		1628CA212B80DF4F001F175C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		163FC55C2B74ECFF002DA4D6 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		167162FD2BB575BD00D481FB /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				1674D1822B9E10870063CBEA /* Constants.swift */,
 				1609F9012BA4EBA70022AA13 /* URLSession+data.swift */,
 				16AC60BC2BB754AF00CD04FA /* AlertPresenter.swift */,
+				1626644F2BC5B9310060F644 /* LoadingGradientView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				16000FA82B810C3200A8458D /* SingleImageViewController.swift in Sources */,
 				168799842BAB84AB00154C8A /* AuthViewControllerDelegate.swift in Sources */,
 				1688EAB62BBB18A400F7FD92 /* GradientView.swift in Sources */,
+				162664502BC5B9310060F644 /* LoadingGradientView.swift in Sources */,
 				16E3FA0B2BC44C8400F07E46 /* ImagesListCellDelegate.swift in Sources */,
 				160960F52BB390E8004E4973 /* UIBlockingProgressHUD.swift in Sources */,
 				169E80A92B7276C700E4C3E8 /* SceneDelegate.swift in Sources */,
