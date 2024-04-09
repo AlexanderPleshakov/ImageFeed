@@ -24,20 +24,27 @@ final class ImagesListService {
         case indexSearchError
     }
     
-    private func convertToPrettyDate(from date: String?) -> String? {
+    private let dateFormatter: DateFormatter? = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-
-        guard let stringDate = date,
-           let date = dateFormatter.date(from: stringDate) else {
-            return nil
-        }
         
+        return dateFormatter
+    }()
+    
+    private let outputDateFormatter: DateFormatter? = {
         let outputDateFormatter = DateFormatter()
         outputDateFormatter.dateFormat = "d MMMM yyyy"
         outputDateFormatter.locale = Locale(identifier: "ru_RU")
         
-        let output = outputDateFormatter.string(from: date)
+        return outputDateFormatter
+    }()
+    
+    private func convertToPrettyDate(from date: String?) -> String? {
+        guard let stringDate = date,
+           let date = dateFormatter?.date(from: stringDate) else {
+            return nil
+        }
+        let output = outputDateFormatter?.string(from: date)
         
         return output
     }
