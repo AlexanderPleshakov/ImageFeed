@@ -62,6 +62,11 @@ final class SplashViewController: UIViewController {
             case .success(_):
                 self.switchToTabBarController()
             case .failure(let error):
+                let alertPresenter = AlertPresenter(delegate: self)
+                alertPresenter.presentNetworkErrorAlert(
+                    title: "Что-то пошло не так(",
+                    message: "Попробуйте позже",
+                    buttonTitle: "Ok")
                 print(error)
             }
         }
