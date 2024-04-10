@@ -138,7 +138,6 @@ final class ImagesListService {
         }
         
         let page = (lastLoadedPage ?? 0) + 1
-        lastLoadedPage = page
         guard let request = makeFetchPhotoRequest(page: page) else {
             print("Cannot construct request")
             return
@@ -148,6 +147,7 @@ final class ImagesListService {
             
             switch result {
             case .success(let photoResult):
+                lastLoadedPage = page
                 var photos = [Photo]()
                 photoResult[..<(photoResult.count - 2)].forEach {
                     guard let photo = self.convertToPhoto(from: $0) else { return }
