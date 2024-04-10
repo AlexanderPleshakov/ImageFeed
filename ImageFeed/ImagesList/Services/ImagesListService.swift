@@ -137,7 +137,6 @@ final class ImagesListService {
             return
         }
         
-        task?.cancel()
         let page = (lastLoadedPage ?? 0) + 1
         lastLoadedPage = page
         guard let request = makeFetchPhotoRequest(page: page) else {
