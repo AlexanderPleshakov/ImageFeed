@@ -24,9 +24,8 @@ final class ImagesListService {
         case indexSearchError
     }
     
-    private let dateFormatter: DateFormatter? = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    private let dateFormatter: ISO8601DateFormatter = {
+        let dateFormatter = ISO8601DateFormatter()
         
         return dateFormatter
     }()
@@ -41,7 +40,7 @@ final class ImagesListService {
     
     private func convertToPrettyDate(from date: String?) -> String? {
         guard let stringDate = date,
-           let date = dateFormatter?.date(from: stringDate) else {
+           let date = dateFormatter.date(from: stringDate) else {
             return nil
         }
         let output = outputDateFormatter?.string(from: date)
