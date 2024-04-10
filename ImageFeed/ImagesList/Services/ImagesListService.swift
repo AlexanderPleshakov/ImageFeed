@@ -49,19 +49,22 @@ final class ImagesListService {
         return output
     }
     
-    private func convertToPhoto(from photoResult: PhotoResultElement) -> Photo {
+    private func convertToPhoto(from photoResult: PhotoResultElement) -> Photo? {
         
         let size = CGSize(width: photoResult.width, height: photoResult.height)
 
         let dateString = convertToPrettyDate(from: photoResult.createdAt)
+        
+        guard let thumbImageURL = URL(string: photoResult.urls.thumb) else { return nil}
+        guard let largeImageURL = URL(string: photoResult.urls.full) else { return nil}
         
         let photo = Photo(
             id: photoResult.id,
             size: size,
             createdAt: dateString,
             welcomeDescription: photoResult.description ?? photoResult.altDescription,
-            thumbImageURL: photoResult.urls.thumb,
-            largeImageURL: photoResult.urls.full,
+            thumbImageURL: thumbImageURL,
+            largeImageURL: largeImageURL,
             isLiked: photoResult.likedByUser)
         
         return photo
@@ -148,7 +151,7 @@ final class ImagesListService {
             case .success(let photoResult):
                 var photos = [Photo]()
                 photoResult[..<(photoResult.count - 2)].forEach {
-                    let photo = self.convertToPhoto(from: $0)
+                    guard let photo = self.convertToPhoto(from: $0) else { return }
                     photos.append(photo)
                 }
                 self.photos += photos

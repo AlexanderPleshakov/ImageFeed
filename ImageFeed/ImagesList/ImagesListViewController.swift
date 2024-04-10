@@ -84,7 +84,7 @@ final class ImagesListViewController: UIViewController {
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let singleImageViewController = SingleImageViewController()
-        guard let url = URL(string: photos[indexPath.row].largeImageURL) else { return }
+        let url = photos[indexPath.row].largeImageURL
         
         singleImageViewController.imageURL = url
         singleImageViewController.modalPresentationStyle = .fullScreen

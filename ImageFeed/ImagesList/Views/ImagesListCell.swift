@@ -81,9 +81,8 @@ final class ImagesListCell: UITableViewCell {
         guard let likeImage = photo.isLiked ? UIImage(named: "FavoritesActive") : UIImage(named: "FavoritesNoActive")
         else { return }
         
-        guard let url = URL(string: photo.thumbImageURL) else { return }
         cell.cellImage.kf.indicatorType = .activity
-        cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "PlaceholderCellImage")) { _ in
+        cell.cellImage.kf.setImage(with: photo.thumbImageURL, placeholder: UIImage(named: "PlaceholderCellImage")) { _ in
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         cell.cellLikeButton.addTarget(self, action: #selector(buttonLikeTapped), for: .touchUpInside)
