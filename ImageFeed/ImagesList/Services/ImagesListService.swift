@@ -24,11 +24,7 @@ final class ImagesListService {
         case indexSearchError
     }
     
-    private let dateFormatter: ISO8601DateFormatter = {
-        let dateFormatter = ISO8601DateFormatter()
-        
-        return dateFormatter
-    }()
+    private let dateFormatter = ISO8601DateFormatter()
     
     private let outputDateFormatter: DateFormatter? = {
         let outputDateFormatter = DateFormatter()
