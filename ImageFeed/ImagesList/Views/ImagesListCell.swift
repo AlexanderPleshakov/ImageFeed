@@ -6,10 +6,15 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ImagesListCell: UITableViewCell {
     
     // MARK: Init
+    private var isLiked = false
+    private var photoId: String?
+    weak var delegate: ImagesListCellDelegate?
+    private var imagesListService = ImagesListService.shared
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -20,17 +25,14 @@ final class ImagesListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setIsLiked(_ isLiked: Bool) {
+        let newImage = isLiked ? UIImage(named: "FavoritesActive") : UIImage(named: "FavoritesNoActive")
+        self.cellLikeButton.setImage(newImage, for: .normal)
+    }
+    
     //MARK: Properties
     
     static let reuseIdentifier = "ImageListCell"
-    static let photosName = Array(0..<20).map { "\($0)" }
-    
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
     
     private let cellGradientView: GradientView = {
         let view = GradientView()
@@ -61,15 +63,30 @@ final class ImagesListCell: UITableViewCell {
     
     //MARK: Functions
     
-    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+    @objc private func buttonLikeTapped() {
+        delegate?.imageListCellDidTapLike(self)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        cellImage.kf.cancelDownloadTask()
+    }
+    
+    func configCell(in tableView: UITableView, for cell: ImagesListCell, with indexPath: IndexPath, photo: Photo) {
+        isLiked = photo.isLiked
+        photoId = photo.id
         setupSubviews()
         
-        guard let likeImage = indexPath.row % 2 != 0 ? UIImage(named: "FavoritesNoActive") : UIImage(named: "FavoritesActive"),
-              let mainImage = UIImage(named: "\(ImagesListCell.photosName[indexPath.row])")
+        guard let likeImage = photo.isLiked ? UIImage(named: "FavoritesActive") : UIImage(named: "FavoritesNoActive")
         else { return }
         
-        cell.cellImage.image = mainImage
-        cell.cellDataLabel.text = dateFormatter.string(from: Date())
+        cell.cellImage.kf.indicatorType = .activity
+        cell.cellImage.kf.setImage(with: photo.thumbImageURL, placeholder: UIImage(named: "PlaceholderCellImage")) { _ in
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        cell.cellLikeButton.addTarget(self, action: #selector(buttonLikeTapped), for: .touchUpInside)
+        cell.cellDataLabel.text = photo.createdAt
         cell.cellLikeButton.setImage(likeImage, for: .normal)
     }
     

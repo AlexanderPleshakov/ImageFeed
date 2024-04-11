@@ -6,17 +6,15 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class SingleImageViewController: UIViewController {
     
     // MARK: Properties
 
-    var image: UIImage! {
-        didSet {
-            guard isViewLoaded else { return }
-            imageView.image = image
-        }
-    }
+    var imageURL: URL!
+    
+    private var image = UIImage()
     
     lazy var zoomingTap: UITapGestureRecognizer = {
         let zoomingTap = UITapGestureRecognizer(target: self, action: #selector(handleZoomingTap))
@@ -59,10 +57,7 @@ final class SingleImageViewController: UIViewController {
         
         setupViews()
         
-        imageView.image = image
-        imageView.frame.size = image.size
-        
-        configurateFor(imageSize: image.size)
+        setFullImage()
     }
     
     override func viewWillLayoutSubviews() {
@@ -70,6 +65,31 @@ final class SingleImageViewController: UIViewController {
     }
     
     // MARK: Methods
+    
+    private func setFullImage() {
+        UIBlockingProgressHUD.show()
+        imageView.kf.setImage(with: imageURL) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let value):
+                self.image = value.image
+                self.imageView.frame.size = image.size
+                self.configurateFor(imageSize: image.size)
+            case .failure(let error):
+                print("Error \(error)")
+                let alertPresenter = AlertPresenter(delegate: self)
+                let actionOk = UIAlertAction(title: "Повторить", style: .default) { [weak self] _ in
+                    self?.setFullImage()
+                }
+                let actionNo = UIAlertAction(title: "Не надо", style: .default)
+                alertPresenter.presentTwoButtonsAlert(
+                    title: "Что-то пошло не так(",
+                    message: "Попробовать еще раз?",
+                    actionOk: actionOk, actionNo: actionNo)
+            }
+            UIBlockingProgressHUD.dismiss()
+        }
+    }
     
     private func configScrollView() {
         scrollView = UIScrollView(frame: view.bounds)
@@ -176,7 +196,8 @@ final class SingleImageViewController: UIViewController {
     }
     
     @objc private func buttonShareTapped() {
-        guard let image = image else { return }
+//        guard let image = image else { return }
+        print(image)
         let activityView = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         present(activityView, animated: true)
     }

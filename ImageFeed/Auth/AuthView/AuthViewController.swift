@@ -69,7 +69,7 @@ extension AuthViewController: WebViewControllerDelegate {
             case .failure(let error):
                 print("failure with error - \(error)")
                 let alertPresenter = AlertPresenter(delegate: self)
-                alertPresenter.presentPresentNetworkErrorAlert(
+                alertPresenter.presentNetworkErrorAlert(
                     title: "Что-то пошло не так(",
                     message: "Не удалось войти в систему",
                     buttonTitle: "Ok")
