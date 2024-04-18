@@ -82,8 +82,14 @@ final class ImagesListCell: UITableViewCell {
         else { return }
         
         cell.cellImage.kf.indicatorType = .activity
-        cell.cellImage.kf.setImage(with: photo.thumbImageURL, placeholder: UIImage(named: "PlaceholderCellImage")) { _ in
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+        cell.cellImage.kf.setImage(with: photo.thumbImageURL, placeholder: UIImage(named: "PlaceholderCellImage")) { result in
+            switch result {
+            case .failure(let error):
+                cell.cellImage.image = UIImage(named: "PlaceholderCellImage")
+            case .success(_):
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+            
         }
         cell.cellLikeButton.addTarget(self, action: #selector(buttonLikeTapped), for: .touchUpInside)
         cell.cellDataLabel.text = photo.createdAt
