@@ -48,7 +48,12 @@ final class AuthViewController: UIViewController {
     
     @objc private func goToWebView() {
         let webView = WebViewController()
+        let webViewPresenter = WebViewPresenter()
+        
+        webViewPresenter.view = webView
+        webView.presenter = webViewPresenter
         webView.delegate = self
+        
         navigationController?.pushViewController(webView, animated: true)
     }
 }

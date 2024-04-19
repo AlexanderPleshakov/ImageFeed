@@ -8,9 +8,10 @@
 import UIKit
 import WebKit
 
-final class WebViewController: UIViewController {
+final class WebViewController: UIViewController, WebViewControllerProtocol {
     // MARK: Properties
     
+    var presenter: WebViewPresenterProtocol?
     weak var delegate: WebViewControllerDelegate!
     private var estimatedProgressObservation: NSKeyValueObservation?
     
