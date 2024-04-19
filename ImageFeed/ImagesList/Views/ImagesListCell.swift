@@ -86,6 +86,7 @@ final class ImagesListCell: UITableViewCell {
             switch result {
             case .failure(let error):
                 cell.cellImage.image = UIImage(named: "PlaceholderCellImage")
+                print(error)
             case .success(_):
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
