@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol WebViewControllerProtocol {
+protocol WebViewControllerProtocol: AnyObject {
     var presenter: WebViewPresenterProtocol? {get set}
 }
