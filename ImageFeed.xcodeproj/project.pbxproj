@@ -159,6 +159,8 @@
 		1609F9062BA4F3B50022AA13 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				16A47F702BD3113A0085D247 /* Protocols */,
+				16A47F6A2BD30C930085D247 /* AuthHelper.swift */,
 				16A560352BA5059C00AD37C8 /* OAuth2TokenStorage.swift */,
 				1609F8FF2BA4DC320022AA13 /* OAuth2Service.swift */,
 			);
@@ -168,6 +170,7 @@
 		1609F9072BA4F3E90022AA13 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				16A47F6E2BD30E910085D247 /* AuthConfiguration.swift */,
 				1609F9042BA4F00C0022AA13 /* OAuthTokenResponseBody.swift */,
 			);
 			path = Models;
@@ -232,9 +235,6 @@
 				168799852BAB85B300154C8A /* WebView */,
 				1609F9072BA4F3E90022AA13 /* Models */,
 				1609F9062BA4F3B50022AA13 /* Services */,
-				16A47F6A2BD30C930085D247 /* AuthHelper.swift */,
-				16A47F6C2BD30CA50085D247 /* AuthHelperProtocol.swift */,
-				16A47F6E2BD30E910085D247 /* AuthConfiguration.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -296,6 +296,14 @@
 				16B4CB3C2B9E78C700775EAF /* WebViewControllerDelegate.swift */,
 				16A47F632BD2B8A40085D247 /* WebViewControllerProtocol.swift */,
 				16A47F672BD2B90D0085D247 /* WebViewPresenterProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		16A47F702BD3113A0085D247 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				16A47F6C2BD30CA50085D247 /* AuthHelperProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
