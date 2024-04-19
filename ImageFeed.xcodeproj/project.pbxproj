@@ -148,10 +148,9 @@
 		1609F9032BA4EBAD0022AA13 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				160960F42BB390E8004E4973 /* UIBlockingProgressHUD.swift */,
-				1674D1822B9E10870063CBEA /* Constants.swift */,
-				1609F9012BA4EBA70022AA13 /* URLSession+data.swift */,
-				16AC60BC2BB754AF00CD04FA /* AlertPresenter.swift */,
+				16A47F712BD311B60085D247 /* Views */,
+				16A47F722BD311C50085D247 /* Storage */,
+				16A47F732BD311D10085D247 /* Extensions */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -306,6 +305,31 @@
 				16A47F6C2BD30CA50085D247 /* AuthHelperProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		16A47F712BD311B60085D247 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				16AC60BC2BB754AF00CD04FA /* AlertPresenter.swift */,
+				160960F42BB390E8004E4973 /* UIBlockingProgressHUD.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		16A47F722BD311C50085D247 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				1674D1822B9E10870063CBEA /* Constants.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		16A47F732BD311D10085D247 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1609F9012BA4EBA70022AA13 /* URLSession+data.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
