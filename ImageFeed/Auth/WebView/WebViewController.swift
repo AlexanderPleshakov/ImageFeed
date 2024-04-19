@@ -47,7 +47,7 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
              changeHandler: { [weak self] _, _ in
                  guard let self = self else { return }
                  
-                 self.updateProgress()
+                 self.presenter?.updateProgressValue(webView.estimatedProgress)
              })
     }
     
@@ -58,13 +58,16 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
         webView.navigationDelegate = self
     }
 
-    private func updateProgress() {
-        progressView.progress = Float(webView.estimatedProgress)
-        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
-    }
-    
     func load(request: URLRequest) {
         webView.load(request)
+    }
+    
+    func setProgressValue(_ newValue: Float) {
+        progressView.progress = newValue
+    }
+    
+    func setProgressHidden(_ isHidden: Bool) {
+        progressView.isHidden = isHidden
     }
     
     // MARK: Actions
