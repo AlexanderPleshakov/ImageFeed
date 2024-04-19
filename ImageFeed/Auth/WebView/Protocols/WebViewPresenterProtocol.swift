@@ -11,4 +11,5 @@ protocol WebViewPresenterProtocol {
     var view: WebViewControllerProtocol? { get set }
     func viewDidLoad()
     func updateProgressValue(_ value: Double)
+    func code(from url: URL) -> String?
 }
