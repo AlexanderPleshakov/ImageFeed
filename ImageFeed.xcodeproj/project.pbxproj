@@ -39,6 +39,9 @@
 		16A47F642BD2B8A40085D247 /* WebViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A47F632BD2B8A40085D247 /* WebViewControllerProtocol.swift */; };
 		16A47F662BD2B8E00085D247 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A47F652BD2B8E00085D247 /* WebViewPresenter.swift */; };
 		16A47F682BD2B90D0085D247 /* WebViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A47F672BD2B90D0085D247 /* WebViewPresenterProtocol.swift */; };
+		16A47F6B2BD30C930085D247 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A47F6A2BD30C930085D247 /* AuthHelper.swift */; };
+		16A47F6D2BD30CA50085D247 /* AuthHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A47F6C2BD30CA50085D247 /* AuthHelperProtocol.swift */; };
+		16A47F6F2BD30E910085D247 /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A47F6E2BD30E910085D247 /* AuthConfiguration.swift */; };
 		16A560362BA5059C00AD37C8 /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A560352BA5059C00AD37C8 /* OAuth2TokenStorage.swift */; };
 		16AC60B92BB6DAA100CD04FA /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC60B82BB6DAA100CD04FA /* ProfileImageService.swift */; };
 		16AC60BB2BB6DAD200CD04FA /* UserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC60BA2BB6DAD100CD04FA /* UserResult.swift */; };
@@ -80,6 +83,9 @@
 		16A47F632BD2B8A40085D247 /* WebViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerProtocol.swift; sourceTree = "<group>"; };
 		16A47F652BD2B8E00085D247 /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
 		16A47F672BD2B90D0085D247 /* WebViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterProtocol.swift; sourceTree = "<group>"; };
+		16A47F6A2BD30C930085D247 /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
+		16A47F6C2BD30CA50085D247 /* AuthHelperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelperProtocol.swift; sourceTree = "<group>"; };
+		16A47F6E2BD30E910085D247 /* AuthConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
 		16A560352BA5059C00AD37C8 /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
 		16AC60B82BB6DAA100CD04FA /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		16AC60BA2BB6DAD100CD04FA /* UserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResult.swift; sourceTree = "<group>"; };
@@ -226,6 +232,9 @@
 				168799852BAB85B300154C8A /* WebView */,
 				1609F9072BA4F3E90022AA13 /* Models */,
 				1609F9062BA4F3B50022AA13 /* Services */,
+				16A47F6A2BD30C930085D247 /* AuthHelper.swift */,
+				16A47F6C2BD30CA50085D247 /* AuthHelperProtocol.swift */,
+				16A47F6E2BD30E910085D247 /* AuthConfiguration.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -382,7 +391,10 @@
 				1628CA222B80DF4F001F175C /* ProfileViewController.swift in Sources */,
 				16A47F642BD2B8A40085D247 /* WebViewControllerProtocol.swift in Sources */,
 				16A47F662BD2B8E00085D247 /* WebViewPresenter.swift in Sources */,
+				16A47F6D2BD30CA50085D247 /* AuthHelperProtocol.swift in Sources */,
 				1609F9052BA4F00C0022AA13 /* OAuthTokenResponseBody.swift in Sources */,
+				16A47F6F2BD30E910085D247 /* AuthConfiguration.swift in Sources */,
+				16A47F6B2BD30C930085D247 /* AuthHelper.swift in Sources */,
 				16A47F682BD2B90D0085D247 /* WebViewPresenterProtocol.swift in Sources */,
 				1602D4512BBF580C001C3B64 /* PhotoResult.swift in Sources */,
 				16A560362BA5059C00AD37C8 /* OAuth2TokenStorage.swift in Sources */,
