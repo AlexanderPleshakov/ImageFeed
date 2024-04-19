@@ -9,4 +9,5 @@ import Foundation
 
 protocol WebViewPresenterProtocol {
     var view: WebViewControllerProtocol? { get set }
+    func viewDidLoad()
 }

@@ -233,11 +233,9 @@
 		168799852BAB85B300154C8A /* WebView */ = {
 			isa = PBXGroup;
 			children = (
+				16A47F692BD2BEA60085D247 /* Protocols */,
 				1674D1872B9E2C100063CBEA /* WebViewController.swift */,
-				16B4CB3C2B9E78C700775EAF /* WebViewControllerDelegate.swift */,
-				16A47F632BD2B8A40085D247 /* WebViewControllerProtocol.swift */,
 				16A47F652BD2B8E00085D247 /* WebViewPresenter.swift */,
-				16A47F672BD2B90D0085D247 /* WebViewPresenterProtocol.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -281,6 +279,16 @@
 				163EA6152B76D62B002B65F6 /* Resources */,
 			);
 			path = ImageFeed;
+			sourceTree = "<group>";
+		};
+		16A47F692BD2BEA60085D247 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				16B4CB3C2B9E78C700775EAF /* WebViewControllerDelegate.swift */,
+				16A47F632BD2B8A40085D247 /* WebViewControllerProtocol.swift */,
+				16A47F672BD2B90D0085D247 /* WebViewPresenterProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
