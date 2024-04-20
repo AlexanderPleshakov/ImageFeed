@@ -37,4 +37,16 @@ final class WebViewTests: XCTestCase {
         // then
         XCTAssertTrue(viewController.loadIsCalled)
     }
+    
+    func testShouldHideProgress() {
+        // given
+        let authHelper = AuthHelperDummy()
+        let presenter = WebViewPresenter(authHelper: authHelper)
+        
+        // when
+        let shouldHideProgress = presenter.shouldHideProgress(for: 1)
+        
+        // then
+        XCTAssertTrue(shouldHideProgress)
+    }
 }
