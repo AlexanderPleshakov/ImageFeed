@@ -69,12 +69,6 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
     func setProgressHidden(_ isHidden: Bool) {
         progressView.isHidden = isHidden
     }
-    
-    // MARK: Actions
-    
-    @IBAction private func buttonBackTapped() {
-        delegate.webViewControllerDidCancel(self)
-    }
 }
 
 // MARK: WKNavigationDelegate
