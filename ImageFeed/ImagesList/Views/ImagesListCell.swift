@@ -84,9 +84,8 @@ final class ImagesListCell: UITableViewCell {
         cell.cellImage.kf.indicatorType = .activity
         cell.cellImage.kf.setImage(with: photo.thumbImageURL, placeholder: UIImage(named: "PlaceholderCellImage")) { result in
             switch result {
-            case .failure(let error):
+            case .failure(_):
                 cell.cellImage.image = UIImage(named: "PlaceholderCellImage")
-                print(error)
             case .success(_):
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
