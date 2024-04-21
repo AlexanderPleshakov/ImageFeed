@@ -66,4 +66,25 @@ final class WebViewTests: XCTestCase {
         XCTAssertEqual(urlString?.contains("code"), true)
         XCTAssertEqual(urlString?.contains(configuration.accessScope), true)
     }
+    
+    func testCodeFromURL() {
+        // given
+        var components = URLComponents(string: "https://unsplash.com/oauth/authorize/native")
+        components?.queryItems = [URLQueryItem(name: "code", value: "test code")]
+        let url = components?.url
+        
+        let authHelper = AuthHelper()
+        
+        // when
+        var code: String = ""
+        if let url = url {
+            code = authHelper.code(from: url) ?? ""
+        } else {
+            XCTFail("url is nil")
+        }
+        
+        // then
+        XCTAssertEqual(code, "test code")
+        
+    }
 }
