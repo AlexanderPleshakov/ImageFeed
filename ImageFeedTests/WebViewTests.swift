@@ -49,4 +49,21 @@ final class WebViewTests: XCTestCase {
         // then
         XCTAssertTrue(shouldHideProgress)
     }
+    
+    func testAuthHelperAuthURL() {
+        //given
+        let configuration = AuthConfiguration.standard
+        let authHelper = AuthHelper(configuration: configuration)
+        
+        //when
+        let url = authHelper.authURL()
+        let urlString = url?.absoluteString
+        
+        //then
+        XCTAssertEqual(urlString?.contains(configuration.authURLString), true)
+        XCTAssertEqual(urlString?.contains(configuration.accessKey), true)
+        XCTAssertEqual(urlString?.contains(configuration.redirectURI), true)
+        XCTAssertEqual(urlString?.contains("code"), true)
+        XCTAssertEqual(urlString?.contains(configuration.accessScope), true)
+    }
 }
