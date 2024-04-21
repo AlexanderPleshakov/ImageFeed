@@ -25,11 +25,6 @@ final class ImagesListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setIsLiked(_ isLiked: Bool) {
-        let newImage = isLiked ? UIImage(named: "FavoritesActive") : UIImage(named: "FavoritesNoActive")
-        self.cellLikeButton.setImage(newImage, for: .normal)
-    }
-    
     //MARK: Properties
     
     static let reuseIdentifier = "ImageListCell"
@@ -71,6 +66,11 @@ final class ImagesListCell: UITableViewCell {
         super.prepareForReuse()
         
         cellImage.kf.cancelDownloadTask()
+    }
+    
+    func setIsLiked(_ isLiked: Bool) {
+        let newImage = isLiked ? UIImage(named: "FavoritesActive") : UIImage(named: "FavoritesNoActive")
+        self.cellLikeButton.setImage(newImage, for: .normal)
     }
     
     func configCell(in tableView: UITableView, for cell: ImagesListCell, with indexPath: IndexPath, photo: Photo) {
