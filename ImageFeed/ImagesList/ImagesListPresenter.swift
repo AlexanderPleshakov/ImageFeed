@@ -12,6 +12,22 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     private let imagesListService = ImagesListService.shared
     private var photos = [Photo]()
     
+    func viewDidLoad() {
+        NotificationCenter.default.addObserver(
+            forName: ImagesListService.didChangeNotification,
+            object: nil,
+            queue: .main) { [weak self] _ in
+                guard let self = self else { return }
+                self.view?.updateTableViewAnimated()
+        }
+        
+        if getPhotosCount() == 0 {
+            view?.updateTableViewAnimated()
+        }
+        
+        nextPage()
+    }
+    
     func getPhotosCount() -> Int {
         photos.count
     }

@@ -39,19 +39,7 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
         super.viewDidLoad()
         
         configure()
-        
-        NotificationCenter.default.addObserver(
-            forName: ImagesListService.didChangeNotification,
-            object: nil,
-            queue: .main) { [weak self] _ in
-                guard let self = self else { return }
-                self.updateTableViewAnimated()
-        }
-        if presenter.getPhotosCount() == 0 {
-            updateTableViewAnimated()
-        }
-        
-        presenter.nextPage()
+        presenter.viewDidLoad()
     }
     
     // MARK: Functions
