@@ -39,7 +39,12 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
         super.viewDidLoad()
         
         configure()
-        presenter.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        presenter.viewDidAppear()
     }
     
     // MARK: Functions
