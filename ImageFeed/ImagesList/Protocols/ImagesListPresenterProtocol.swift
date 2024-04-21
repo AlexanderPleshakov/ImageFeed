@@ -15,5 +15,5 @@ protocol ImagesListPresenterProtocol {
     func nextPage()
     func shouldGetNextPage(for index: Int)
     func changeLike(at index: Int, _ completion: @escaping (Result<Bool, Error>) -> Void)
-    func viewDidAppear()
+    func viewDidLoad()
 }
