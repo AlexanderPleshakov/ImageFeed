@@ -46,7 +46,6 @@
 		16A47F822BD462DF0085D247 /* WebViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A47F812BD462DF0085D247 /* WebViewPresenterSpy.swift */; };
 		16A47F842BD465F10085D247 /* WebViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A47F832BD465F10085D247 /* WebViewControllerSpy.swift */; };
 		16A47F862BD467DB0085D247 /* AuthHelperDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A47F852BD467DB0085D247 /* AuthHelperDummy.swift */; };
-		16A47F882BD4699C0085D247 /* WebViewPresenterFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A47F872BD4699C0085D247 /* WebViewPresenterFake.swift */; };
 		16A47F8A2BD46D460085D247 /* AuthHelperFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A47F892BD46D460085D247 /* AuthHelperFake.swift */; };
 		16A560362BA5059C00AD37C8 /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A560352BA5059C00AD37C8 /* OAuth2TokenStorage.swift */; };
 		16AC60B92BB6DAA100CD04FA /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC60B82BB6DAA100CD04FA /* ProfileImageService.swift */; };
@@ -107,7 +106,6 @@
 		16A47F812BD462DF0085D247 /* WebViewPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterSpy.swift; sourceTree = "<group>"; };
 		16A47F832BD465F10085D247 /* WebViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerSpy.swift; sourceTree = "<group>"; };
 		16A47F852BD467DB0085D247 /* AuthHelperDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelperDummy.swift; sourceTree = "<group>"; };
-		16A47F872BD4699C0085D247 /* WebViewPresenterFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterFake.swift; sourceTree = "<group>"; };
 		16A47F892BD46D460085D247 /* AuthHelperFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelperFake.swift; sourceTree = "<group>"; };
 		16A560352BA5059C00AD37C8 /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
 		16AC60B82BB6DAA100CD04FA /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
@@ -203,6 +201,18 @@
 				1609F9042BA4F00C0022AA13 /* OAuthTokenResponseBody.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		161876D02BD5231600DC5DB5 /* WebViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				16A47F7A2BD45F860085D247 /* WebViewTests.swift */,
+				16A47F812BD462DF0085D247 /* WebViewPresenterSpy.swift */,
+				16A47F832BD465F10085D247 /* WebViewControllerSpy.swift */,
+				16A47F852BD467DB0085D247 /* AuthHelperDummy.swift */,
+				16A47F892BD46D460085D247 /* AuthHelperFake.swift */,
+			);
+			path = WebViewTests;
 			sourceTree = "<group>";
 		};
 		1628CA232B80DF95001F175C /* Profile */ = {
@@ -367,12 +377,7 @@
 		16A47F792BD45F860085D247 /* ImageFeedTests */ = {
 			isa = PBXGroup;
 			children = (
-				16A47F7A2BD45F860085D247 /* WebViewTests.swift */,
-				16A47F812BD462DF0085D247 /* WebViewPresenterSpy.swift */,
-				16A47F872BD4699C0085D247 /* WebViewPresenterFake.swift */,
-				16A47F832BD465F10085D247 /* WebViewControllerSpy.swift */,
-				16A47F852BD467DB0085D247 /* AuthHelperDummy.swift */,
-				16A47F892BD46D460085D247 /* AuthHelperFake.swift */,
+				161876D02BD5231600DC5DB5 /* WebViewTests */,
 			);
 			path = ImageFeedTests;
 			sourceTree = "<group>";
@@ -532,7 +537,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				16A47F8A2BD46D460085D247 /* AuthHelperFake.swift in Sources */,
-				16A47F882BD4699C0085D247 /* WebViewPresenterFake.swift in Sources */,
 				16A47F7B2BD45F860085D247 /* WebViewTests.swift in Sources */,
 				16A47F842BD465F10085D247 /* WebViewControllerSpy.swift in Sources */,
 				16A47F862BD467DB0085D247 /* AuthHelperDummy.swift in Sources */,
