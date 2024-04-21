@@ -40,6 +40,7 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     func changeLike(at index: Int, _ completion: @escaping (Result<Bool, any Error>) -> Void) {
         let photo = photos[index]
         
+        view?.showProgressHUD()
         imagesListService.changeLike(photoId: photo.id, isLiked: photo.isLiked) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -50,7 +51,6 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
                 print(error)
                 completion(.failure(error))
             }
-           // UIBlockingProgressHUD.dismiss()
         }
     }
 }

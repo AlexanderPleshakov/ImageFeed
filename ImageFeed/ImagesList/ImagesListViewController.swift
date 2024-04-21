@@ -56,7 +56,7 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
     
     // MARK: Functions
     
-    private func updateTableViewAnimated() {
+    func updateTableViewAnimated() {
         let (oldCount, newCount) = presenter.updatePhotosAndGetCounts()
         
         tableView.performBatchUpdates {
@@ -65,7 +65,14 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
             }
             tableView.insertRows(at: indexPaths, with: .automatic)
         } completion: { _ in }
-
+    }
+    
+    func showProgressHUD() {
+        UIBlockingProgressHUD.show()
+    }
+    
+    func dismissProgressHUD() {
+        UIBlockingProgressHUD.dismiss()
     }
     
     private func configure() {
@@ -140,10 +147,11 @@ extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         
-        presenter.changeLike(at: indexPath.row) { result in
+        presenter.changeLike(at: indexPath.row) { [weak self] result in
             switch result {
             case .success(let isLiked):
                 cell.setIsLiked(isLiked)
+                self?.dismissProgressHUD()
             case .failure(let error):
                 print(error)
             }
