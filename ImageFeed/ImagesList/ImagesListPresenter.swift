@@ -12,7 +12,7 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     private let imagesListService = ImagesListService.shared
     private var photos = [Photo]()
     
-    func photosCount() -> Int {
+    func getPhotosCount() -> Int {
         photos.count
     }
     
@@ -21,21 +21,36 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     }
     
     func updatePhotosAndGetCounts() -> (Int, Int) {
-        let oldCount = photosCount()
+        let oldCount = getPhotosCount()
         photos = imagesListService.photos
-        let newCount = photosCount()
+        let newCount = getPhotosCount()
         return (oldCount, newCount)
     }
     
     func nextPage() {
-        
+        imagesListService.fetchPhotosNextPage()
     }
     
     func shouldGetNextPage(for index: Int) {
-        <#code#>
+        if index == getPhotosCount() - 1 {
+            imagesListService.fetchPhotosNextPage()
+        }
     }
     
     func changeLike(at index: Int, _ completion: @escaping (Result<Bool, any Error>) -> Void) {
-        <#code#>
+        let photo = photos[index]
+        
+        imagesListService.changeLike(photoId: photo.id, isLiked: photo.isLiked) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let newPhoto):
+                self.photos[index] = newPhoto
+                completion(.success(newPhoto.isLiked))
+            case .failure(let error):
+                print(error)
+                completion(.failure(error))
+            }
+           // UIBlockingProgressHUD.dismiss()
+        }
     }
 }

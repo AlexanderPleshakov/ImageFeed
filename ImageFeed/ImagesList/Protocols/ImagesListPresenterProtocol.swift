@@ -9,7 +9,7 @@ import Foundation
 
 protocol ImagesListPresenterProtocol {
     var view: ImagesListViewControllerProtocol? { get set }
-    func photosCount() -> Int
+    func getPhotosCount() -> Int
     func getPhoto(at index: Int) -> Photo
     func updatePhotosAndGetCounts() -> (Int, Int)
     func nextPage()

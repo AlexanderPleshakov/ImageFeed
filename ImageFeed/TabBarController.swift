@@ -16,7 +16,9 @@ final class TabBarController: UITabBarController {
         tabBar.barTintColor = UIColor(named: "YP Black")
         tabBar.isTranslucent = false
         
-        let imagesListViewController = ImagesListViewController()
+        let presenter = ImagesListPresenter()
+        let imagesListViewController = ImagesListViewController(presenter: presenter)
+        presenter.view = imagesListViewController
         let profileViewController = ProfileViewController()
         
         profileViewController.tabBarItem = UITabBarItem(
