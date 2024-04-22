@@ -19,6 +19,7 @@ final class ImagesListPresenterSpy: ImagesListPresenterProtocol {
     var photos = [Photo]()
     
     var isViewDidLoad = false
+    var isUpdatePhotosCalled = false
     
     func getPhotosCount() -> Int {
         return 0
@@ -29,6 +30,7 @@ final class ImagesListPresenterSpy: ImagesListPresenterProtocol {
     }
     
     func updatePhotosAndGetCounts() -> (Int, Int) {
+        isUpdatePhotosCalled = true
         return (0, 0)
     }
     

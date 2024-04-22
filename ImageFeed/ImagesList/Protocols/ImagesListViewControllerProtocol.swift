@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol ImagesListViewControllerProtocol: NSObject {
+public protocol ImagesListViewControllerProtocol: AnyObject {
     func showProgressHUD()
     func dismissProgressHUD()
     func updateTableViewAnimated()

@@ -55,4 +55,21 @@ final class ImagesListTests: XCTestCase {
         // then
         XCTAssertTrue(presenter.isViewDidLoad)
     }
+    
+    func testViewControllerCallsUpdatePhotos() {
+        // given
+        let presenter = ImagesListPresenterSpy()
+        let viewController = ImagesListViewController(presenter: presenter)
+        presenter.view = viewController
+        
+        // when
+        viewController.updateTableViewAnimated()
+        
+        // then
+        XCTAssertTrue(presenter.isUpdatePhotosCalled)
+    }
+    
+    func testShowingProgressHUD() {
+        
+    }
 }
