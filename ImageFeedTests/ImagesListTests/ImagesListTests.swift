@@ -70,6 +70,15 @@ final class ImagesListTests: XCTestCase {
     }
     
     func testShowingProgressHUD() {
+        // given
+        let presenter = ImagesListPresenterStub()
+        let viewController = ImagesListViewControllerSpy()
+        presenter.view = viewController
         
+        // when
+        presenter.changeLike(at: 0) { _ in }
+        
+        // then
+        XCTAssertTrue(viewController.isShowedProgressHUD)
     }
 }
