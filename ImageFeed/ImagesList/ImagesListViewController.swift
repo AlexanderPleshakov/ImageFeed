@@ -85,7 +85,7 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let singleImageViewController = SingleImageViewController()
-        let url = presenter.getPhoto(at: indexPath.row).largeImageURL
+        guard let url = presenter.getPhoto(at: indexPath.row)?.largeImageURL else { return }
         
         singleImageViewController.imageURL = url
         singleImageViewController.modalPresentationStyle = .fullScreen
@@ -96,7 +96,10 @@ extension ImagesListViewController: UITableViewDelegate {
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
         
-        let photo = presenter.getPhoto(at: indexPath.row)
+        guard let photo = presenter.getPhoto(at: indexPath.row) else {
+            return UIImage(named: "PlaceholderCellImage")?.size.height ?? 0
+        }
+        
         let imageWidth = photo.size.width
         let scale = imageViewWidth / imageWidth
         let cellHeight = photo.size.height * scale + imageInsets.top + imageInsets.bottom
@@ -122,9 +125,10 @@ extension ImagesListViewController: UITableViewDataSource {
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
-        let photo = presenter.getPhoto(at: indexPath.row)
         imageListCell.delegate = self
         imageListCell.selectionStyle = .none
+        
+        guard let photo = presenter.getPhoto(at: indexPath.row) else { return imageListCell}
         imageListCell.configCell(in: tableView, for: imageListCell, with: indexPath, photo: photo)
         
         return imageListCell

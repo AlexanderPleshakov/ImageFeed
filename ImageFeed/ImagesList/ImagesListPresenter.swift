@@ -32,8 +32,11 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
         photos.count
     }
     
-    func getPhoto(at index: Int) -> Photo {
-        photos[index]
+    func getPhoto(at index: Int) -> Photo? {
+        guard index <= photos.count - 1 else {
+            return nil
+        }
+        return photos[index]
     }
     
     func updatePhotosAndGetCounts() -> (Int, Int) {

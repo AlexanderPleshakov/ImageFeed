@@ -20,6 +20,17 @@ final class ImagesListTests: XCTestCase {
         XCTAssertEqual(count, 0)
     }
     
+    func testGetPhoto() {
+        // given
+        let presenter = ImagesListPresenter()
+        
+        // when
+        let photo = presenter.getPhoto(at: 1)
+        
+        // then
+        XCTAssertNil(photo)
+    }
+    
     func testViewControllerCallsViewDidLoad() {
         // given
         let presenter = ImagesListPresenterSpy()

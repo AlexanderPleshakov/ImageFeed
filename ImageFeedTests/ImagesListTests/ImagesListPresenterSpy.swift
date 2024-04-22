@@ -8,6 +8,12 @@
 import Foundation
 import ImageFeed
 
+//Photo(id: "0", size: CGSize.zero,
+//             createdAt: "", welcomeDescription: "",
+//             thumbImageURL: URL(string: "https:\\")!,
+//             largeImageURL: URL(string: "https:\\")!,
+//             isLiked: true)
+
 final class ImagesListPresenterSpy: ImagesListPresenterProtocol {
     var view: (any ImageFeed.ImagesListViewControllerProtocol)?
     var photos = [Photo]()
@@ -18,12 +24,8 @@ final class ImagesListPresenterSpy: ImagesListPresenterProtocol {
         return 0
     }
     
-    func getPhoto(at index: Int) -> Photo {
-        return Photo(id: "0", size: CGSize.zero,
-                     createdAt: "", welcomeDescription: "",
-                     thumbImageURL: URL(string: "https:\\")!,
-                     largeImageURL: URL(string: "https:\\")!,
-                     isLiked: true)
+    func getPhoto(at index: Int) -> Photo? {
+        return nil
     }
     
     func updatePhotosAndGetCounts() -> (Int, Int) {
