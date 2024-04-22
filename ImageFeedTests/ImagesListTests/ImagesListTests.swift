@@ -8,8 +8,28 @@
 import XCTest
 @testable import ImageFeed
 
-final class ImagesListTests: XCTestCase {
-    func someTest() {
+final class ImagesListTests: XCTestCase {    
+    func testGetPhotosCount() {
+        // given
+        let presenter = ImagesListPresenter()
         
+        // when
+        let count = presenter.getPhotosCount()
+        
+        // then
+        XCTAssertEqual(count, 0)
+    }
+    
+    func testViewControllerCallsViewDidLoad() {
+        // given
+        let presenter = ImagesListPresenterSpy()
+        let viewController = ImagesListViewController(presenter: presenter)
+        presenter.view = viewController
+        
+        // when
+        _ = viewController.view
+        
+        // then
+        XCTAssertTrue(presenter.isViewDidLoad)
     }
 }

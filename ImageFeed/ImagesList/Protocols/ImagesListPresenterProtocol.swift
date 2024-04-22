@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ImagesListPresenterProtocol {
+public protocol ImagesListPresenterProtocol {
     var view: ImagesListViewControllerProtocol? { get set }
     func getPhotosCount() -> Int
     func getPhoto(at index: Int) -> Photo
