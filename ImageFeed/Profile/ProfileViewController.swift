@@ -59,25 +59,12 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         return logoutButton
     }()
     
-    // Services
-    private let profileService = ProfileService.shared
-    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure(profile: profileService.profile)
-        
-        NotificationCenter.default.addObserver(
-            forName: ProfileImageService.didChangeNotification,
-            object: nil,
-            queue: .main,
-            using: { [weak self] _ in
-                guard let self = self else { return }
-                self.updateAvatar()
-            })
-        updateAvatar()
+        presenter?.viewDidLoad()
     }
     
     // MARK: Methods
@@ -97,23 +84,20 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         showLogoutAlert()
     }
     
-    private func updateAvatar() {
-        guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
-            let url = URL(string: profileImageURL)
-        else {
-            return
-        }
+    func updateAvatarImage() {
+        presenter?.updateAvatarURL()
+    }
+    
+    func setAvatar(url: URL) {
         avatarImageView.kf.setImage(
             with: url,
             placeholder: UIImage(named: "PlaceholderAvatar"))
     }
     
-    private func configure(profile: Profile?) {
+    func configure(for profile: Profile) {
         view.backgroundColor = UIColor(named: "YP Black")
         logoutButton.addTarget(self, action: #selector(buttonLogoutTapped), for: .touchUpInside)
         
-        guard let profile = profile else { return }
         setupSubviews(userName: profile.name, loginName: profile.loginName, bio: profile.bio)
     }
     
