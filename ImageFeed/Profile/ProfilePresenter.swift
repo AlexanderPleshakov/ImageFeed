@@ -17,7 +17,7 @@ final class ProfilePresenter: ProfilePresenterProtocol {
         logoutService.logout()
     }
     
-    func updateAvatarURL(){
+    func updateAvatar(){
         guard
             let profileImageURL = profileImageService.avatarURL,
             let url = URL(string: profileImageURL)

@@ -85,7 +85,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     }
     
     func updateAvatarImage() {
-        presenter?.updateAvatarURL()
+        presenter?.updateAvatar()
     }
     
     func setAvatar(url: URL) {

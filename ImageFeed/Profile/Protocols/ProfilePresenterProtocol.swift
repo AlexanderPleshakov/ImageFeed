@@ -11,6 +11,6 @@ protocol ProfilePresenterProtocol {
     var view: ProfileViewControllerProtocol? { get set }
     
     func doLogoutAction()
-    func updateAvatarURL()
+    func updateAvatar()
     func viewDidLoad()
 }
