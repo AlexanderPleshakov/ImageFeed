@@ -13,7 +13,7 @@ final class ProfileImageServiceStub: ProfileImageServiceProtocol {
     
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChangeStub")
     
-    var avatarURL: String?
+    var avatarURL: String? = "http://"
     
     func clearBeforeLogout() {
         

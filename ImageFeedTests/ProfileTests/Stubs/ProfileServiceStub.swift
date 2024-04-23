@@ -11,7 +11,7 @@ import ImageFeed
 final class ProfileServiceStub: ProfileServiceProtocol {
     static var shared: any ImageFeed.ProfileServiceProtocol = ProfileServiceStub()
     
-    var profile: ImageFeed.Profile?
+    var profile: ImageFeed.Profile? = Profile()
     
     func clearBeforeLogout() {
         
