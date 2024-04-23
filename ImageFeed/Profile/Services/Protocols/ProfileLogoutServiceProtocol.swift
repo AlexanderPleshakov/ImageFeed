@@ -8,5 +8,6 @@
 import Foundation
 
 protocol ProfileLogoutServiceProtocol {
-    
+    static var shared: ProfileLogoutServiceProtocol { get }
+    func logout()
 }
