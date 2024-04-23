@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ProfileServiceProtocol {
+public protocol ProfileServiceProtocol {
     static var shared: ProfileServiceProtocol { get }
     
     var profile: Profile? { get }

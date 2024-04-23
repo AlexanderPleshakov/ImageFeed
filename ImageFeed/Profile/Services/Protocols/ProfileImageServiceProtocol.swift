@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ProfileImageServiceProtocol {
+public protocol ProfileImageServiceProtocol {
     static var shared: ProfileImageServiceProtocol { get }
     static var didChangeNotification: Notification.Name { get }
     
