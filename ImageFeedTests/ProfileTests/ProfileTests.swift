@@ -56,4 +56,32 @@ final class ProfileTests: XCTestCase {
         // then
         XCTAssertTrue(viewController.isAvatarImageUpdated)
     }
+    
+    func testControllerCallsUpdateAvatar() {
+        // given
+        let sut = ProfileViewController()
+        let presenter = ProfilePresenterSpy()
+        sut.presenter = presenter
+        presenter.view = sut
+        
+        // when
+        sut.updateAvatarImage()
+        
+        // then
+        XCTAssertTrue(presenter.isAvatarUpdated)
+    }
+    
+    func testControllerCallsViewDidLoad() {
+        // given
+        let sut = ProfileViewController()
+        let presenter = ProfilePresenterSpy()
+        sut.presenter = presenter
+        presenter.view = sut
+        
+        // when
+        _ = sut.view
+        
+        // then
+        XCTAssertTrue(presenter.isViewDidLoad)
+    }
 }
