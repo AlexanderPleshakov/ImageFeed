@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ProfileViewControllerProtocol: AnyObject {
+public protocol ProfileViewControllerProtocol: AnyObject {
     var presenter: ProfilePresenterProtocol? { get set }
     
     func setAvatar(url: URL)
