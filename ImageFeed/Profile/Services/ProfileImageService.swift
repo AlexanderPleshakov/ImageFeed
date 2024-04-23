@@ -8,7 +8,7 @@
 import UIKit
 
 final class ProfileImageService: ProfileImageServiceProtocol {
-    static let shared = ProfileImageService()
+    static let shared: ProfileImageServiceProtocol = ProfileImageService()
     
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
