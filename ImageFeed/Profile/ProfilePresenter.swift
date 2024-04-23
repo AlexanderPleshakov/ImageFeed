@@ -9,9 +9,19 @@ import Foundation
 
 final class ProfilePresenter: ProfilePresenterProtocol {
     var view: ProfileViewControllerProtocol?
-    var logoutService = ProfileLogoutService.shared
-    var profileService = ProfileService.shared
-    var profileImageService = ProfileImageService.shared
+    private var logoutService: ProfileLogoutServiceProtocol
+    private var profileService: ProfileServiceProtocol
+    private var profileImageService: ProfileImageServiceProtocol
+    
+    init(view: ProfileViewControllerProtocol? = nil,
+         logoutService: ProfileLogoutServiceProtocol = ProfileLogoutService.shared,
+         profileService: ProfileServiceProtocol = ProfileService.shared,
+         profileImageService: ProfileImageServiceProtocol = ProfileImageService.shared) {
+        self.view = view
+        self.logoutService = logoutService
+        self.profileService = profileService
+        self.profileImageService = profileImageService
+    }
     
     func doLogoutAction() {
         logoutService.logout()
