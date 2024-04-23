@@ -8,9 +8,12 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
     
     // MARK: Properties
+    
+    var presenter: ProfilePresenterProtocol?
+    
     // For UI
     private let avatarImageView = {
         let avatarImage = UIImage(systemName: "person.crop.circle.fill")
@@ -58,7 +61,6 @@ final class ProfileViewController: UIViewController {
     
     // Services
     private let profileService = ProfileService.shared
-    private var profileImageObserver: NSObjectProtocol?
     
     // MARK: Life Cycle
     
@@ -67,7 +69,7 @@ final class ProfileViewController: UIViewController {
         
         configure(profile: profileService.profile)
         
-        profileImageObserver = NotificationCenter.default.addObserver(
+        NotificationCenter.default.addObserver(
             forName: ProfileImageService.didChangeNotification,
             object: nil,
             queue: .main,
@@ -80,17 +82,19 @@ final class ProfileViewController: UIViewController {
     
     // MARK: Methods
     
-    @objc private func buttonLogoutTapped() {
+    private func showLogoutAlert() {
         let alertPresenter = AlertPresenter(delegate: self)
-        let profileLogoutService = ProfileLogoutService.shared
-        let actionOk = UIAlertAction(title: "Да", style: .default) { _ in
-            profileLogoutService.logout()
+        let actionOk = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+            self?.presenter?.doLogoutAction()
         }
         let actionNo = UIAlertAction(title: "Нет", style: .default)
         alertPresenter.presentTwoButtonsAlert(title: "Пока, пока!",
                                               message: "Уверены, что хотите выйти?",
                                               actionOk: actionOk, actionNo: actionNo)
-        
+    }
+    
+    @objc private func buttonLogoutTapped() {
+        showLogoutAlert()
     }
     
     private func updateAvatar() {
