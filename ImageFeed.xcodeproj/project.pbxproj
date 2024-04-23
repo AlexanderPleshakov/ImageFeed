@@ -67,6 +67,9 @@
 		16C688B32BD8470500DA4D78 /* ProfileImageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688B22BD8470500DA4D78 /* ProfileImageServiceProtocol.swift */; };
 		16C688B52BD8471200DA4D78 /* ProfileServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688B42BD8471200DA4D78 /* ProfileServiceProtocol.swift */; };
 		16C688B72BD8472400DA4D78 /* ProfileLogoutServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688B62BD8472400DA4D78 /* ProfileLogoutServiceProtocol.swift */; };
+		16C688BA2BD84EEC00DA4D78 /* ProfileImageServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688B92BD84EEC00DA4D78 /* ProfileImageServiceStub.swift */; };
+		16C688BC2BD8502E00DA4D78 /* ProfileServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688BB2BD8502E00DA4D78 /* ProfileServiceStub.swift */; };
+		16C688BF2BD8517100DA4D78 /* ProfileLogoutServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688BE2BD8517100DA4D78 /* ProfileLogoutServiceStub.swift */; };
 		16E3FA0B2BC44C8400F07E46 /* ImagesListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3FA0A2BC44C8400F07E46 /* ImagesListCellDelegate.swift */; };
 		16E3FA0D2BC47DCE00F07E46 /* ProfileLogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3FA0C2BC47DCE00F07E46 /* ProfileLogoutService.swift */; };
 /* End PBXBuildFile section */
@@ -142,6 +145,9 @@
 		16C688B22BD8470500DA4D78 /* ProfileImageServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageServiceProtocol.swift; sourceTree = "<group>"; };
 		16C688B42BD8471200DA4D78 /* ProfileServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServiceProtocol.swift; sourceTree = "<group>"; };
 		16C688B62BD8472400DA4D78 /* ProfileLogoutServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutServiceProtocol.swift; sourceTree = "<group>"; };
+		16C688B92BD84EEC00DA4D78 /* ProfileImageServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageServiceStub.swift; sourceTree = "<group>"; };
+		16C688BB2BD8502E00DA4D78 /* ProfileServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServiceStub.swift; sourceTree = "<group>"; };
+		16C688BE2BD8517100DA4D78 /* ProfileLogoutServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutServiceStub.swift; sourceTree = "<group>"; };
 		16E3FA0A2BC44C8400F07E46 /* ImagesListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCellDelegate.swift; sourceTree = "<group>"; };
 		16E3FA0C2BC47DCE00F07E46 /* ProfileLogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -453,6 +459,7 @@
 			children = (
 				16C688AD2BD83D4100DA4D78 /* ProfileTests.swift */,
 				16C688B02BD83F6000DA4D78 /* ProfileViewControllerSpy.swift */,
+				16C688C02BD851B600DA4D78 /* Stubs */,
 			);
 			path = ProfileTests;
 			sourceTree = "<group>";
@@ -465,6 +472,16 @@
 				16C688B62BD8472400DA4D78 /* ProfileLogoutServiceProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		16C688C02BD851B600DA4D78 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				16C688B92BD84EEC00DA4D78 /* ProfileImageServiceStub.swift */,
+				16C688BB2BD8502E00DA4D78 /* ProfileServiceStub.swift */,
+				16C688BE2BD8517100DA4D78 /* ProfileLogoutServiceStub.swift */,
+			);
+			path = Stubs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -631,8 +648,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				16A47F8A2BD46D460085D247 /* AuthHelperFake.swift in Sources */,
+				16C688BF2BD8517100DA4D78 /* ProfileLogoutServiceStub.swift in Sources */,
 				16C688B12BD83F6000DA4D78 /* ProfileViewControllerSpy.swift in Sources */,
 				161876DC2BD6716000DC5DB5 /* ImagesListPresenterSpy.swift in Sources */,
+				16C688BC2BD8502E00DA4D78 /* ProfileServiceStub.swift in Sources */,
 				16A47F7B2BD45F860085D247 /* WebViewTests.swift in Sources */,
 				161876E02BD6C10300DC5DB5 /* ImagesListViewControllerSpy.swift in Sources */,
 				16A47F842BD465F10085D247 /* WebViewControllerSpy.swift in Sources */,
@@ -641,6 +660,7 @@
 				16A47F862BD467DB0085D247 /* AuthHelperDummy.swift in Sources */,
 				16A47F822BD462DF0085D247 /* WebViewPresenterSpy.swift in Sources */,
 				16C688AE2BD83D4100DA4D78 /* ProfileTests.swift in Sources */,
+				16C688BA2BD84EEC00DA4D78 /* ProfileImageServiceStub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
