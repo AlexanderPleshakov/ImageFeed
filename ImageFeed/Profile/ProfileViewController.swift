@@ -55,6 +55,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         let logoutImage = UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage()
         let logoutButton = UIButton.systemButton(with: logoutImage, target: nil, action: nil)
         logoutButton.tintColor = UIColor(named: "YP Red")
+        logoutButton.accessibilityIdentifier = "LogoutButton"
         
         return logoutButton
     }()

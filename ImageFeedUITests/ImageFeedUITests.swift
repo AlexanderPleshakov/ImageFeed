@@ -22,6 +22,16 @@ final class ImageFeedUITests: XCTestCase {
     override func tearDownWithError() throws {
         print(app.debugDescription)
     }
+    
+    private func dismissKeyboardIfPresent() {
+        if app.keyboards.element(boundBy: 0).exists {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                app.keyboards.buttons["Hide keyboard"].tap()
+            } else {
+                app.toolbars.buttons["Done"].tap()
+            }
+        }
+    }
 
     func testAuth() throws {
         app.buttons["Auth"].tap()
@@ -34,15 +44,17 @@ final class ImageFeedUITests: XCTestCase {
         XCTAssertTrue(loginTextField.waitForExistence(timeout: 5))
         
         loginTextField.tap()
-        loginTextField.typeText("")
-        webView.swipeUp()
+        loginTextField.typeText("email")
+        dismissKeyboardIfPresent()
+        //webView.swipeUp()
         
         let passwordTextField = webView.descendants(matching: .secureTextField).element
         XCTAssertTrue(passwordTextField.waitForExistence(timeout: 5))
         
         passwordTextField.tap()
-        passwordTextField.typeText("")
-        webView.swipeUp()
+        passwordTextField.typeText("password")
+        dismissKeyboardIfPresent()
+        //webView.swipeUp()
         
         webView.buttons["Login"].tap()
         
@@ -79,13 +91,25 @@ final class ImageFeedUITests: XCTestCase {
         
         let navBackButton = app.buttons["BackToImagesListButton"]
         navBackButton.tap()
+        
+        let cellAfterLike = tablesQuery.descendants(matching: .cell).element(boundBy: 1)
+        
+        XCTAssertTrue(cellAfterLike.waitForExistence(timeout: 5))
     }
     
     func testProfile() throws {
-        // Подождать, пока открывается и загружается экран ленты
-        // Перейти на экран профиля
-        // Проверить, что на нём отображаются ваши персональные данные
-        // Нажать кнопку логаута
-        // Проверить, что открылся экран авторизации
+        let tab = app.tabBars.buttons.element(boundBy: 1)
+        XCTAssertTrue(tab.waitForExistence(timeout: 5))
+        tab.tap()
+        
+        sleep(1)
+        
+        XCTAssertTrue(app.staticTexts["Александр Плешаков"].exists)
+        XCTAssertTrue(app.staticTexts["@alexanderpleshakov"].exists)
+        
+        app.buttons["LogoutButton"].tap()
+        app.alerts["TwoButtonsAlert"].scrollViews.otherElements.buttons["Да"].tap()
+        
+        XCTAssertTrue(app.buttons["Auth"].waitForExistence(timeout: 5))
     }
 }

@@ -28,6 +28,7 @@ final class AlertPresenter {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(actionOk)
         alert.addAction(actionNo)
+        alert.view.accessibilityIdentifier = "TwoButtonsAlert"
         delegate?.present(alert, animated: true)
     }
 }
