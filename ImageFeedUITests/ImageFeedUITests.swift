@@ -10,10 +10,12 @@ import XCTest
 
 final class ImageFeedUITests: XCTestCase {
     private let app = XCUIApplication()
+    
 
     override func setUpWithError() throws {
         continueAfterFailure = false
-        
+
+        app.launchArguments = ["testMode"]
         app.launch()
     }
 
@@ -22,11 +24,6 @@ final class ImageFeedUITests: XCTestCase {
     }
 
     func testAuth() throws {
-        // Нажать кнопку авторизации
-            // Подождать, пока экран авторизации открывается и загружается
-            // Ввести данные в форму
-            // Нажать кнопку логина
-            // Подождать, пока открывается экран ленты
         app.buttons["Auth"].tap()
         
         let webView = app.webViews["UnsplashWebView"]
@@ -47,8 +44,6 @@ final class ImageFeedUITests: XCTestCase {
         passwordTextField.typeText("")
         webView.swipeUp()
         
-        let loginButton = webView.descendants(matching: .button).element
-        
         webView.buttons["Login"].tap()
         
         let tablesQuery = app.tables
@@ -58,10 +53,39 @@ final class ImageFeedUITests: XCTestCase {
     }
     
     func testFeed() throws {
+        let tablesQuery = app.tables
         
+        let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
+        cell.swipeUp()
+        
+        sleep(2)
+        
+        let cellToLike = tablesQuery.descendants(matching: .cell).element(boundBy: 1)
+        
+        cellToLike.buttons["LikeButton"].tap()
+        sleep(1)
+        cellToLike.buttons["LikeButton"].tap()
+        
+        sleep(2)
+        
+        cellToLike.tap()
+        
+        sleep(2)
+        
+        let image = app.scrollViews.images.element(boundBy: 0)
+
+        image.pinch(withScale: 2, velocity: 1)
+        image.pinch(withScale: 0.5, velocity: -1)
+        
+        let navBackButton = app.buttons["BackToImagesListButton"]
+        navBackButton.tap()
     }
     
     func testProfile() throws {
-        
+        // Подождать, пока открывается и загружается экран ленты
+        // Перейти на экран профиля
+        // Проверить, что на нём отображаются ваши персональные данные
+        // Нажать кнопку логаута
+        // Проверить, что открылся экран авторизации
     }
 }

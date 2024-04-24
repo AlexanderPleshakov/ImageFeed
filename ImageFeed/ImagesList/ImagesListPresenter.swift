@@ -51,7 +51,8 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     }
     
     func shouldGetNextPage(for index: Int) {
-        if index == getPhotosCount() - 1 {
+        let testMode =  ProcessInfo.processInfo.arguments.contains("testMode")
+        if index == getPhotosCount() - 1 && !testMode {
             imagesListService.fetchPhotosNextPage()
         }
     }
