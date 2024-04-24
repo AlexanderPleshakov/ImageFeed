@@ -29,6 +29,8 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
         let webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.backgroundColor = .white
+        webView.accessibilityIdentifier = "UnsplashWebView"
+        
         return webView
     }()
     

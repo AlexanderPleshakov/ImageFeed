@@ -26,6 +26,7 @@ final class AuthViewController: UIViewController {
         button.setTitleColor(UIColor(named: "YP Black"), for: .normal)
         button.layer.cornerRadius = 16
         button.layer.masksToBounds = true
+        button.accessibilityIdentifier = "Auth"
         
         return button
     }()
