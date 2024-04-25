@@ -9,8 +9,14 @@ import Foundation
 
 final class ImagesListPresenter: ImagesListPresenterProtocol {
     weak var view: ImagesListViewControllerProtocol?
-    private let imagesListService = ImagesListService.shared
+    private let imagesListService: ImagesListServiceProtocol
     private var photos = [Photo]()
+    
+    init(view: ImagesListViewControllerProtocol? = nil,
+         imagesListService: ImagesListServiceProtocol = ImagesListService.shared) {
+        self.view = view
+        self.imagesListService = imagesListService
+    }
     
     func viewDidLoad() {
         NotificationCenter.default.addObserver(
