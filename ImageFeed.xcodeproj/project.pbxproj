@@ -270,8 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				16A47F7A2BD45F860085D247 /* WebViewTests.swift */,
-				16A47F812BD462DF0085D247 /* WebViewPresenterSpy.swift */,
-				16A47F832BD465F10085D247 /* WebViewControllerSpy.swift */,
+				16C688DE2BDA7B1100DA4D78 /* Spies */,
 				16A47F852BD467DB0085D247 /* AuthHelperDummy.swift */,
 				16A47F892BD46D460085D247 /* AuthHelperFake.swift */,
 			);
@@ -540,6 +539,15 @@
 				16C688D42BDA60C400DA4D78 /* ImagesListServiceStub.swift */,
 			);
 			path = Stubs;
+			sourceTree = "<group>";
+		};
+		16C688DE2BDA7B1100DA4D78 /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+				16A47F812BD462DF0085D247 /* WebViewPresenterSpy.swift */,
+				16A47F832BD465F10085D247 /* WebViewControllerSpy.swift */,
+			);
+			path = Spies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
