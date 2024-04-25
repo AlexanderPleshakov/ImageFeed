@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class ImagesListService {
+final class ImagesListService: ImagesListServiceProtocol {
     static let didChangeNotification = Notification.Name("ImagesListServiceDidChange")
-    static let shared = ImagesListService()
+    static let shared: ImagesListServiceProtocol = ImagesListService()
     
     private init() {}
     

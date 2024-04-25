@@ -72,6 +72,7 @@
 		16C688BF2BD8517100DA4D78 /* ProfileLogoutServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688BE2BD8517100DA4D78 /* ProfileLogoutServiceStub.swift */; };
 		16C688C22BD872F900DA4D78 /* ProfilePresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688C12BD872F900DA4D78 /* ProfilePresenterSpy.swift */; };
 		16C688CA2BD9332600DA4D78 /* ImageFeedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688C92BD9332600DA4D78 /* ImageFeedUITests.swift */; };
+		16C688D32BDA5E9100DA4D78 /* ImagesListServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688D22BDA5E9100DA4D78 /* ImagesListServiceProtocol.swift */; };
 		16E3FA0B2BC44C8400F07E46 /* ImagesListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3FA0A2BC44C8400F07E46 /* ImagesListCellDelegate.swift */; };
 		16E3FA0D2BC47DCE00F07E46 /* ProfileLogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3FA0C2BC47DCE00F07E46 /* ProfileLogoutService.swift */; };
 /* End PBXBuildFile section */
@@ -160,6 +161,7 @@
 		16C688C12BD872F900DA4D78 /* ProfilePresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterSpy.swift; sourceTree = "<group>"; };
 		16C688C72BD9332600DA4D78 /* ImageFeedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16C688C92BD9332600DA4D78 /* ImageFeedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFeedUITests.swift; sourceTree = "<group>"; };
+		16C688D22BDA5E9100DA4D78 /* ImagesListServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListServiceProtocol.swift; sourceTree = "<group>"; };
 		16E3FA0A2BC44C8400F07E46 /* ImagesListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCellDelegate.swift; sourceTree = "<group>"; };
 		16E3FA0C2BC47DCE00F07E46 /* ProfileLogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -213,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				1602D44B2BBF4F8E001C3B64 /* ImagesListService.swift */,
+				16C688D22BDA5E9100DA4D78 /* ImagesListServiceProtocol.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -666,6 +669,7 @@
 				1628CA222B80DF4F001F175C /* ProfileViewController.swift in Sources */,
 				16A47F642BD2B8A40085D247 /* WebViewControllerProtocol.swift in Sources */,
 				16A47F662BD2B8E00085D247 /* WebViewPresenter.swift in Sources */,
+				16C688D32BDA5E9100DA4D78 /* ImagesListServiceProtocol.swift in Sources */,
 				16A47F6D2BD30CA50085D247 /* AuthHelperProtocol.swift in Sources */,
 				161876D52BD5249E00DC5DB5 /* ImagesListPresenter.swift in Sources */,
 				161876E42BD6E24A00DC5DB5 /* ProfilePresenter.swift in Sources */,
