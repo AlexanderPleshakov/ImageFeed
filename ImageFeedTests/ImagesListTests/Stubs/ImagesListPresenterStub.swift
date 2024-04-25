@@ -9,7 +9,7 @@ import Foundation
 import ImageFeed
 
 final class ImagesListPresenterStub: ImagesListPresenterProtocol {
-    var view: (any ImageFeed.ImagesListViewControllerProtocol)?
+    weak var view: (any ImageFeed.ImagesListViewControllerProtocol)?
     var isLiked = false
     
     func getPhotosCount() -> Int {

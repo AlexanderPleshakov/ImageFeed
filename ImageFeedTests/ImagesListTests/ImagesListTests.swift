@@ -109,4 +109,17 @@ final class ImagesListTests: XCTestCase {
         XCTAssertTrue(viewController.isCalledUpdateTable)
     }
     
+    func testUpdatingPresenterPhotosCount() {
+        let service = ImagesListServiceStub()
+        let view = ImagesListViewControllerFake()
+        let sut = ImagesListPresenter(imagesListService: service)
+        sut.view = view
+        view.presenter = sut
+        
+        sut.viewDidLoad()
+        let count = sut.getPhotosCount()
+        
+        XCTAssertEqual(count, 2)
+    }
+    
 }
