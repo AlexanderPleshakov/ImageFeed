@@ -11,10 +11,10 @@ import XCTest
 final class ImagesListTests: XCTestCase {    
     func testGetPhotosCount() {
         // given
-        let presenter = ImagesListPresenter()
+        let sut = ImagesListPresenter()
         
         // when
-        let count = presenter.getPhotosCount()
+        let count = sut.getPhotosCount()
         
         // then
         XCTAssertEqual(count, 0)
@@ -22,21 +22,19 @@ final class ImagesListTests: XCTestCase {
     
     func testGetPhoto() {
         // given
-        let presenter = ImagesListPresenter()
+        let sut = ImagesListPresenter(view: nil, imagesListService: ImagesListServiceStub())
         
         // when
-        let photo = presenter.getPhoto(at: 1)
-        
-        // then
-        XCTAssertNil(photo)
+        let photo = sut.getPhoto(at: 0)
+        XCTAssertTrue(photo?.id == "0")
     }
     
     func testUpdatePhotosAndGetCounts() {
         // given
-        let presenter = ImagesListPresenter()
+        let sut = ImagesListPresenter(view: nil, imagesListService: ImagesListServiceStub())
         
         // when
-        let (new, old) = presenter.updatePhotosAndGetCounts()
+        let (new, old) = sut.updatePhotosAndGetCounts()
         
         // then
         XCTAssertEqual(new, 0)
@@ -81,4 +79,24 @@ final class ImagesListTests: XCTestCase {
         // then
         XCTAssertTrue(viewController.isShowedProgressHUD)
     }
+    
+    func testChangeLike() {
+        // given
+        let sut = ImagesListServiceStub()// ImagesListPresenter(view: nil, imagesListService: ImagesListServiceStub())
+        var isLike = false
+        
+        // when
+        sut.changeLike(photoId: "0", isLiked: isLike) { result in
+            switch result {
+            case .success(let photo):
+                isLike = photo.isLiked
+            case .failure(let error):
+                XCTFail()
+            }
+        }
+        
+        // then
+        XCTAssertTrue(isLike)
+    }
+    
 }
