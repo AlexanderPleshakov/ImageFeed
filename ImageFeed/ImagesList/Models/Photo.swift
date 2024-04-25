@@ -8,13 +8,13 @@
 import Foundation
 
 public struct Photo {
-    let id: String
-    let size: CGSize
-    let createdAt: String?
-    let welcomeDescription: String?
-    let thumbImageURL: URL
-    let largeImageURL: URL
-    let isLiked: Bool
+    public private(set) var id: String
+     var size: CGSize
+    var createdAt: String?
+    var welcomeDescription: String?
+    var thumbImageURL: URL
+    var largeImageURL: URL
+    private(set) var isLiked: Bool
     
     public init(id: String, size: CGSize, createdAt: String?, welcomeDescription: String?, thumbImageURL: URL, largeImageURL: URL, isLiked: Bool) {
         self.id = id
@@ -24,5 +24,9 @@ public struct Photo {
         self.thumbImageURL = thumbImageURL
         self.largeImageURL = largeImageURL
         self.isLiked = isLiked
+    }
+    
+    public mutating func duplicateAndChangeLike() {
+        isLiked = !isLiked
     }
 }
