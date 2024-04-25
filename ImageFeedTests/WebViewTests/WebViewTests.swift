@@ -11,13 +11,13 @@ import XCTest
 final class WebViewTests: XCTestCase {
     func testViewControllerCallsViewDidLoad() {
         // given
-        let viewController = WebViewController()
+        let sut = WebViewController()
         let presenter = WebViewPresenterSpy()
-        presenter.view = viewController
-        viewController.presenter = presenter
+        presenter.view = sut
+        sut.presenter = presenter
         
         // when
-        _ = viewController.view
+        _ = sut.view
         
         // then
         XCTAssertTrue(presenter.viewDidLoadCalled)
@@ -27,12 +27,12 @@ final class WebViewTests: XCTestCase {
         // given
         let viewController = WebViewControllerSpy()
         let authHelper = AuthHelperFake()
-        let presenter = WebViewPresenter(authHelper: authHelper)
-        viewController.presenter = presenter
-        presenter.view = viewController
+        let sut = WebViewPresenter(authHelper: authHelper)
+        viewController.presenter = sut
+        sut.view = viewController
         
         // when
-        presenter.viewDidLoad()
+        sut.viewDidLoad()
         
         // then
         XCTAssertTrue(viewController.loadIsCalled)
@@ -41,10 +41,10 @@ final class WebViewTests: XCTestCase {
     func testShouldHideProgress() {
         // given
         let authHelper = AuthHelperDummy()
-        let presenter = WebViewPresenter(authHelper: authHelper)
+        let sut = WebViewPresenter(authHelper: authHelper)
         
         // when
-        let shouldHideProgress = presenter.shouldHideProgress(for: 1)
+        let shouldHideProgress = sut.shouldHideProgress(for: 1)
         
         // then
         XCTAssertTrue(shouldHideProgress)
@@ -53,10 +53,10 @@ final class WebViewTests: XCTestCase {
     func testAuthHelperAuthURL() {
         //given
         let configuration = AuthConfiguration.standard
-        let authHelper = AuthHelper(configuration: configuration)
+        let sut = AuthHelper(configuration: configuration)
         
         //when
-        let url = authHelper.authURL()
+        let url = sut.authURL()
         let urlString = url?.absoluteString
         
         //then
@@ -73,12 +73,12 @@ final class WebViewTests: XCTestCase {
         components?.queryItems = [URLQueryItem(name: "code", value: "test code")]
         let url = components?.url
         
-        let authHelper = AuthHelper()
+        let sut = AuthHelper()
         
         // when
         var code: String = ""
         if let url = url {
-            code = authHelper.code(from: url) ?? ""
+            code = sut.code(from: url) ?? ""
         } else {
             XCTFail("url is nil")
         }
