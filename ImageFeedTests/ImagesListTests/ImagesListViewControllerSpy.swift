@@ -10,6 +10,7 @@ import ImageFeed
 
 final class ImagesListViewControllerSpy: ImagesListViewControllerProtocol {
     var isShowedProgressHUD = false
+    var isCalledUpdateTable = false
     
     func showProgressHUD() {
         isShowedProgressHUD = true
@@ -20,7 +21,7 @@ final class ImagesListViewControllerSpy: ImagesListViewControllerProtocol {
     }
     
     func updateTableViewAnimated() {
-        
+        isCalledUpdateTable = true
     }
     
     

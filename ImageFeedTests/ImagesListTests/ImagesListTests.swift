@@ -99,4 +99,14 @@ final class ImagesListTests: XCTestCase {
         XCTAssertTrue(isLike)
     }
     
+    func testViewDidLoadNotification() {
+        let viewController = ImagesListViewControllerSpy()
+        let sut = ImagesListPresenter(view: viewController, imagesListService: ImagesListServiceStub())
+        sut.view = viewController
+        
+        sut.viewDidLoad()
+        
+        XCTAssertTrue(viewController.isCalledUpdateTable)
+    }
+    
 }
