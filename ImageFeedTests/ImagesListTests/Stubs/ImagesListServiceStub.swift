@@ -18,7 +18,7 @@ final class ImagesListServiceStub: ImagesListServiceProtocol {
     
     
     func clearBeforeLogout() {
-        photos = []
+        photos = [Photo(id: "0", size: CGSize.zero, createdAt: nil, welcomeDescription: nil, thumbImageURL: URL(string: "http://")!, largeImageURL: URL(string: "http://")!, isLiked: false)]
     }
     
     func changeLike(photoId: String, isLiked: Bool, _ completion: @escaping (Result<ImageFeed.Photo, any Error>) -> Void) {

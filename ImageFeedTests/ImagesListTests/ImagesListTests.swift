@@ -22,23 +22,28 @@ final class ImagesListTests: XCTestCase {
     
     func testGetPhoto() {
         // given
-        let sut = ImagesListPresenter(view: nil, imagesListService: ImagesListServiceStub())
+        let service = ImagesListServiceStub()
+        service.clearBeforeLogout()
+        let sut = ImagesListPresenter(view: nil, imagesListService: service)
         
         // when
+        let (_, _) = sut.updatePhotosAndGetCounts()
         let photo = sut.getPhoto(at: 0)
         XCTAssertTrue(photo?.id == "0")
     }
     
     func testUpdatePhotosAndGetCounts() {
         // given
-        let sut = ImagesListPresenter(view: nil, imagesListService: ImagesListServiceStub())
+        let service = ImagesListServiceStub()
+        service.clearBeforeLogout()
+        let sut = ImagesListPresenter(view: nil, imagesListService: service)
         
         // when
-        let (new, old) = sut.updatePhotosAndGetCounts()
+        let (old, new) = sut.updatePhotosAndGetCounts()
         
         // then
-        XCTAssertEqual(new, 0)
         XCTAssertEqual(old, 0)
+        XCTAssertEqual(new, 1)
     }
     
     func testViewControllerCallsViewDidLoad() {
@@ -90,7 +95,7 @@ final class ImagesListTests: XCTestCase {
             switch result {
             case .success(let photo):
                 isLike = photo.isLiked
-            case .failure(let error):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -101,7 +106,9 @@ final class ImagesListTests: XCTestCase {
     
     func testViewDidLoadNotification() {
         let viewController = ImagesListViewControllerSpy()
-        let sut = ImagesListPresenter(view: viewController, imagesListService: ImagesListServiceStub())
+        let service = ImagesListServiceStub()
+        service.clearBeforeLogout()
+        let sut = ImagesListPresenter(view: viewController, imagesListService: service)
         sut.view = viewController
         
         sut.viewDidLoad()
@@ -111,6 +118,7 @@ final class ImagesListTests: XCTestCase {
     
     func testUpdatingPresenterPhotosCount() {
         let service = ImagesListServiceStub()
+        service.clearBeforeLogout()
         let view = ImagesListViewControllerFake()
         let sut = ImagesListPresenter(imagesListService: service)
         sut.view = view
@@ -120,6 +128,23 @@ final class ImagesListTests: XCTestCase {
         let count = sut.getPhotosCount()
         
         XCTAssertEqual(count, 2)
+    }
+    
+    func testShouldGetNextPage() {
+        let service = ImagesListServiceStub()
+        service.clearBeforeLogout()
+        let view = ImagesListViewControllerFake()
+        let sut = ImagesListPresenter(imagesListService: service)
+        sut.view = view
+        view.presenter = sut
+        
+        sut.viewDidLoad()
+        
+        let startCount = sut.getPhotosCount()
+        sut.shouldGetNextPage(for: 1)
+        let newCount = sut.getPhotosCount()
+        
+        XCTAssertEqual(startCount + 1, newCount)
     }
     
 }

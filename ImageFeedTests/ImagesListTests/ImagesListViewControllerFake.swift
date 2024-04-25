@@ -19,7 +19,7 @@ final class ImagesListViewControllerFake: ImagesListViewControllerProtocol {
     }
     
     func updateTableViewAnimated() {
-        let (oldCount, newCount) = presenter.updatePhotosAndGetCounts()
+        let (_, _) = presenter.updatePhotosAndGetCounts()
     }
     
     
