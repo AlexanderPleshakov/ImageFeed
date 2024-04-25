@@ -84,4 +84,17 @@ final class ProfileTests: XCTestCase {
         // then
         XCTAssertTrue(presenter.isViewDidLoad)
     }
+    
+    func testDoLogoutAction() {
+        // given
+        let sut = ProfilePresenter()
+        
+        // when
+        sut.doLogoutAction()
+        
+        // then
+        XCTAssertNil(ProfileImageService.shared.avatarURL)
+        XCTAssertNil(ProfileService.shared.profile)
+        XCTAssertTrue(ImagesListService.shared.photos.isEmpty)
+    }
 }
