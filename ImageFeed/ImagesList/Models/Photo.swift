@@ -26,7 +26,7 @@ public struct Photo {
         self.isLiked = isLiked
     }
     
-    public mutating func duplicateAndChangeLike() {
+    public mutating func changeLike() {
         isLiked = !isLiked
     }
 }
