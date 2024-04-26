@@ -8,9 +8,12 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
     
     // MARK: Properties
+    
+    var presenter: ProfilePresenterProtocol?
+    
     // For UI
     private let avatarImageView = {
         let avatarImage = UIImage(systemName: "person.crop.circle.fill")
@@ -52,64 +55,50 @@ final class ProfileViewController: UIViewController {
         let logoutImage = UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage()
         let logoutButton = UIButton.systemButton(with: logoutImage, target: nil, action: nil)
         logoutButton.tintColor = UIColor(named: "YP Red")
+        logoutButton.accessibilityIdentifier = "LogoutButton"
         
         return logoutButton
     }()
-    
-    // Services
-    private let profileService = ProfileService.shared
-    private var profileImageObserver: NSObjectProtocol?
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure(profile: profileService.profile)
-        
-        profileImageObserver = NotificationCenter.default.addObserver(
-            forName: ProfileImageService.didChangeNotification,
-            object: nil,
-            queue: .main,
-            using: { [weak self] _ in
-                guard let self = self else { return }
-                self.updateAvatar()
-            })
-        updateAvatar()
+        presenter?.viewDidLoad()
     }
     
     // MARK: Methods
     
-    @objc private func buttonLogoutTapped() {
+    private func showLogoutAlert() {
         let alertPresenter = AlertPresenter(delegate: self)
-        let profileLogoutService = ProfileLogoutService.shared
-        let actionOk = UIAlertAction(title: "Да", style: .default) { _ in
-            profileLogoutService.logout()
+        let actionOk = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+            self?.presenter?.doLogoutAction()
         }
         let actionNo = UIAlertAction(title: "Нет", style: .default)
         alertPresenter.presentTwoButtonsAlert(title: "Пока, пока!",
                                               message: "Уверены, что хотите выйти?",
                                               actionOk: actionOk, actionNo: actionNo)
-        
     }
     
-    private func updateAvatar() {
-        guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
-            let url = URL(string: profileImageURL)
-        else {
-            return
-        }
+    @objc private func buttonLogoutTapped() {
+        showLogoutAlert()
+    }
+    
+    func updateAvatarImage() {
+        presenter?.updateAvatar()
+    }
+    
+    func setAvatar(url: URL) {
         avatarImageView.kf.setImage(
             with: url,
             placeholder: UIImage(named: "PlaceholderAvatar"))
     }
     
-    private func configure(profile: Profile?) {
+    func configure(for profile: Profile) {
         view.backgroundColor = UIColor(named: "YP Black")
         logoutButton.addTarget(self, action: #selector(buttonLogoutTapped), for: .touchUpInside)
         
-        guard let profile = profile else { return }
         setupSubviews(userName: profile.name, loginName: profile.loginName, bio: profile.bio)
     }
     

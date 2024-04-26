@@ -26,6 +26,7 @@ final class AuthViewController: UIViewController {
         button.setTitleColor(UIColor(named: "YP Black"), for: .normal)
         button.layer.cornerRadius = 16
         button.layer.masksToBounds = true
+        button.accessibilityIdentifier = "Auth"
         
         return button
     }()
@@ -48,7 +49,13 @@ final class AuthViewController: UIViewController {
     
     @objc private func goToWebView() {
         let webView = WebViewController()
+        let authHelper = AuthHelper()
+        let webViewPresenter = WebViewPresenter(authHelper: authHelper)
+        
+        webViewPresenter.view = webView
+        webView.presenter = webViewPresenter
         webView.delegate = self
+        
         navigationController?.pushViewController(webView, animated: true)
     }
 }

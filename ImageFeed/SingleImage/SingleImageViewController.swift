@@ -34,6 +34,7 @@ final class SingleImageViewController: UIViewController {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "Backward"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "BackToImagesListButton"
         return button
     }()
     

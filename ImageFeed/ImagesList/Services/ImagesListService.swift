@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class ImagesListService {
+final class ImagesListService: ImagesListServiceProtocol {
     static let didChangeNotification = Notification.Name("ImagesListServiceDidChange")
-    static let shared = ImagesListService()
+    static let shared: ImagesListServiceProtocol = ImagesListService()
     
     private init() {}
     
@@ -105,15 +105,8 @@ final class ImagesListService {
             switch result {
             case .success(_):
                 if let index = self.photos.firstIndex(where: { $0.id == photoId }) {
-                    let oldPhoto = self.photos[index]
-                    let newPhoto = Photo(id: oldPhoto.id, size: oldPhoto.size,
-                                         createdAt: oldPhoto.createdAt,
-                                         welcomeDescription: oldPhoto.welcomeDescription,
-                                         thumbImageURL: oldPhoto.thumbImageURL,
-                                         largeImageURL: oldPhoto.largeImageURL,
-                                         isLiked: !oldPhoto.isLiked)
-                    self.photos[index] = newPhoto
-                    completion(.success((newPhoto)))
+                    self.photos[index].changeLike()
+                    completion(.success((photos[index])))
                 } else {
                     completion(.failure(NetworkError.indexSearchError))
                 }

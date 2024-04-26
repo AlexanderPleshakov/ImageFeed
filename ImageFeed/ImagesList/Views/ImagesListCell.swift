@@ -25,11 +25,6 @@ final class ImagesListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setIsLiked(_ isLiked: Bool) {
-        let newImage = isLiked ? UIImage(named: "FavoritesActive") : UIImage(named: "FavoritesNoActive")
-        self.cellLikeButton.setImage(newImage, for: .normal)
-    }
-    
     //MARK: Properties
     
     static let reuseIdentifier = "ImageListCell"
@@ -50,6 +45,7 @@ final class ImagesListCell: UITableViewCell {
     
     private let cellLikeButton: UIButton = {
         let button = UIButton()
+        button.accessibilityIdentifier = "LikeButton"
         return button
     }()
     
@@ -73,6 +69,11 @@ final class ImagesListCell: UITableViewCell {
         cellImage.kf.cancelDownloadTask()
     }
     
+    func setIsLiked(_ isLiked: Bool) {
+        let newImage = isLiked ? UIImage(named: "FavoritesActive") : UIImage(named: "FavoritesNoActive")
+        self.cellLikeButton.setImage(newImage, for: .normal)
+    }
+    
     func configCell(in tableView: UITableView, for cell: ImagesListCell, with indexPath: IndexPath, photo: Photo) {
         isLiked = photo.isLiked
         photoId = photo.id
@@ -82,8 +83,14 @@ final class ImagesListCell: UITableViewCell {
         else { return }
         
         cell.cellImage.kf.indicatorType = .activity
-        cell.cellImage.kf.setImage(with: photo.thumbImageURL, placeholder: UIImage(named: "PlaceholderCellImage")) { _ in
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+        cell.cellImage.kf.setImage(with: photo.thumbImageURL, placeholder: UIImage(named: "PlaceholderCellImage")) { result in
+            switch result {
+            case .failure(_):
+                cell.cellImage.image = UIImage(named: "PlaceholderCellImage")
+            case .success(_):
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+            
         }
         cell.cellLikeButton.addTarget(self, action: #selector(buttonLikeTapped), for: .touchUpInside)
         cell.cellDataLabel.text = photo.createdAt

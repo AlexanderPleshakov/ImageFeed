@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class ProfileService {
-    static let shared = ProfileService()
+final class ProfileService: ProfileServiceProtocol {
+    static let shared: ProfileServiceProtocol = ProfileService()
     
     private init() {}
     
