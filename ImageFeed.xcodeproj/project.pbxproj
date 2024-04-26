@@ -73,7 +73,6 @@
 		16C688CA2BD9332600DA4D78 /* ImageFeedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688C92BD9332600DA4D78 /* ImageFeedUITests.swift */; };
 		16C688D32BDA5E9100DA4D78 /* ImagesListServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688D22BDA5E9100DA4D78 /* ImagesListServiceProtocol.swift */; };
 		16C688D52BDA60C400DA4D78 /* ImagesListServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688D42BDA60C400DA4D78 /* ImagesListServiceStub.swift */; };
-		16C688D72BDA6A5100DA4D78 /* ImagesListServiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688D62BDA6A5100DA4D78 /* ImagesListServiceSpy.swift */; };
 		16C688DB2BDA739D00DA4D78 /* ImagesListViewControllerFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688DA2BDA739D00DA4D78 /* ImagesListViewControllerFake.swift */; };
 		16C688DD2BDA792D00DA4D78 /* ImagesListPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C688DC2BDA792D00DA4D78 /* ImagesListPresenterSpy.swift */; };
 		16E3FA0B2BC44C8400F07E46 /* ImagesListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3FA0A2BC44C8400F07E46 /* ImagesListCellDelegate.swift */; };
@@ -165,7 +164,6 @@
 		16C688C92BD9332600DA4D78 /* ImageFeedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFeedUITests.swift; sourceTree = "<group>"; };
 		16C688D22BDA5E9100DA4D78 /* ImagesListServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListServiceProtocol.swift; sourceTree = "<group>"; };
 		16C688D42BDA60C400DA4D78 /* ImagesListServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListServiceStub.swift; sourceTree = "<group>"; };
-		16C688D62BDA6A5100DA4D78 /* ImagesListServiceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListServiceSpy.swift; sourceTree = "<group>"; };
 		16C688DA2BDA739D00DA4D78 /* ImagesListViewControllerFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewControllerFake.swift; sourceTree = "<group>"; };
 		16C688DC2BDA792D00DA4D78 /* ImagesListPresenterSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagesListPresenterSpy.swift; path = ImageFeedTests/ProfileTests/ImagesListPresenterSpy.swift; sourceTree = SOURCE_ROOT; };
 		16E3FA0A2BC44C8400F07E46 /* ImagesListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCellDelegate.swift; sourceTree = "<group>"; };
@@ -527,7 +525,6 @@
 			children = (
 				16C688DC2BDA792D00DA4D78 /* ImagesListPresenterSpy.swift */,
 				161876DF2BD6C10300DC5DB5 /* ImagesListViewControllerSpy.swift */,
-				16C688D62BDA6A5100DA4D78 /* ImagesListServiceSpy.swift */,
 			);
 			path = Spies;
 			sourceTree = "<group>";
@@ -751,7 +748,6 @@
 				16A47F7B2BD45F860085D247 /* WebViewTests.swift in Sources */,
 				16C688DD2BDA792D00DA4D78 /* ImagesListPresenterSpy.swift in Sources */,
 				161876E02BD6C10300DC5DB5 /* ImagesListViewControllerSpy.swift in Sources */,
-				16C688D72BDA6A5100DA4D78 /* ImagesListServiceSpy.swift in Sources */,
 				16C688D52BDA60C400DA4D78 /* ImagesListServiceStub.swift in Sources */,
 				16A47F842BD465F10085D247 /* WebViewControllerSpy.swift in Sources */,
 				16C688C22BD872F900DA4D78 /* ProfilePresenterSpy.swift in Sources */,
