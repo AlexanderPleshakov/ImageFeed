@@ -8,7 +8,7 @@
 import Foundation
 
 final class ProfilePresenter: ProfilePresenterProtocol {
-    var view: ProfileViewControllerProtocol?
+    weak var view: ProfileViewControllerProtocol?
     private var logoutService: ProfileLogoutServiceProtocol
     private var profileService: ProfileServiceProtocol
     private var profileImageService: ProfileImageServiceProtocol
