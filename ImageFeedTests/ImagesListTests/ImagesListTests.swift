@@ -11,10 +11,10 @@ import XCTest
 final class ImagesListTests: XCTestCase {    
     func testGetPhotosCount() {
         // given
-        let sut = ImagesListPresenter()
+        let presenter = ImagesListPresenter()
         
         // when
-        let count = sut.getPhotosCount()
+        let count = presenter.getPhotosCount()
         
         // then
         XCTAssertEqual(count, 0)
@@ -24,11 +24,11 @@ final class ImagesListTests: XCTestCase {
         // given
         let service = ImagesListServiceStub()
         service.clearBeforeLogout()
-        let sut = ImagesListPresenter(view: nil, imagesListService: service)
+        let presenter = ImagesListPresenter(view: nil, imagesListService: service)
         
         // when
-        let (_, _) = sut.updatePhotosAndGetCounts()
-        let photo = sut.getPhoto(at: 0)
+        let (_, _) = presenter.updatePhotosAndGetCounts()
+        let photo = presenter.getPhoto(at: 0)
         XCTAssertTrue(photo?.id == "0")
     }
     
@@ -36,10 +36,10 @@ final class ImagesListTests: XCTestCase {
         // given
         let service = ImagesListServiceStub()
         service.clearBeforeLogout()
-        let sut = ImagesListPresenter(view: nil, imagesListService: service)
+        let presenter = ImagesListPresenter(view: nil, imagesListService: service)
         
         // when
-        let (old, new) = sut.updatePhotosAndGetCounts()
+        let (old, new) = presenter.updatePhotosAndGetCounts()
         
         // then
         XCTAssertEqual(old, 0)
@@ -87,11 +87,11 @@ final class ImagesListTests: XCTestCase {
     
     func testChangeLike() {
         // given
-        let sut = ImagesListServiceStub()// ImagesListPresenter(view: nil, imagesListService: ImagesListServiceStub())
+        let service = ImagesListServiceStub()// ImagesListPresenter(view: nil, imagesListService: ImagesListServiceStub())
         var isLike = false
         
         // when
-        sut.changeLike(photoId: "0", isLiked: isLike) { result in
+        service.changeLike(photoId: "0", isLiked: isLike) { result in
             switch result {
             case .success(let photo):
                 isLike = photo.isLiked
@@ -108,10 +108,10 @@ final class ImagesListTests: XCTestCase {
         let viewController = ImagesListViewControllerSpy()
         let service = ImagesListServiceStub()
         service.clearBeforeLogout()
-        let sut = ImagesListPresenter(view: viewController, imagesListService: service)
-        sut.view = viewController
+        let presenter = ImagesListPresenter(view: viewController, imagesListService: service)
+        presenter.view = viewController
         
-        sut.viewDidLoad()
+        presenter.viewDidLoad()
         
         XCTAssertTrue(viewController.isCalledUpdateTable)
     }
@@ -120,12 +120,12 @@ final class ImagesListTests: XCTestCase {
         let service = ImagesListServiceStub()
         service.clearBeforeLogout()
         let view = ImagesListViewControllerFake()
-        let sut = ImagesListPresenter(imagesListService: service)
-        sut.view = view
-        view.presenter = sut
+        let presenter = ImagesListPresenter(imagesListService: service)
+        presenter.view = view
+        view.presenter = presenter
         
-        sut.viewDidLoad()
-        let count = sut.getPhotosCount()
+        presenter.viewDidLoad()
+        let count = presenter.getPhotosCount()
         
         XCTAssertEqual(count, 2)
     }
@@ -134,15 +134,15 @@ final class ImagesListTests: XCTestCase {
         let service = ImagesListServiceStub()
         service.clearBeforeLogout()
         let view = ImagesListViewControllerFake()
-        let sut = ImagesListPresenter(imagesListService: service)
-        sut.view = view
-        view.presenter = sut
+        let presenter = ImagesListPresenter(imagesListService: service)
+        presenter.view = view
+        view.presenter = presenter
         
-        sut.viewDidLoad()
+        presenter.viewDidLoad()
         
-        let startCount = sut.getPhotosCount()
-        sut.shouldGetNextPage(for: 1)
-        let newCount = sut.getPhotosCount()
+        let startCount = presenter.getPhotosCount()
+        presenter.shouldGetNextPage(for: 1)
+        let newCount = presenter.getPhotosCount()
         
         XCTAssertEqual(startCount + 1, newCount)
     }

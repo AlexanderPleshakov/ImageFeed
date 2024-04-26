@@ -12,14 +12,14 @@ final class ProfileTests: XCTestCase {
     func testPresenterCallsSetAvatar() {
         // given
         let viewController = ProfileViewControllerSpy()
-        let sut = ProfilePresenter(view: viewController,
+        let presenter = ProfilePresenter(view: viewController,
                                    logoutService: ProfileLogoutServiceStub.shared,
                                    profileService: ProfileServiceStub.shared,
                                    profileImageService: ProfileImageServiceStub.shared)
-        viewController.presenter = sut
+        viewController.presenter = presenter
         
         // when
-        sut.updateAvatar()
+        presenter.updateAvatar()
         
         // then
         XCTAssertTrue(viewController.isAvatarSet)
@@ -28,14 +28,14 @@ final class ProfileTests: XCTestCase {
     func testPresenterCallsConfigure() {
         // given
         let viewController = ProfileViewControllerSpy()
-        let sut = ProfilePresenter(view: viewController,
+        let presenter = ProfilePresenter(view: viewController,
                                    logoutService: ProfileLogoutServiceStub.shared,
                                    profileService: ProfileServiceStub.shared,
                                    profileImageService: ProfileImageServiceStub.shared)
-        viewController.presenter = sut
+        viewController.presenter = presenter
         
         // when
-        sut.viewDidLoad()
+        presenter.viewDidLoad()
         
         // then
         XCTAssertTrue(viewController.isConfigure)
@@ -44,14 +44,14 @@ final class ProfileTests: XCTestCase {
     func testPresenterCallsAvatarImageUpdate() {
         // given
         let viewController = ProfileViewControllerSpy()
-        let sut = ProfilePresenter(view: viewController,
+        let presenter = ProfilePresenter(view: viewController,
                                    logoutService: ProfileLogoutServiceStub.shared,
                                    profileService: ProfileServiceStub.shared,
                                    profileImageService: ProfileImageServiceStub.shared)
-        viewController.presenter = sut
+        viewController.presenter = presenter
         
         // when
-        sut.viewDidLoad()
+        presenter.viewDidLoad()
         
         // then
         XCTAssertTrue(viewController.isAvatarImageUpdated)
@@ -59,13 +59,13 @@ final class ProfileTests: XCTestCase {
     
     func testControllerCallsUpdateAvatar() {
         // given
-        let sut = ProfileViewController()
+        let controller = ProfileViewController()
         let presenter = ProfilePresenterSpy()
-        sut.presenter = presenter
-        presenter.view = sut
+        controller.presenter = presenter
+        presenter.view = controller
         
         // when
-        sut.updateAvatarImage()
+        controller.updateAvatarImage()
         
         // then
         XCTAssertTrue(presenter.isAvatarUpdated)
@@ -73,13 +73,13 @@ final class ProfileTests: XCTestCase {
     
     func testControllerCallsViewDidLoad() {
         // given
-        let sut = ProfileViewController()
+        let controller = ProfileViewController()
         let presenter = ProfilePresenterSpy()
-        sut.presenter = presenter
-        presenter.view = sut
+        controller.presenter = presenter
+        presenter.view = controller
         
         // when
-        _ = sut.view
+        _ = controller.view
         
         // then
         XCTAssertTrue(presenter.isViewDidLoad)
@@ -87,10 +87,10 @@ final class ProfileTests: XCTestCase {
     
     func testDoLogoutAction() {
         // given
-        let sut = ProfilePresenter()
+        let presenter = ProfilePresenter()
         
         // when
-        sut.doLogoutAction()
+        presenter.doLogoutAction()
         
         // then
         XCTAssertNil(ProfileImageService.shared.avatarURL)
